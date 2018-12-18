@@ -17,12 +17,15 @@ public class MenuServiceImpl implements MenuService {
 	public List<Menu> menuList() throws SQLException {
 		List<Menu> list = menuDao.findAllByP_id(-1);
 		Menu menuParent = list.remove(0);
+		menuParent.getAttributes().setUrl(menuParent.getUrl());
 		List<Menu> listChild1 = menuDao.findAllByP_id(menuParent.getId());
 		for (Menu menu : listChild1) {
+			menu.getAttributes().setUrl(menu.getUrl());
 			menuParent.getChildren().add(menu);
-
+			
 			List<Menu> listChild2 = menuDao.findAllByP_id(menu.getId());
 			for (Menu menu2 : listChild2) {
+				menu2.getAttributes().setUrl(menu2.getUrl());
 				menu.getChildren().add(menu2);
 			}
 		}

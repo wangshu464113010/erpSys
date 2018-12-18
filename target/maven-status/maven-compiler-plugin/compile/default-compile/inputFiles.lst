@@ -1,8 +1,9 @@
-D:\workspace\work_eclipse\erp\src\main\java\cn\erp\service\MenuService.java
-D:\workspace\work_eclipse\erp\src\main\java\cn\erp\domain\Menu.java
-D:\workspace\work_eclipse\erp\src\main\java\cn\erp\utils\C3P0Util.java
-D:\workspace\work_eclipse\erp\src\main\java\cn\erp\service\impl\MenuServiceImpl.java
-D:\workspace\work_eclipse\erp\src\main\java\com\erp\filter\EncodingFilter.java
-D:\workspace\work_eclipse\erp\src\main\java\cn\erp\dao\impl\MenuDaoImpl.java
-D:\workspace\work_eclipse\erp\src\main\java\cn\erp\web\servlet\UserServlet.java
-D:\workspace\work_eclipse\erp\src\main\java\cn\erp\dao\MenuDao.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\utils\C3P0Util.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\dao\impl\MenuDaoImpl.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\web\servlet\UserServlet.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\domain\Attribute.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\service\MenuService.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\dao\MenuDao.java
+D:\Git\gitrepository\erpSys\src\main\java\com\erp\filter\EncodingFilter.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\domain\Menu.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\service\impl\MenuServiceImpl.java

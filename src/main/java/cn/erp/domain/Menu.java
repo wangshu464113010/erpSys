@@ -12,8 +12,16 @@ public class Menu implements Serializable{
 	private String name;
 	private Integer state;
 	private String url;
+	private Attribute attributes =new Attribute();
 	private Integer p_id;
 	private List<Menu> children = new ArrayList<>();
+	
+	public Attribute getAttributes() {
+		return attributes;
+	}
+	public void setAttributes(Attribute attributes) {
+		this.attributes = attributes;
+	}
 	public Integer getId() {
 		return id;
 	}

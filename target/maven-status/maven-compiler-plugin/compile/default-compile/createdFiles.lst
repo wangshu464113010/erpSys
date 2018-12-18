@@ -1,0 +1,9 @@
+cn\erp\web\servlet\UserServlet.class
+cn\erp\utils\C3P0Util.class
+cn\erp\domain\Menu.class
+cn\erp\dao\MenuDao.class
+cn\erp\service\MenuService.class
+cn\erp\dao\impl\MenuDaoImpl.class
+cn\erp\domain\Attribute.class
+cn\erp\service\impl\MenuServiceImpl.class
+com\erp\filter\EncodingFilter.class
