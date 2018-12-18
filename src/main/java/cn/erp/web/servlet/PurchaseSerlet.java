@@ -13,12 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
 
-import cn.erp.domain.Menu;
-import cn.erp.domain.Purchase;
 import cn.erp.domain.PurchaseList;
-import cn.erp.service.MenuService;
 import cn.erp.service.PurchaseService;
-import cn.erp.service.impl.MenuServiceImpl;
 import cn.erp.service.impl.PurchaseServiceImpl;
 
 @WebServlet("/admin/goodsType/*")

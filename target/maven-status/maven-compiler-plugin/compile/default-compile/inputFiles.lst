@@ -12,6 +12,7 @@ D:\Git\gitrepository\erpSys\src\main\java\cn\erp\domain\Attribute.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\service\MenuService.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\domain\Menu.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\service\impl\MenuServiceImpl.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\domain\Page.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\domain\PurchaseList.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\dao\impl\MenuDaoImpl.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\service\impl\PurchaseServiceImpl.java

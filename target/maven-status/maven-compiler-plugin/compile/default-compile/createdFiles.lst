@@ -1,4 +1,5 @@
 cn\erp\domain\Purchase.class
+cn\erp\domain\Page.class
 cn\erp\dao\impl\PurchaseDaoImpl.class
 cn\erp\service\impl\PurchaseServiceImpl.class
 cn\erp\web\servlet\PurchaseSerlet.class
