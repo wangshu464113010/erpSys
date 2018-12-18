@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.Goods;
+
 import cn.erp.domain.GoodsData;
 import cn.erp.domain.GoodsType;
+
 import cn.erp.service.GoodsService;
 import cn.erp.service.GoodstypeService;
 import cn.erp.service.impl.GoodsServiceImpl;
@@ -38,43 +40,39 @@ public class GoodsServlet extends HttpServlet{
 			showTree(req,resp);
 		}
 		if("/list".equals(uri)){
-			findAllGoodsAndGoodsType(resp);
+			findAllGoodsAndGoodsType(req,resp);
 		}
 	}
+
 	
 	
 	public void findAll(HttpServletRequest req, HttpServletResponse resp){
 		try {
-			GoodsData goodsData = new GoodsData();
-			List<Goods> data = goodsService.findAll();
-			for (Goods goods : data) {
-				GoodsType goodstype = goodstypeService.findByPid(goods.getType_id());
-				goods.setType(goodstype);
-			}
-			goodsData.setTotal(data.size());
-			goodsData.setRows(data);
-			resp.getWriter().write(JSONObject.toJSON(goodsData).toString().
-					replaceAll("inventory_quantity", "inventoryQuantity").
-					replaceAll("min_num", "minNum").
-					replaceAll("purchasing_price", "purchasingPrice").
-					replaceAll("selling_price", "sellingPrice").
-					replaceAll("p_id", "pId").
-					replaceAll("last_purchasing_price", "lastPurchasingPrice"));
-		} catch (SQLException e) {
-			e.printStackTrace();
+			findAllGoodsAndGoodsType(req,resp);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public void showTree(HttpServletRequest req, HttpServletResponse resp){
 		
 	}
 	
-	private void findAllGoodsAndGoodsType(HttpServletResponse resp) throws IOException {
+
+	private void findAllGoodsAndGoodsType(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
 		PrintWriter pw = resp.getWriter();
+		Integer page = Integer.parseInt(req.getParameter("page"));
+		Integer rows = Integer.parseInt(req.getParameter("rows"));
+		String typeid = req.getParameter("type.id");
+		List<Goods> list =null;
 		try {
-			List<Goods> list = goodsService.findAll();
+			if(!"".equals(typeid)&&typeid!=null){
+				list = goodsService.findAll(page,rows,Integer.parseInt(typeid));
+			}else{
+				list = goodsService.findAll(page,rows,null);
+			}
 			int total = goodsService.count();
 			//System.out.println();
 			String string = JSONObject.toJSON(list).toString();

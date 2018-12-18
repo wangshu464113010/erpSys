@@ -16,6 +16,16 @@ public class GoodsServiceImpl implements GoodsService {
 	private GoodsTypeDao goodsTypeDao = new GoodsTypeDaoImpl();
 	
 	@Override
+	public List<Goods> findAll(Integer page,Integer rows,Integer type_id1) throws SQLException {
+		List<Goods> list = goodsDao.findAll(page,rows,type_id1);
+		for (Goods goods : list) {
+			Integer type_id = goods.getType_id();
+			goods.setType(goodsTypeDao.findOne(type_id));
+		}
+		return list;
+	}
+	
+	@Override
 	public List<Goods> findAll() throws SQLException {
 		List<Goods> list = goodsDao.findAll();
 		for (Goods goods : list) {
