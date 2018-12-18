@@ -11,11 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.Goods;
-import cn.erp.domain.PurchaseList;
 import cn.erp.service.GoodsService;
 import cn.erp.service.impl.GoodsServiceImpl;
 
@@ -34,7 +32,7 @@ public class GoodsServlet extends HttpServlet {
 		String uri = req.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
 		if("/list".equals(uri)){
-			findAllGoodsAndGoodsType(resp);
+			findAllGoodsAndGoodsType(req,resp);
 		}
 		if("/genGoodsCode".equals(uri)){
 			
@@ -43,10 +41,18 @@ public class GoodsServlet extends HttpServlet {
 		
 //		
 	}
-	private void findAllGoodsAndGoodsType(HttpServletResponse resp) throws IOException {
+	private void findAllGoodsAndGoodsType(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		PrintWriter pw = resp.getWriter();
+		Integer page = Integer.parseInt(req.getParameter("page"));
+		Integer rows = Integer.parseInt(req.getParameter("rows"));
+		String typeid = req.getParameter("type.id");
+		List<Goods> list =null;
 		try {
-			List<Goods> list = goodsService.findAll();
+			if(!"".equals(typeid)&&typeid!=null){
+				list = goodsService.findAll(page,rows,Integer.parseInt(typeid));
+			}else{
+				list = goodsService.findAll(page,rows,null);
+			}
 			int total = goodsService.count();
 			//System.out.println();
 			String string = JSONObject.toJSON(list).toString();

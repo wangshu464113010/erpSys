@@ -50,6 +50,8 @@ public class PurchaseSerlet extends HttpServlet{
 	}
 	
 	private void findAllByType(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		
 		PrintWriter pw = response.getWriter();
 		try {
 			List<PurchaseList> list = purchaseService.purchaseList();
