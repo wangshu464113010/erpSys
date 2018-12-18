@@ -14,7 +14,7 @@ public class Goods {
 	private double selling_price;
 	private String unit;
 	private int type_id;
-	private Goodstype type;
+	private GoodsType type;
 	private int state;
 	private double last_purchasing_price;
 	private String codeOrName;
@@ -96,10 +96,10 @@ public class Goods {
 	public void setType_id(int type_id) {
 		this.type_id = type_id;
 	}
-	public Goodstype getType() {
+	public GoodsType getType() {
 		return type;
 	}
-	public void setType(Goodstype type) {
+	public void setType(GoodsType type) {
 		this.type = type;
 	}
 	public int getState() {
@@ -120,6 +120,5 @@ public class Goods {
 	public void setCodeOrName(String codeOrName) {
 		this.codeOrName = codeOrName;
 	}
-	
-	
+
 }

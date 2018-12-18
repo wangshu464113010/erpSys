@@ -6,5 +6,6 @@ import java.util.List;
 import cn.erp.domain.Goods;
 
 public interface GoodsDao {
-	List<Goods> findAll() throws SQLException;
+	public List<Goods> findAll() throws SQLException;
+	public int count() throws SQLException;
 }

@@ -10,12 +10,20 @@ import cn.erp.dao.GoodsDao;
 import cn.erp.domain.Goods;
 import cn.erp.utils.C3P0Util;
 
-public class GoodsDaoImpl implements GoodsDao{
-	
+
+public class GoodsDaoImpl implements GoodsDao {
+
+	@Override
 	public List<Goods> findAll() throws SQLException {
-		String sql = "select * from t_goods";
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query(sql,new BeanListHandler<Goods>(Goods.class));
+		String sql = "select * from t_goods";
+		List<Goods> list =  qr.query(sql,new BeanListHandler<Goods>(Goods.class));
+		return list;
+	}
+
+	@Override
+	public int count() throws SQLException {
+		return findAll().size();
 	}
 
 }
