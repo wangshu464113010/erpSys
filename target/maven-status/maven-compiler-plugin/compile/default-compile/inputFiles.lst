@@ -1,9 +1,16 @@
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\utils\C3P0Util.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\domain\PurchaseList.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\domain\Purchase.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\dao\impl\MenuDaoImpl.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\web\servlet\PurchaseSerlet.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\service\impl\PurchaseServiceImpl.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\service\PurchaseService.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\dao\PurchaseDao.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\web\servlet\UserServlet.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\domain\Attribute.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\service\MenuService.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\dao\MenuDao.java
 D:\Git\gitrepository\erpSys\src\main\java\com\erp\filter\EncodingFilter.java
+D:\Git\gitrepository\erpSys\src\main\java\cn\erp\dao\impl\PurchaseDaoImpl.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\domain\Menu.java
 D:\Git\gitrepository\erpSys\src\main\java\cn\erp\service\impl\MenuServiceImpl.java
