@@ -86,6 +86,20 @@ public class PurchaseDaoImpl implements PurchaseDao{
 		return qr.query(sql,new BeanHandler<Purchase_List>(Purchase_List.class),id);
 	}
 
+	@Override
+	public int deletePuchaseListById(Integer id) throws SQLException {
+		String sql = "delete from t_purchase_list where id=?";
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.update(sql,id);
+	}
+
+	@Override
+	public int deletePuchaseListGoodsByPuchaseListId(Integer id) throws SQLException {
+		String sql = "delete from t_purchase_list_goods where purchase_list_id=?";
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.update(sql,id);
+	}
+
 	
 	
 

@@ -17,4 +17,6 @@ public interface PurchaseService {
 	public List<Purchase_List> findAllPurchaseSearch(String purchaseNumber,Integer supplier_id,Integer state,String bPurchaseDate,String ePurchaseDate)throws SQLException;
 
 	public List<Purchase_List_Goods> findAllListGoodsById(Integer id) throws SQLException;
+	
+	public int deletePurchaseList(Integer id)throws SQLException;
 }	

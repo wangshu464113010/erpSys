@@ -60,6 +60,9 @@ public class PurchaseSerlet extends HttpServlet{
 		if("/purchaseList/listGoods".equals(uri)){
 			findAllListGoods(request,response);
 		}
+		if("/purchaseList/delete".equals(uri)){
+			deletePurchaseList(request,response);
+		}
 			
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -189,4 +192,26 @@ public class PurchaseSerlet extends HttpServlet{
 		}
 	}
 	
+
+	private void deletePurchaseList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		PrintWriter pw = response.getWriter();
+		Integer id = Integer.parseInt(request.getParameter("id"));
+		try {
+			int index = this.purchaseService.deletePurchaseList(id);
+			Map<String,Object> map=new HashMap<>();
+			Object json1=null;
+			if(index>0){
+				map.put("success", true);
+				json1 = JSONObject.toJSON(map);
+			}else{
+				map.put("success", false);
+				map.put("errorInfo", "系统繁忙，请稍后尝试");
+				json1 = JSONObject.toJSON(map);
+			}
+			pw.write(json1.toString());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

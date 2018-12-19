@@ -24,4 +24,8 @@ public interface PurchaseDao {
 	public List<Purchase_List_Goods> findAllByPurchaseListId(Integer id) throws SQLException;
 
 	public Purchase_List findById(Integer id)throws SQLException;
+	
+	public int deletePuchaseListById(Integer id)throws SQLException;
+	
+	public int deletePuchaseListGoodsByPuchaseListId(Integer id)throws SQLException;
 }

@@ -133,7 +133,10 @@ public class PurchaseServiceImpl implements PurchaseService{
 	public List<Purchase_List_Goods> findAllListGoodsById(Integer id) throws SQLException {
 		List<Purchase_List_Goods> list=new ArrayList<>();
 		List<Purchase_List_Goods> purchaseListGoods = this.purchaseDao.findAllByPurchaseListId(id);
-		Purchase_List purchase_List=this.purchaseDao.findById(id);
+		Purchase_List purchase_List=new Purchase_List();
+		if(this.purchaseDao.findById(id)!=null){
+			purchase_List=this.purchaseDao.findById(id);
+		}
 		Supplier supplier = this.supplierDao.findSupplierById(purchase_List.getSupplier_id());
 		User user = this.userDao.findUserById(purchase_List.getUser_id());
 		GoodsType goodsType=new GoodsType();
@@ -148,5 +151,13 @@ public class PurchaseServiceImpl implements PurchaseService{
 			list.add(purchase_List_Goods);
 		}
 		return list;
+	}
+
+
+	@Override
+	public int deletePurchaseList(Integer id) throws SQLException {
+		int  i= this.purchaseDao.deletePuchaseListGoodsByPuchaseListId(id);
+		int index = this.purchaseDao.deletePuchaseListById(id);
+		return index;
 	}
 }
