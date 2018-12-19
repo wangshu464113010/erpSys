@@ -13,6 +13,7 @@ public class SaleList {
 	private int user_id;
 	private int customer_id;
 	private Customer customer = new Customer();
+	private User user = new User();
 	public int getId() {
 		return id;
 	}
@@ -72,6 +73,12 @@ public class SaleList {
 	}
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }
