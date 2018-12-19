@@ -37,8 +37,22 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Override
 	public int count() throws SQLException {
-		// TODO Auto-generated method stub
 		return goodsDao.count();
+	}
+
+	@Override
+	public String getMaxGoodsCode() throws SQLException {
+		String code = goodsDao.getMaxGoodsCode();
+		int k = Integer.parseInt(code);
+		k+=1;
+		String str = k + "";
+		for(int i = 0 ;i<code.length();++i){
+			if(str.length()>=code.length()){
+				break;
+			}
+			str = "0"+str;
+		}
+		return str;
 	}
 
 }

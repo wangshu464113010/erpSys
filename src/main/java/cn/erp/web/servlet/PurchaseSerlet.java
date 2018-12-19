@@ -13,15 +13,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
 
+import cn.erp.domain.GoodsType;
 import cn.erp.domain.PurchaseList;
+import cn.erp.service.GoodstypeService;
 import cn.erp.service.PurchaseService;
+import cn.erp.service.impl.GoodstypeServiceImpl;
 import cn.erp.service.impl.PurchaseServiceImpl;
-
+/**
+ * 此servlet就是GoodsTypeServlet
+ * @author wangshu
+ *
+ */
 @WebServlet("/admin/goodsType/*")
 public class PurchaseSerlet extends HttpServlet{
 	
 	private PurchaseService purchaseService = new PurchaseServiceImpl();
-	
+	private GoodstypeService goodstypeService = new GoodstypeServiceImpl();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
@@ -31,8 +38,26 @@ public class PurchaseSerlet extends HttpServlet{
 		if("/list".equals(uri)){
 			findAllByType(request,response);//
 		}
+		if("/save".equals(uri)){//保存商品类型
+			saveGoodsType(request, response);
+		}
+		if("/delete".equals(uri)){//删除商品类型
+		}
 		
-		
+	}
+	private void saveGoodsType(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		GoodsType goodstype = new GoodsType();
+		String name = request.getParameter("name");
+		String parentId = request.getParameter("parentId");
+		goodstype.setName(name);
+		goodstype.setP_id(Integer.parseInt(parentId));
+		try {
+			goodstypeService.addGoodsType(goodstype);
+			PrintWriter pw = response.getWriter();
+			pw.write("{\"success\":true}");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

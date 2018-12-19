@@ -22,4 +22,11 @@ public class GoodstypeServiceImpl implements GoodstypeService {
 		return null;
 	}
 
+	@Override
+	public int addGoodsType(GoodsType goodstype) throws SQLException {
+		goodstype.setIcon("icon-folder");//具体还不清楚该值意思?
+		goodstype.setState(0);//状态state值默认为0(可能是与启用与停用有关?)
+		return goodstypeDao.insertGoodsType(goodstype);
+	}
+
 }
