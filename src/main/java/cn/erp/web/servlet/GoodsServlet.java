@@ -14,20 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.Goods;
-
-import cn.erp.domain.GoodsData;
-import cn.erp.domain.GoodsType;
-
+import cn.erp.domain.SaleListGoods;
 import cn.erp.service.GoodsService;
 import cn.erp.service.GoodstypeService;
+import cn.erp.service.SaleListGoodsService;
 import cn.erp.service.impl.GoodsServiceImpl;
 import cn.erp.service.impl.GoodstypeServiceImpl;
+import cn.erp.service.impl.SaleListGoodsServiceImpl;
 
 @WebServlet("/admin/goods/*")
 public class GoodsServlet extends HttpServlet{
 	
 	private GoodsService goodsService = new GoodsServiceImpl();
 	private GoodstypeService goodstypeService = new GoodstypeServiceImpl();
+	private SaleListGoodsService saleListGoodsService = new SaleListGoodsServiceImpl();
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -65,19 +65,19 @@ public class GoodsServlet extends HttpServlet{
 		PrintWriter pw = resp.getWriter();
 		Integer page = Integer.parseInt(req.getParameter("page"));
 		Integer rows = Integer.parseInt(req.getParameter("rows"));
+		String codeOrName = req.getParameter("codeOrName");
 		String typeid = req.getParameter("type.id");
 		List<Goods> list =null;
 		try {
 			if(!"".equals(typeid)&&typeid!=null){
-				list = goodsService.findAll(page,rows,Integer.parseInt(typeid));
+				list = goodsService.findAll(page,rows,Integer.parseInt(typeid),codeOrName);
 			}else{
-				list = goodsService.findAll(page,rows,null);
+				list = goodsService.findAll(page,rows,null,codeOrName);
 			}
 			int total = goodsService.count();
-			//System.out.println();
+			System.out.println(list.size());
 			String string = JSONObject.toJSON(list).toString();
 			string = "{\"total\":"+total+",\"rows\":"+string+"}";
-		
 			string = string.replaceAll("purchasing_price", "purchasingPrice");
 			string = string.replaceAll("selling_price", "sellingPrice");
 			//string = string.replaceAll("last_purchasing_price", "lastPurchasingPrice");
