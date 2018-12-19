@@ -89,21 +89,18 @@ public class SaleListServlet extends HttpServlet{
 	public void searchSaleList(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			String sale_number = req.getParameter("saleNumber");
-			String customer_id = req.getParameter("customer.id");
-			String state = req.getParameter("state");
+			Integer customer_id=null;
+			if(!"".equals(req.getParameter("customer.id"))&&req.getParameter("customer.id")!=null){
+				customer_id=Integer.parseInt(req.getParameter("customer.id"));
+			}
+			Integer state=null;
+			if(!"".equals(req.getParameter("state"))&&req.getParameter("state")!=null){
+				state = Integer.parseInt(req.getParameter("state"));
+			}
 			String bSaleDate = req.getParameter("bSaleDate");
 			String eSaleDate = req.getParameter("eSaleDate");
-			System.out.println(sale_number+"--"+customer_id+"--"+state+"--"+bSaleDate+"--"+eSaleDate+"--");
-			System.out.println("111111111111111111111");
-//			SaleListCondition saleListCondition = new SaleListCondition();
-//			saleListCondition.setSaleNumber(sale_number);
-//			saleListCondition.setCustomer_id(Integer.parseInt(customer_id));
-//			saleListCondition.setState(Integer.parseInt(state));
-//			saleListCondition.setbSaleDate(bSaleDate);
-//			saleListCondition.seteSaleDate(eSaleDate);
 			
-			System.out.println("22222222222222222222");
-			List<SaleList> list = saleListService.selectByCondition(sale_number,Integer.parseInt(customer_id),Integer.parseInt(state),bSaleDate,eSaleDate);
+			List<SaleList> list = saleListService.selectByCondition(sale_number,customer_id,state,bSaleDate,eSaleDate);
 			String jsonData = JSONObject.toJSON(list).toString();
 			jsonData = "{\"rows\":"+jsonData+"}";
 			String data = StringUtils.removeUnderlineAndUpperCase(jsonData);
