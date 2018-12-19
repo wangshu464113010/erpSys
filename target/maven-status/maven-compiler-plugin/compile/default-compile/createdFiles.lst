@@ -1,25 +1,64 @@
+<<<<<<< HEAD
 cn\erp\dao\OverlistDao.class
+=======
+>>>>>>> branch 'master' of https://github.com/wangshu464113010/erpSys.git
 cn\erp\dao\impl\GoodsTypeDaoImpl.class
+<<<<<<< HEAD
 cn\erp\service\GoodsService.class
 cn\erp\dao\OverDao.class
+=======
+cn\erp\dao\SaleListGoodsDao.class
+cn\erp\service\GoodsService.class
+cn\erp\web\servlet\PurchaseSerlet$1.class
+>>>>>>> branch 'master' of https://github.com/wangshu464113010/erpSys.git
 cn\erp\domain\SaleList.class
+<<<<<<< HEAD
 cn\erp\domain\PurchaseList.class
+=======
+>>>>>>> branch 'master' of https://github.com/wangshu464113010/erpSys.git
 cn\erp\service\GoodstypeService.class
+<<<<<<< HEAD
 cn\erp\service\impl\DamagelistServiceImpl.class
 cn\erp\service\impl\DamageServiceImpl.class
 cn\erp\web\servlet\UserServlet.class
 cn\erp\service\impl\OverServiceImpl.class
 cn\erp\service\DamagelistService.class
+=======
+cn\erp\domain\PurchaseList.class
+cn\erp\web\servlet\UserServlet.class
+cn\erp\service\impl\SaleListServiceImpl.class
+utils\StringUtils.class
+>>>>>>> branch 'master' of https://github.com/wangshu464113010/erpSys.git
 cn\erp\service\MenuService.class
+<<<<<<< HEAD
 cn\erp\dao\impl\OverDaoImpl.class
 cn\erp\service\DamageService.class
 cn\erp\domain\Page.class
 com\erp\filter\EncodingFilter.class
 cn\erp\utils\C3P0Util.class
 cn\erp\web\servlet\DamageServlet.class
+=======
+cn\erp\domain\Supplier.class
+cn\erp\dao\SupplierDao.class
+cn\erp\domain\Purchase_List.class
+cn\erp\dao\impl\SaleListDaoImpl.class
+cn\erp\domain\User.class
+cn\erp\dao\impl\UserDaoImpl.class
+cn\erp\dao\impl\SaleListGoodsDaoImpl.class
+cn\erp\dao\UserDao.class
+cn\erp\service\SupplierService.class
+cn\erp\domain\Page.class
+cn\erp\web\servlet\SaleListServlet.class
+cn\erp\dao\impl\SupplierDaoImpl.class
+com\erp\filter\EncodingFilter.class
+cn\erp\utils\C3P0Util.class
+cn\erp\service\SaleListGoodsService.class
+cn\erp\service\SaleListService.class
+>>>>>>> branch 'master' of https://github.com/wangshu464113010/erpSys.git
 cn\erp\dao\impl\GoodsDaoImpl.class
 cn\erp\dao\impl\MenuDaoImpl.class
 cn\erp\domain\Goods.class
+<<<<<<< HEAD
 cn\erp\dao\DamagelistDao.class
 cn\erp\web\servlet\PurchaseSerlet.class
 cn\erp\service\OverlistService.class
@@ -50,3 +89,38 @@ cn\erp\dao\PurchaseDao.class
 cn\erp\web\servlet\GoodsServlet.class
 cn\erp\dao\impl\DamagelistDaoImpl.class
 cn\erp\domain\Damagelist.class
+=======
+cn\erp\web\servlet\PurchaseSerlet.class
+cn\erp\service\CustomerService.class
+cn\erp\domain\GoodsType.class
+cn\erp\dao\SaleListDao.class
+cn\erp\domain\GoodsData.class
+cn\erp\service\impl\SupplierServiceImpl.class
+cn\erp\service\impl\PurchaseServiceImpl.class
+cn\erp\domain\Menu.class
+cn\erp\dao\GoodsDao.class
+cn\erp\service\impl\SaleListGoodsServiceImpl.class
+cn\erp\domain\SaleListCondition.class
+cn\erp\dao\GoodsTypeDao.class
+cn\erp\domain\SaleListGoods.class
+cn\erp\dao\MenuDao.class
+cn\erp\domain\Attribute.class
+cn\erp\dao\impl\PurchaseDaoImpl.class
+cn\erp\domain\Purchase_List_Goods.class
+cn\erp\service\PurchaseService.class
+cn\erp\service\impl\GoodsServiceImpl.class
+cn\erp\web\servlet\CustomerServlet.class
+cn\erp\dao\impl\CustomerDaoImpl.class
+cn\erp\web\servlet\SupplierServlet.class
+cn\erp\service\impl\CustomerServiceImpl.class
+cn\erp\service\impl\MenuServiceImpl.class
+cn\erp\domain\Purchase.class
+cn\erp\domain\Customer.class
+cn\erp\web\servlet\GoodsTypeServlet.class
+cn\erp\domain\GoodsJson.class
+cn\erp\dao\CustomerDao.class
+cn\erp\utils\StringUtils.class
+cn\erp\service\impl\GoodstypeServiceImpl.class
+cn\erp\dao\PurchaseDao.class
+cn\erp\web\servlet\GoodsServlet.class
+>>>>>>> branch 'master' of https://github.com/wangshu464113010/erpSys.git
