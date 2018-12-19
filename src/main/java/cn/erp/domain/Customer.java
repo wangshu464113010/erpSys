@@ -43,6 +43,9 @@ public class Customer {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", address=" + address + ", contact=" + contact + ", name=" + name + ", number="
+				+ number + ", remarks=" + remarks + "]";
+	}
 }
