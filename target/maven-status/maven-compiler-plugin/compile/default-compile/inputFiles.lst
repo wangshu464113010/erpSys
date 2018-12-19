@@ -61,28 +61,55 @@ C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\domain\Menu.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\domain\Supplier.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\impl\CustomerDaoImpl.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\GoodsDao.java
+<<<<<<< HEAD
+=======
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\GoodsTypeDao.java
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\service\impl\GoodsunitServiceImpl.java
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\web\servlet\SupplierServlet.java
+>>>>>>> refs/heads/two
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\web\servlet\GoodsServlet.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\service\GoodsService.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\impl\GoodsTypeDaoImpl.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\domain\SaleList.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\domain\Attribute.java
+<<<<<<< HEAD
+=======
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\service\SupplierService.java
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\service\GoodsunitService.java
+>>>>>>> refs/heads/two
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\service\GoodstypeService.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\domain\Customer.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\UserDao.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\impl\SupplierDaoImpl.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\impl\GoodsDaoImpl.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\service\impl\PurchaseServiceImpl.java
+<<<<<<< HEAD
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\utils\StringUtils.java
+=======
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\utils\C3P0Util.java
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\MenuDao.java
+>>>>>>> refs/heads/two
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\service\impl\GoodsServiceImpl.java
+<<<<<<< HEAD
 C:\Users\Administrator\git\erpSys\src\main\java\utils\StringUtils.java
+=======
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\impl\GoodsunitDaoImpl.java
+>>>>>>> refs/heads/two
 C:\Users\Administrator\git\erpSys\src\main\java\com\erp\filter\EncodingFilter.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\web\servlet\GoodsTypeServlet.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\PurchaseDao.java
+<<<<<<< HEAD
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\service\impl\SaleListServiceImpl.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\service\SaleListGoodsService.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\service\CustomerService.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\SaleListDao.java
+=======
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\GoodsunitDao.java
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\impl\PurchaseDaoImpl.java
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\service\impl\MenuServiceImpl.java
+>>>>>>> refs/heads/two
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\domain\GoodsType.java
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\domain\Goodsunit.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\domain\PurchaseList.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\web\servlet\CustomerServlet.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\domain\Purchase.java
@@ -113,5 +140,6 @@ C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\domain\Purchase_List_Good
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\impl\MenuDaoImpl.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\dao\impl\UserDaoImpl.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\domain\GoodsData.java
+C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\web\servlet\GoodsUnitServlet.java
 C:\Users\Administrator\git\erpSys\src\main\java\cn\erp\service\PurchaseService.java
 >>>>>>> branch 'master' of https://github.com/wangshu464113010/erpSys.git
