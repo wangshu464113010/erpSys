@@ -3,8 +3,6 @@ package cn.erp.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.swing.plaf.OptionPaneUI;
-
 import cn.erp.domain.Purchase;
 import cn.erp.domain.Purchase_List;
 import cn.erp.domain.Purchase_List_Goods;
