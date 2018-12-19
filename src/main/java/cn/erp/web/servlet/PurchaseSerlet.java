@@ -25,60 +25,59 @@ import cn.erp.domain.GoodsJson;
 import cn.erp.domain.PurchaseList;
 import cn.erp.domain.Purchase_List;
 import cn.erp.domain.Purchase_List_Goods;
-import cn.erp.domain.Supplier;
+import cn.erp.service.GoodstypeService;
 import cn.erp.service.PurchaseService;
 import cn.erp.service.SupplierService;
+import cn.erp.service.impl.GoodstypeServiceImpl;
 import cn.erp.service.impl.PurchaseServiceImpl;
 import cn.erp.service.impl.SupplierServiceImpl;
 import utils.StringUtils;
 
-@WebServlet("/admin/*")
+
+/**
+ * 此servlet就是GoodsTypeServlet
+ * @author wangshu
+ *
+ */
+//@WebServlet("/admin/goodsType/*")
+@WebServlet("/admin/purchaseList/*")
 public class PurchaseSerlet extends HttpServlet{
 	
 	private PurchaseService purchaseService = new PurchaseServiceImpl();
-	private SupplierService supplierService = new SupplierServiceImpl();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
-//		uri = uri.substring(uri.lastIndexOf("/"));
-		uri = uri.substring(6);
-		if("/goodsType/loadTreeInfo".equals(uri)){
-			findAll(request,response);//
-		}
-		if("/goodsType/list".equals(uri)){
-			findAllByType(request,response);//
-		}
-		if("/supplier/comboList".equals(uri)){
-			findAllSupplier(request,response);
-		}
-		if("/purchaseList/save".equals(uri)){
+		uri = uri.substring(uri.lastIndexOf("/"));
+		//uri = uri.substring(6);
+//		if("/goodsType/loadTreeInfo".equals(uri)){
+//			findAll(request,response);//
+//		}
+//		if("/goodsType/list".equals(uri)){
+//			findAllByType(request,response);//
+//		}
+		
+		if("/save".equals(uri)){
 			saveSupplier(request,response);
 		}
-		if("/purchaseList/list".equals(uri)){
+		if("/list".equals(uri)){
 			findAllPurchaseSearch(request,response);
 		}
-		if("/purchaseList/listGoods".equals(uri)){
+		if("/listGoods".equals(uri)){
 			findAllListGoods(request,response);
 		}
-		if("/purchaseList/delete".equals(uri)){
+		if("/delete".equals(uri)){
 			deletePurchaseList(request,response);
 		}
 			
+		
+		
 	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 	
-	private void findAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		PrintWriter pw = response.getWriter();
-		try {
-			List<PurchaseList> list = purchaseService.purchaseList();
-			Object json = JSONObject.toJSON(list);
-			pw.write(json.toString().replaceAll("name", "text"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 	private void findAllByType(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
@@ -93,16 +92,7 @@ public class PurchaseSerlet extends HttpServlet{
 		}
 	}
 	
-	private void findAllSupplier(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		PrintWriter pw = response.getWriter();
-		try {
-			List<Supplier> list = supplierService.findAllSupplier();
-			Object json = JSONObject.toJSON(list);
-			pw.write(json.toString());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 	private void saveSupplier(HttpServletRequest request, HttpServletResponse response) throws IOException{
 //		User user = request.getSession().getAttribute("user");

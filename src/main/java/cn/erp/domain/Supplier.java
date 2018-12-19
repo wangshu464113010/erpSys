@@ -1,12 +1,19 @@
 package cn.erp.domain;
 
+/**
+ * 供应商表
+ * @author wangshu
+ *
+ */
 public class Supplier {
-	private Integer id;
-	private String address;
-	private String contact;
-	private String name;
-	private String number;
-	private String remarks;
+	
+	private Integer id; //主键
+	private String address;//地址
+	private String contact;//联系人
+	private String name;//供应商全称
+	private String number;//电话号码  格式：xxxx-xxxxxxx
+	private String remarks;//备注
+	
 	public Integer getId() {
 		return id;
 	}
@@ -43,5 +50,5 @@ public class Supplier {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	
+
 }

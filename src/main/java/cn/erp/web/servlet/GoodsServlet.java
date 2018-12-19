@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.omg.CORBA.Request;
+
 import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.Goods;
@@ -41,6 +43,15 @@ public class GoodsServlet extends HttpServlet{
 		}
 		if("/list".equals(uri)){
 			findAllGoodsAndGoodsType(req,resp);
+		}
+		if("/genGoodsCode".equals(uri)){
+			try {
+				String maxGoodsCode = goodsService.getMaxGoodsCode();
+				PrintWriter pw = resp.getWriter();
+				pw.write(maxGoodsCode);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

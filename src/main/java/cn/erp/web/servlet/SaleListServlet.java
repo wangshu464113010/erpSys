@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.SaleList;
-import cn.erp.domain.SaleListCondition;
 import cn.erp.service.SaleListService;
 import cn.erp.service.impl.SaleListServiceImpl;
 import cn.erp.utils.StringUtils;
