@@ -50,6 +50,7 @@ D:\erpSys\src\main\java\cn\erp\service\impl\GoodsunitServiceImpl.java
 D:\erpSys\src\main\java\cn\erp\dao\GoodsDao.java
 D:\erpSys\src\main\java\cn\erp\dao\GoodsunitDao.java
 D:\erpSys\src\main\java\cn\erp\service\impl\MenuServiceImpl.java
+D:\erpSys\src\main\java\cn\erp\web\servlet\UpdatePassword.java
 D:\erpSys\src\main\java\cn\erp\domain\CustomerReturnListGoods.java
 D:\erpSys\src\main\java\cn\erp\domain\Overlist.java
 D:\erpSys\src\main\java\cn\erp\dao\impl\DamagelistDaoImpl.java

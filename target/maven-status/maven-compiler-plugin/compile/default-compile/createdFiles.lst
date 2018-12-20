@@ -40,6 +40,7 @@ cn\erp\service\impl\DamagelistServiceImpl.class
 cn\erp\domain\Overgoods.class
 cn\erp\utils\StringUtils.class
 cn\erp\service\impl\OverServiceImpl.class
+cn\erp\web\servlet\UpdatePassword.class
 cn\erp\dao\impl\SupplierDaoImpl.class
 cn\erp\domain\PurchaseList.class
 cn\erp\dao\OverDao.class

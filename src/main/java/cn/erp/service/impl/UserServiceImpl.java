@@ -22,5 +22,10 @@ public class UserServiceImpl implements UserService{
 	public List<User_Role> findAllUserRoleByUserId(Integer id) throws SQLException {
 		return this.userDao.findAllUserRoleByUserId(id);
 	}
+	
+	@Override
+	public int updatePassword(User user, String password) throws SQLException {
+		return this.userDao.updatePassword(user,password);
+	}
 
 }

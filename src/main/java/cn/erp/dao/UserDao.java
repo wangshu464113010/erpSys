@@ -15,4 +15,6 @@ public interface UserDao {
 	List<User_Role> findAllUserRoleByUserId(Integer id) throws SQLException;
 	
 	List<Role_Menu> findAllRoleMenuByRoleId(Integer id) throws SQLException;
+	
+	int updatePassword(User user,String password)throws SQLException;
 }
