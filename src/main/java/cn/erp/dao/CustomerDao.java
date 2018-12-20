@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import cn.erp.domain.Customer;
-import cn.erp.domain.Goods;
 import cn.erp.domain.Page;
 
 public interface CustomerDao {
