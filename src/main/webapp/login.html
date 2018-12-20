@@ -25,7 +25,9 @@ canvas{z-index:-1;position:absolute;}
 	  
 	  $("#loginBtn").click(function(){
 		  $.post("/user/login",{userName:$("#userName").val(),password:$("#password").val(),imageCode:$("#imageCode").val()},function(result){
-				if(result.success){
+			  result=JSON.parse(result);
+			  if(result.success){
+				  window.location.href="/main.html";
 					if(result.roleSize==1){
 						var roleId=result.roleList[0].id;
 						$.post("/user/saveRole",{roleId:roleId},function(result){
@@ -48,7 +50,15 @@ canvas{z-index:-1;position:absolute;}
 						document.getElementById('fade').style.display='block';
 					}
 				}else{
-					alert(result.errorInfo);
+					if(result.errorInfo==1){
+						alert("用户名不能为空!");
+					}
+					if(result.errorInfo==2){
+						alert("密码不能为空!");
+					}
+					if(result.errorInfo==3){
+						alert("用户名或密码错误!");
+					}
 				}
 		});
 	  });
