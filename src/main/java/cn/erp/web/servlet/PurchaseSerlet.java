@@ -154,7 +154,12 @@ public class PurchaseSerlet extends HttpServlet{
 		String bPurchaseDate = request.getParameter("bPurchaseDate");
 		String ePurchaseDate = request.getParameter("ePurchaseDate");
 		try {
-			List<Purchase_List> list = this.purchaseService.findAllPurchaseSearch(purchaseNumber,supplier_id,state,bPurchaseDate,ePurchaseDate);
+			List<Purchase_List> list = null;
+			if(purchaseNumber == null){
+				list = this.purchaseService.findAllPurchaseSearch("",supplier_id,state,bPurchaseDate,ePurchaseDate);
+			}else{
+				list = this.purchaseService.findAllPurchaseSearch(purchaseNumber,supplier_id,state,bPurchaseDate,ePurchaseDate);
+			}
 			Map<String,Object> map=new HashMap<>();
 			map.put("rows", list);
 			Object json = JSONObject.toJSON(map);

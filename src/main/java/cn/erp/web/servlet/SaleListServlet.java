@@ -106,8 +106,12 @@ public class SaleListServlet extends HttpServlet{
 			}
 			String bSaleDate = req.getParameter("bSaleDate");
 			String eSaleDate = req.getParameter("eSaleDate");
-			
-			List<SaleList> list = saleListService.selectByCondition(sale_number,customer_id,state,bSaleDate,eSaleDate);
+			List<SaleList> list = null;
+			if(sale_number == null){
+				list = saleListService.selectByCondition("",customer_id,state,bSaleDate,eSaleDate);
+			}else{
+				 list = saleListService.selectByCondition(sale_number,customer_id,state,bSaleDate,eSaleDate);
+			}
 			String jsonData = JSONObject.toJSON(list).toString();
 			jsonData = "{\"rows\":"+jsonData+"}";
 			String data = StringUtils.removeUnderlineAndUpperCase(jsonData);

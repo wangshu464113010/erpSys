@@ -10,10 +10,12 @@ cn\erp\service\GoodsService.class
 cn\erp\service\impl\GoodsServiceImpl.class
 cn\erp\domain\Purchase_List_Goods.class
 cn\erp\web\servlet\CustomerReturnListServlet.class
+cn\erp\dao\impl\RoleDaoImpl.class
 cn\erp\dao\GoodsunitDao.class
 com\erp\filter\LoginFilter.class
 cn\erp\service\impl\UserServiceImpl.class
 cn\erp\web\servlet\DamageServlet.class
+cn\erp\web\servlet\RoleServlet.class
 cn\erp\domain\CustomerReturnListGoods.class
 cn\erp\dao\CustomerReturnListDao.class
 cn\erp\web\servlet\SupplierServlet.class
@@ -55,9 +57,11 @@ cn\erp\domain\Page.class
 cn\erp\dao\DamagelistDao.class
 cn\erp\dao\impl\PurchaseDaoImpl.class
 cn\erp\domain\Menu.class
+cn\erp\domain\Role.class
 cn\erp\service\CustomerService.class
 cn\erp\dao\impl\GoodsTypeDaoImpl.class
 cn\erp\domain\Customer.class
+cn\erp\service\impl\RoleServiceImpl.class
 cn\erp\service\OverlistService.class
 cn\erp\web\servlet\GoodsTypeServlet.class
 cn\erp\domain\Damaggoods.class
@@ -72,9 +76,11 @@ cn\erp\service\impl\SaleListGoodsServiceImpl.class
 cn\erp\dao\impl\SaleListGoodsDaoImpl.class
 cn\erp\domain\SaleListCondition.class
 cn\erp\dao\impl\OverlistDaoImpl.class
+cn\erp\service\RoleService.class
 cn\erp\service\DamagelistService.class
 cn\erp\service\impl\PurchaseServiceImpl.class
 cn\erp\domain\Damagelist.class
+cn\erp\dao\RoleDao.class
 cn\erp\service\impl\MenuServiceImpl.class
 cn\erp\dao\DamageDao.class
 cn\erp\service\impl\DamageServiceImpl.class
