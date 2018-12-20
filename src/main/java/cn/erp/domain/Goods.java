@@ -18,6 +18,7 @@ public class Goods {
 	private int state;
 	private double last_purchasing_price;
 	private String codeOrName;
+	
 	public int getId() {
 		return id;
 	}

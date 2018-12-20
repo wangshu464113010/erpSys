@@ -1,6 +1,7 @@
 package cn.erp.web.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.SaleList;
+import cn.erp.domain.SaleListGoods;
 import cn.erp.service.SaleListService;
 import cn.erp.service.impl.SaleListServiceImpl;
 import cn.erp.utils.StringUtils;
@@ -36,6 +38,12 @@ public class SaleListServlet extends HttpServlet{
 		}
 		if("/list".equals(uri)){
 			searchSaleList(req,resp);
+		}
+		if("/listGoods".equals(uri)){
+			showListGoods(req,resp);
+		}
+		if("/delete".equals(uri)){
+			delete(req,resp);
 		}
 		
 	}
@@ -104,6 +112,45 @@ public class SaleListServlet extends HttpServlet{
 			jsonData = "{\"rows\":"+jsonData+"}";
 			String data = StringUtils.removeUnderlineAndUpperCase(jsonData);
 			resp.getWriter().write(data);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void showListGoods(HttpServletRequest req, HttpServletResponse resp) {
+		try {
+			PrintWriter pw = resp.getWriter();
+			Integer id=Integer.parseInt(req.getParameter("saleListId"));
+			System.out.println(id);
+			List<SaleListGoods> list = saleListService.findAllListGoodsById(id);
+			Map<String,Object> map=new HashMap<>();
+			map.put("rows", list);
+			Object json = JSONObject.toJSON(map);
+			String str = json.toString();
+			str = StringUtils.removeUnderlineAndUpperCase(str);
+			pw.write(str);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void delete(HttpServletRequest req, HttpServletResponse resp) {
+		try {
+			String id = req.getParameter("id");
+			int i = saleListService.deleteById(Integer.parseInt(id));
+			Map<String, Object> map = new HashMap<>();
+			if(i == 1){
+				map.put("success", true);
+			}else{
+				map.put("errorInfo", "删除失败！");
+			}
+			resp.getWriter().write(JSONObject.toJSON(map).toString());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

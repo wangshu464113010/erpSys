@@ -4,10 +4,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.erp.dao.SaleListDao;
+import cn.erp.domain.Purchase_List;
+import cn.erp.domain.Purchase_List_Goods;
 import cn.erp.domain.SaleList;
+import cn.erp.domain.SaleListGoods;
 import cn.erp.utils.C3P0Util;
 
 public class SaleListDaoImpl implements SaleListDao{
@@ -44,6 +48,28 @@ public class SaleListDaoImpl implements SaleListDao{
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public SaleList findById(Integer id) throws SQLException {
+		String sql = "select * from t_sale_list where id = ?";
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query(sql,new BeanHandler<SaleList>(SaleList.class),id);
+	}
+
+	@Override
+	public List<SaleListGoods> findAllBySaleListId(Integer id) throws SQLException {
+		String sql = "select * from t_sale_list_goods where sale_list_id = ?";
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query(sql,new BeanListHandler<SaleListGoods>(SaleListGoods.class),id);
+	}
+
+	@Override
+	public int deleteById(int id) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "delete from t_sale_list where id=?";
+		int i = qr.update(sql,id);
+		return i;
 	}
 
 }
