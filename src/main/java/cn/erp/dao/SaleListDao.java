@@ -14,4 +14,5 @@ public interface SaleListDao {
 	public SaleList findById(Integer id) throws SQLException;
 	public List<SaleListGoods> findAllBySaleListId(Integer id) throws SQLException;
 	public int deleteById(int id) throws SQLException;
+	public List<SaleList> findByMaxId() throws SQLException;
 }

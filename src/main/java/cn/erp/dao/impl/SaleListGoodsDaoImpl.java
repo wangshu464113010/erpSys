@@ -8,6 +8,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.erp.dao.SaleListGoodsDao;
+import cn.erp.domain.SaleList;
 import cn.erp.domain.SaleListGoods;
 import cn.erp.utils.C3P0Util;
 
@@ -26,6 +27,15 @@ public class SaleListGoodsDaoImpl implements SaleListGoodsDao{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		String sql = "delete from t_sale_list_goods where sale_list_id=?";
 		int i = qr.update(sql,saleListId);
+		return i;
+	}
+
+	@Override
+	public int insertSaleListGoods(SaleListGoods saleListGoods) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "insert into t_sale_list_goods values(default,?,?,?,?,?,?,?,?,?,?)";
+		int i = qr.update(sql,saleListGoods.getCode(),saleListGoods.getModel(),saleListGoods.getName(),saleListGoods.getNum(),saleListGoods.getPrice(),
+				saleListGoods.getTotal(),saleListGoods.getUnit(),saleListGoods.getSale_list_id(),saleListGoods.getType_id(),saleListGoods.getGoods_id());
 		return i;
 	}
 	

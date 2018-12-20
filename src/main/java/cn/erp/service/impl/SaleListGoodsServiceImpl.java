@@ -16,4 +16,9 @@ public class SaleListGoodsServiceImpl implements SaleListGoodsService{
 		return saleListGoodsDao.findSaleListGoodsByGoods_Id(goods_id);
 	}
 
+	@Override
+	public int insertSaleListGoods(SaleListGoods saleListGoods) throws SQLException {
+		return saleListGoodsDao.insertSaleListGoods(saleListGoods);
+	}
+
 }

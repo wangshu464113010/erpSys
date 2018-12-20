@@ -14,4 +14,6 @@ public interface SaleListService {
 	public List<SaleListGoods> findAllListGoodsById(Integer id) throws SQLException;
 	
 	public int deleteById(int id) throws SQLException;
+	
+	public int findByMaxId() throws SQLException;
 }

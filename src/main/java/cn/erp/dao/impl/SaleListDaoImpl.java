@@ -71,5 +71,13 @@ public class SaleListDaoImpl implements SaleListDao{
 		int i = qr.update(sql,id);
 		return i;
 	}
+	
+	@Override
+	public List<SaleList> findByMaxId() throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select * from t_sale_list";
+		List<SaleList> list = qr.query(sql,new BeanListHandler<SaleList>(SaleList.class));
+		return list;
+	}
 
 }

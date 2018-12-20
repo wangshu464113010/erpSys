@@ -2,6 +2,7 @@ package cn.erp.service.impl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import cn.erp.dao.CustomerDao;
@@ -31,7 +32,7 @@ public class SaleListServiceImpl implements SaleListService{
 
 	@Override
 	public int addSaleList(SaleList saleList) throws SQLException {
-		return saleListDao.insertSaleList(saleList);
+		 return saleListDao.insertSaleList(saleList);
 	}
 
 	@Override
@@ -75,6 +76,19 @@ public class SaleListServiceImpl implements SaleListService{
 		saleListGoodsDao.deleteBySaleListId(id);
 		int i = saleListDao.deleteById(id);
 		return i;
+	}
+
+	@Override
+	public int findByMaxId() throws SQLException {
+		 List<SaleList> list = saleListDao.findByMaxId();
+		 int id = 0;
+		 for (int i = 0; i < list.size(); i++) {
+			 int id2 = list.get(i).getId();
+			 if(id < id2){
+				 id = id2;
+			 }
+		}
+		 return id;
 	}
 	
 

@@ -42,5 +42,12 @@ public class UserDaoImpl implements UserDao{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		return qr.query(sql,new BeanListHandler<Role_Menu>(Role_Menu.class),id);
 	}
+	
+	@Override
+	public int updatePassword(User user, String password) throws SQLException {
+		String sql = "update t_user set password=? where id=?";
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.update(sql,password,user.getId());
+	}
 
 }
