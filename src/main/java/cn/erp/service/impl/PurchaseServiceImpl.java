@@ -1,6 +1,5 @@
 package cn.erp.service.impl;
 
-import java.io.ObjectOutputStream.PutField;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,10 +13,8 @@ import cn.erp.dao.impl.GoodsTypeDaoImpl;
 import cn.erp.dao.impl.PurchaseDaoImpl;
 import cn.erp.dao.impl.SupplierDaoImpl;
 import cn.erp.dao.impl.UserDaoImpl;
-import cn.erp.domain.Attribute;
 import cn.erp.domain.GoodsJson;
 import cn.erp.domain.GoodsType;
-import cn.erp.domain.Menu;
 import cn.erp.domain.Purchase;
 import cn.erp.domain.PurchaseList;
 import cn.erp.domain.Purchase_List;

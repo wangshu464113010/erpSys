@@ -21,11 +21,14 @@ public class GoodstypeServiceImpl implements GoodstypeService {
 	public List<GoodsType> findAllByPid(int id) throws SQLException {
 		return null;
 	}
-
+	@Override
+	public int delete(int id) throws SQLException {
+		return goodstypeDao.delete(id);
+	}
 	@Override
 	public int addGoodsType(GoodsType goodstype) throws SQLException {
-		goodstype.setIcon("icon-folder");//具体还不清楚该值意思?
-		goodstype.setState(0);//状态state值默认为0(可能是与启用与停用有关?)
+		goodstype.setIcon("icon-folder");//鍏蜂綋杩樹笉娓呮璇ュ�兼剰鎬�?
+		goodstype.setState(0);//鐘舵�乻tate鍊奸粯璁や负0(鍙兘鏄笌鍚敤涓庡仠鐢ㄦ湁鍏�?)
 		return goodstypeDao.insertGoodsType(goodstype);
 	}
 

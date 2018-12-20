@@ -10,6 +10,8 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.erp.dao.GoodsDao;
 import cn.erp.domain.Goods;
+import cn.erp.domain.IntegerDO;
+import cn.erp.domain.Page;
 import cn.erp.utils.C3P0Util;
 
 
@@ -67,17 +69,23 @@ public class GoodsDaoImpl implements GoodsDao {
 				+ "model,name,producer,purchasing_price"
 				+ ",remarks,selling_price,unit,type_id,state,last_purchasing_price  )"
 				+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?) ";
-		return qr.update(sql);
+		return qr.update(sql,goods.getCode(),goods.getInventory_quantity(),
+				goods.getMin_num(),goods.getModel(),goods.getName(),goods.getProducer()
+				,goods.getPurchasing_price(),goods.getRemarks(),goods.getSelling_price(),
+				goods.getUnit(),goods.getType_id(),goods.getState(),goods.getLast_purchasing_price());
 	}
 
 	@Override
 	public int update(Goods goods) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		String sql = "update t_goods set "
-				+ " inventory_quantity=?,min_num=?,"
+				+ " min_num=?,"
 				+ "model=?,name=?,producer=?,purchasing_price=?"
 				+ ",remarks=?,selling_price=?,unit=?,type_id=? where id = ? ";
-		return qr.update(sql);
+		return qr.update(sql,
+				goods.getMin_num(),goods.getModel(),goods.getName(),goods.getProducer()
+				,goods.getPurchasing_price(),goods.getRemarks(),goods.getSelling_price(),
+				goods.getUnit(),goods.getType_id(),goods.getId());
 	}
 
 	@Override
@@ -85,6 +93,20 @@ public class GoodsDaoImpl implements GoodsDao {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		String sql = "delete from  t_goods where id = ?";
 		return qr.update(sql,id);
+	}
+
+	@Override
+	public List<Goods> findLikeGoods(String name,Page page) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select  * from  t_goods where name like ? limit ?,?";
+		return qr.query(sql, new BeanListHandler<Goods>(Goods.class),"%"+name+"%",
+				(page.getPageNow()-1)*page.getSize(),page.getSize());
+	}
+	
+	public IntegerDO countLikeGoods(String name) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select  count(*) as count  from  t_goods where name like ? ";
+		return qr.query(sql, new BeanHandler<IntegerDO>(IntegerDO.class),"%"+name+"%");
 	}
 
 }

@@ -43,7 +43,15 @@ public class GoodsTypeServlet extends HttpServlet {
 			saveGoodsType(request, response);
 		}
 		if("/delete".equals(uri)){//删除商品类型
-			
+			String id = request.getParameter("id");
+			try {
+				if(goodstypeService.delete(Integer.parseInt(id))>0){
+					PrintWriter pw = response.getWriter();
+					pw.write("{\"success\":true}");
+				}
+			} catch (NumberFormatException | SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	
 	}

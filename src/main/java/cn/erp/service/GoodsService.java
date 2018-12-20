@@ -10,6 +10,11 @@ public interface GoodsService {
 	public int count() throws SQLException;
 	public List<Goods> findAll() throws SQLException;
 	
-	//获取商品code中最大的值
+	//wangshu
 	public String getMaxGoodsCode()throws SQLException;
+	public  List<Goods> findLikeGoods(String name,int pageNow,int pageSize)throws SQLException;
+	public int countLikeGoods(String name)throws SQLException;
+	public int insert(Goods goods)throws SQLException;
+	public int update(Goods goods)throws SQLException;
+	public int delete(int id)throws SQLException;
 }	

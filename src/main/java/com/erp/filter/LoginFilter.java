@@ -12,9 +12,8 @@ import javax.servlet.annotation.WebFilter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-//@WebFilter
 
-//git@github.com/wangshu464113010/erpSys.git
+//@WebFilter("/*")
 public class LoginFilter implements Filter{
 
 	@Override
@@ -27,8 +26,12 @@ public class LoginFilter implements Filter{
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
-		if(!"/user/login".equals(request.getRequestURI())&&!"/login.html".equals(request.getRequestURI())&&request.getSession().getAttribute("user")==null){
+		if(!"/user/login".equals(request.getRequestURI())
+				&& !"/login.html".equals(request.getRequestURI())
+				&& request.getSession().getAttribute("user")==null 
+				&& !request.getRequestURI().contains("static")){//放行静态资源
 			response.sendRedirect("/login.html");
+			return ;
 		}else{
 			chain.doFilter(request, response);
 		}

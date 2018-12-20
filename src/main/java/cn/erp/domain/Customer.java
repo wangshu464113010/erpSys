@@ -7,6 +7,7 @@ public class Customer {
 	private String name;
 	private String number;
 	private String remarks;
+	
 	public int getId() {
 		return id;
 	}

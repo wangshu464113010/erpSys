@@ -10,6 +10,9 @@ import cn.erp.dao.impl.GoodsDaoImpl;
 import cn.erp.dao.impl.GoodsTypeDaoImpl;
 import cn.erp.dao.impl.SaleListGoodsDaoImpl;
 import cn.erp.domain.Goods;
+import cn.erp.domain.GoodsType;
+import cn.erp.domain.IntegerDO;
+import cn.erp.domain.Page;
 import cn.erp.domain.SaleListGoods;
 import cn.erp.service.GoodsService;
 
@@ -63,6 +66,43 @@ public class GoodsServiceImpl implements GoodsService {
 			str = "0"+str;
 		}
 		return str;
+	}
+
+	@Override
+	public int insert(Goods goods) throws SQLException {
+		goods.setPurchasing_price(goods.getPurchasing_price());
+		goods.setState(0);
+		goods.setInventory_quantity(0);
+		return goodsDao.insert(goods);
+	}
+
+	@Override
+	public int update(Goods goods) throws SQLException {
+		return goodsDao.update(goods);
+	}
+
+	@Override
+	public int delete(int id) throws SQLException {
+		return goodsDao.delete(id);
+	}
+
+	@Override
+	public List<Goods> findLikeGoods(String name, int pageNow, int pageSize) throws SQLException {
+		Page<Goods> page = new Page<Goods>();
+		page.setPageNow(pageNow);
+		page.setSize(pageSize);
+		page.setTotal(goodsDao.countLikeGoods(name).getCount());
+		List<Goods> list = goodsDao.findLikeGoods(name, page);
+		for (Goods goods : list) {
+			GoodsType findOne = goodsTypeDao.findOne(goods.getType_id());
+			goods.setType(findOne);
+		}
+		return list;
+	}
+
+	@Override
+	public int countLikeGoods(String name) throws SQLException {
+		return goodsDao.countLikeGoods(name).getCount();
 	}
 
 }

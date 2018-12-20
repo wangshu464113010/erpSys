@@ -7,6 +7,7 @@ cn\erp\service\impl\DamagelistServiceImpl.class
 cn\erp\service\impl\DamageServiceImpl.class
 cn\erp\web\servlet\UserServlet.class
 cn\erp\service\impl\SaleListServiceImpl.class
+cn\erp\domain\HelloWorld.class
 cn\erp\service\impl\UserServiceImpl.class
 cn\erp\dao\impl\UserDaoImpl.class
 cn\erp\domain\User.class
@@ -46,6 +47,7 @@ cn\erp\web\servlet\GoodsTypeServlet.class
 cn\erp\utils\StringUtils.class
 cn\erp\dao\OverlistDao.class
 cn\erp\dao\SaleListGoodsDao.class
+com\erp\filter\ReleaseStaticResourcesFilter.class
 cn\erp\dao\OverDao.class
 cn\erp\domain\SaleList.class
 utils\StringUtils.class
@@ -82,6 +84,7 @@ cn\erp\dao\DamageDao.class
 cn\erp\web\servlet\CustomerServlet.class
 cn\erp\dao\impl\CustomerDaoImpl.class
 cn\erp\web\servlet\OverServlet.class
+cn\erp\domain\IntegerDO.class
 cn\erp\domain\Purchase.class
 cn\erp\domain\Customer.class
 cn\erp\service\OverService.class
