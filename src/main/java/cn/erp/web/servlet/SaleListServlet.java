@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +16,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 
+import cn.erp.domain.GoodsJson;
 import cn.erp.domain.SaleList;
 import cn.erp.domain.SaleListGoods;
+import cn.erp.service.SaleListGoodsService;
 import cn.erp.service.SaleListService;
+import cn.erp.service.impl.SaleListGoodsServiceImpl;
 import cn.erp.service.impl.SaleListServiceImpl;
 import cn.erp.utils.StringUtils;
 
@@ -28,6 +34,7 @@ import cn.erp.utils.StringUtils;
 public class SaleListServlet extends HttpServlet{
 	
 	private SaleListService saleListService = new SaleListServiceImpl();
+	private SaleListGoodsService saleListGoodsService = new SaleListGoodsServiceImpl();
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -75,7 +82,27 @@ public class SaleListServlet extends HttpServlet{
 			saleList.setState(Integer.parseInt(state));
 			saleList.setUser_id(1);
 			saleList.setCustomer_id(Integer.parseInt(customer_id));
+			
+			
+			ArrayList<GoodsJson> list = JSON.parseObject(goodsJson, new TypeReference<ArrayList<GoodsJson>>() {});
+			GoodsJson goodsJson2 = list.get(0);
+			SaleListGoods saleListGoods = new SaleListGoods();
+			saleListGoods.setCode(goodsJson2.getCode());
+			saleListGoods.setModel(goodsJson2.getModel());
+			saleListGoods.setName(goodsJson2.getName());
+			saleListGoods.setNum(Integer.parseInt(goodsJson2.getNum()));
+			saleListGoods.setPrice(Float.parseFloat(goodsJson2.getPrice()));
+			saleListGoods.setTotal(goodsJson2.getTotal());
+			saleListGoods.setUnit(goodsJson2.getUnit());
+			saleListGoods.setType_id(goodsJson2.getTypeId());
+			saleListGoods.setGoods_id(goodsJson2.getGoodsId());
+			
 			int i = saleListService.addSaleList(saleList);
+			if(i == 1){
+				int id = saleListService.findByMaxId();
+				saleListGoods.setSale_list_id(id);
+				saleListGoodsService.insertSaleListGoods(saleListGoods);
+			}
 			Map<String, Object> resultMap = new HashMap<>();
 			if(i == 1){
 				resultMap.put("success", true);

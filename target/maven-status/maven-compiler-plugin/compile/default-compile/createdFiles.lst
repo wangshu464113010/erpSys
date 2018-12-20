@@ -32,6 +32,7 @@ cn\erp\dao\UserDao.class
 cn\erp\dao\impl\OverDaoImpl.class
 cn\erp\domain\Purchase.class
 cn\erp\domain\SaleListGoods.class
+cn\erp\web\servlet\SaleListServlet$1.class
 cn\erp\web\servlet\PurchaseSerlet.class
 cn\erp\service\OverService.class
 cn\erp\domain\CustomerReturnList.class
