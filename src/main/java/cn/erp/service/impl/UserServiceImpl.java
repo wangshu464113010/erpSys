@@ -15,17 +15,13 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User login(String user_name, String password)throws SQLException {
+		
 		return this.userDao.findByNameAndPassword(user_name,password);
 	}
 
 	@Override
 	public List<User_Role> findAllUserRoleByUserId(Integer id) throws SQLException {
 		return this.userDao.findAllUserRoleByUserId(id);
-	}
-	
-	@Override
-	public int updatePassword(User user, String password) throws SQLException {
-		return this.userDao.updatePassword(user,password);
 	}
 
 }
