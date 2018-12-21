@@ -5,28 +5,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.erp.dao.GoodsDao;
 import cn.erp.domain.Goods;
+import cn.erp.domain.IntegerDO;
+import cn.erp.domain.Page;
 import cn.erp.utils.C3P0Util;
 
 
 public class GoodsDaoImpl implements GoodsDao {
 
 	@Override
-	public List<Goods> findAll(Integer page,Integer rows,Integer type_id) throws SQLException {
+	public List<Goods> findAll(Integer page,Integer rows,Integer type_id,String codeOrName) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		String sql ="";
 		List<Goods> list=new ArrayList<>();
-		if(type_id==null){
+		if(type_id==null&&("".equals(codeOrName)||codeOrName==null)){
 			sql = "select * from t_goods limit ?,?";
 			list =  qr.query(sql,new BeanListHandler<Goods>(Goods.class),(page-1)*rows,rows);
-		}else{
+		}
+		else if(type_id==null&&(!"".equals(codeOrName)||codeOrName!=null)){
+			sql = "select * from t_goods where code like ? or name like ? limit ?,?";
+			list =  qr.query(sql,new BeanListHandler<Goods>(Goods.class),"%"+codeOrName+"%","%"+codeOrName+"%",(page-1)*rows,rows);
+		}else if(type_id!=null&&("".equals(codeOrName)||codeOrName==null)){
 			sql = "select * from t_goods where type_id=? limit ?,?";
 			list =  qr.query(sql,new BeanListHandler<Goods>(Goods.class),type_id,(page-1)*rows,rows);
+		}else if(type_id!=null&&(!"".equals(codeOrName)||codeOrName!=null)){
+			sql = "select * from t_goods where type_id=? and code like ? or name like ? limit ?,?";
+			list =  qr.query(sql,new BeanListHandler<Goods>(Goods.class),type_id,"%"+codeOrName+"%","%"+codeOrName+"%",(page-1)*rows,rows);
 		}
-		//System.out.println(list);
 		return list;
 	}
 	
@@ -41,6 +50,70 @@ public class GoodsDaoImpl implements GoodsDao {
 	@Override
 	public int count() throws SQLException {
 		return findAll().size();
+	}
+	
+	//获取商品中最大编号的商品
+	@Override
+	public String getMaxGoodsCode() throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select max(code) as code from t_goods";
+		Goods query = qr.query(sql, new BeanHandler<Goods>(Goods.class));
+		return query.getCode();
+	}
+
+	@Override
+	public int insert(Goods goods) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "insert into t_goods("
+				+ "code,inventory_quantity,min_num,"
+				+ "model,name,producer,purchasing_price"
+				+ ",remarks,selling_price,unit,type_id,state,last_purchasing_price  )"
+				+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+		return qr.update(sql,goods.getCode(),goods.getInventory_quantity(),
+				goods.getMin_num(),goods.getModel(),goods.getName(),goods.getProducer()
+				,goods.getPurchasing_price(),goods.getRemarks(),goods.getSelling_price(),
+				goods.getUnit(),goods.getType_id(),goods.getState(),goods.getLast_purchasing_price());
+	}
+
+	@Override
+	public int update(Goods goods) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "update t_goods set "
+				+ " min_num=?,"
+				+ "model=?,name=?,producer=?,purchasing_price=?"
+				+ ",remarks=?,selling_price=?,unit=?,type_id=? where id = ? ";
+		return qr.update(sql,
+				goods.getMin_num(),goods.getModel(),goods.getName(),goods.getProducer()
+				,goods.getPurchasing_price(),goods.getRemarks(),goods.getSelling_price(),
+				goods.getUnit(),goods.getType_id(),goods.getId());
+	}
+
+	@Override
+	public int delete(int id) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "delete from  t_goods where id = ?";
+		return qr.update(sql,id);
+	}
+
+	@Override
+	public List<Goods> findLikeGoods(String name,Page page) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select  * from  t_goods where name like ? limit ?,?";
+		return qr.query(sql, new BeanListHandler<Goods>(Goods.class),"%"+name+"%",
+				(page.getPageNow()-1)*page.getSize(),page.getSize());
+	}
+	
+	public IntegerDO countLikeGoods(String name) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select  count(*) as count  from  t_goods where name like ? ";
+		return qr.query(sql, new BeanHandler<IntegerDO>(IntegerDO.class),"%"+name+"%");
+	}
+
+	@Override
+	public Goods findGoodsByCode(String code) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select  * from  t_goods where code = ? ";
+		return qr.query(sql, new BeanHandler<Goods>(Goods.class),code);
 	}
 
 }

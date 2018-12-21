@@ -6,5 +6,5 @@ import java.util.List;
 import cn.erp.domain.Menu;
 
 public interface MenuService {
-	public List<Menu> menuList()throws SQLException;
+	public List<Menu> menuList(Integer userid) throws SQLException;
 }

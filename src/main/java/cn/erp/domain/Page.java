@@ -8,7 +8,7 @@ public class Page<T> {
 	private Integer pageNow;
 	private Integer firstPage = 1;
 	private Integer lastPage;
-	private Integer total = 10 ;
+	private Integer total;
 	private Integer size;
 	
 	private List<T> list = new ArrayList<T>();
