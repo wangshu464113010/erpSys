@@ -24,4 +24,10 @@ public class UserServiceImpl implements UserService{
 		return this.userDao.findAllUserRoleByUserId(id);
 	}
 
+	@Override
+	public int updatePassword(User user, String password) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
