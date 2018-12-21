@@ -21,4 +21,6 @@ public interface GoodsDao {
 	public int update(Goods goods)throws SQLException;
 	public int delete(int id)throws SQLException;
 	
+	public Goods findGoodsByCode(String code) throws SQLException;
+	
 }

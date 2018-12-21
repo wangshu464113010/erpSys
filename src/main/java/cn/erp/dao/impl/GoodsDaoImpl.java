@@ -109,4 +109,11 @@ public class GoodsDaoImpl implements GoodsDao {
 		return qr.query(sql, new BeanHandler<IntegerDO>(IntegerDO.class),"%"+name+"%");
 	}
 
+	@Override
+	public Goods findGoodsByCode(String code) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select  * from  t_goods where code = ? ";
+		return qr.query(sql, new BeanHandler<Goods>(Goods.class),code);
+	}
+
 }

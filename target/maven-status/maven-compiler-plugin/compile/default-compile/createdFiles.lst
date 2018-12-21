@@ -111,6 +111,7 @@ cn\erp\service\SupplierService.class
 cn\erp\service\GoodsunitService.class
 cn\erp\service\impl\CustomerReturnListServiceImpl.class
 cn\erp\service\impl\SupplierServiceImpl.class
+cn\erp\domain\CountSale.class
 cn\erp\service\impl\GoodstypeServiceImpl.class
 cn\erp\web\servlet\GoodsUnitServlet.class
 com\erp\filter\ReleaseStaticResourcesFilter.class

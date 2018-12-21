@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 
+import cn.erp.domain.CountSale;
 import cn.erp.domain.GoodsJson;
 import cn.erp.domain.SaleList;
 import cn.erp.domain.SaleListGoods;
@@ -52,6 +53,10 @@ public class SaleListServlet extends HttpServlet{
 		if("/delete".equals(uri)){
 			delete(req,resp);
 		}
+		if("/countSaleByMonth".equals(uri)){
+			countSaleByMonth(req,resp);
+		}
+		
 		
 	}
 
@@ -107,7 +112,7 @@ public class SaleListServlet extends HttpServlet{
 			if(i == 1){
 				resultMap.put("success", true);
 			}else{
-				resultMap.put("errorInfo", "保存失败！");
+				resultMap.put("errorInfo", "淇濆瓨澶辫触锛�");
 			}
 			resp.getWriter().write(JSONObject.toJSON(resultMap).toString());
 			
@@ -177,7 +182,7 @@ public class SaleListServlet extends HttpServlet{
 			if(i == 1){
 				map.put("success", true);
 			}else{
-				map.put("errorInfo", "删除失败！");
+				map.put("errorInfo", "删除失败!");
 			}
 			resp.getWriter().write(JSONObject.toJSON(map).toString());
 		} catch (NumberFormatException e) {
@@ -185,6 +190,21 @@ public class SaleListServlet extends HttpServlet{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void countSaleByMonth(HttpServletRequest req, HttpServletResponse resp) {
+		String begin = req.getParameter("begin");
+		String end = req.getParameter("end");
+		try {
+			PrintWriter pw = resp.getWriter();
+			List<CountSale> list = this.saleListService.findByMonthTj(begin, end);
+			Map<String,Object> map=new HashMap<>();
+			map.put("success", true);
+			map.put("rows", list);
+			pw.write(JSONObject.toJSON(map).toString());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
