@@ -1,6 +1,7 @@
 D:\erpSys\src\main\java\cn\erp\domain\User_Role.java
 D:\erpSys\src\main\java\cn\erp\domain\Customer.java
 D:\erpSys\src\main\java\cn\erp\domain\Purchase_List_Goods.java
+D:\erpSys\src\main\java\cn\erp\dao\CustomerReturnListGoodsDao.java
 D:\erpSys\src\main\java\cn\erp\service\CustomerService.java
 D:\erpSys\src\main\java\com\erp\filter\EncodingFilter.java
 D:\erpSys\src\main\java\cn\erp\dao\impl\CustomerDaoImpl.java
@@ -67,8 +68,11 @@ D:\erpSys\src\main\java\cn\erp\service\DamagelistService.java
 D:\erpSys\src\main\java\cn\erp\service\DamageService.java
 D:\erpSys\src\main\java\cn\erp\dao\impl\GoodsTypeDaoImpl.java
 D:\erpSys\src\main\java\cn\erp\dao\impl\SupplierDaoImpl.java
+D:\erpSys\src\main\java\cn\erp\dao\impl\CustomerReturnListGoodsDaoImpl.java
 D:\erpSys\src\main\java\cn\erp\domain\SaleListCondition.java
+D:\erpSys\src\main\java\cn\erp\domain\CustomerReturnListCount.java
 D:\erpSys\src\main\java\cn\erp\domain\Goods.java
+D:\erpSys\src\main\java\cn\erp\domain\SaleListCount.java
 D:\erpSys\src\main\java\cn\erp\dao\impl\MenuDaoImpl.java
 D:\erpSys\src\main\java\cn\erp\service\impl\DamagelistServiceImpl.java
 D:\erpSys\src\main\java\cn\erp\service\OverlistService.java

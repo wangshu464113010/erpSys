@@ -68,6 +68,9 @@ public class PurchaseSerlet extends HttpServlet{
 		if("/delete".equals(uri)){
 			deletePurchaseList(request,response);
 		}
+		if("/update".equals(uri)){
+			updateState(request,response);
+		}
 			
 		
 		
@@ -208,5 +211,24 @@ public class PurchaseSerlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		
+	}
+	
+	
+	private void updateState(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		try {
+			String id = req.getParameter("id");
+			int i = purchaseService.updataState(Integer.parseInt(id));
+			Map<String, Object> map = new HashMap<>();
+			if(i == 0){
+				map.put("errorInfo", "操作超时！");
+			}else{
+				map.put("success", true);
+			}
+			resp.getWriter().write(JSONObject.toJSON(map).toString());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

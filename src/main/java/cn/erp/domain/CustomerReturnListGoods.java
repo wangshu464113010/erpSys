@@ -13,6 +13,7 @@ public class CustomerReturnListGoods {
 	private Integer customer_return_list_id;//关联退货表里的id
 	private Integer type_id;//关联t_goodstype类型表里的id
 	private Integer goods_id;//关联t_goods类型表里的id 
+	private GoodsType type;
 	public Integer getId() {
 		return id;
 	}
@@ -79,4 +80,11 @@ public class CustomerReturnListGoods {
 	public void setGoods_id(Integer goods_id) {
 		this.goods_id = goods_id;
 	}
+	public GoodsType getType() {
+		return type;
+	}
+	public void setType(GoodsType type) {
+		this.type = type;
+	}
+	
 }

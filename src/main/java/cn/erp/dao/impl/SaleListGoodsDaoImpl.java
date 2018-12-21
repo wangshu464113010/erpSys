@@ -8,6 +8,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.erp.dao.SaleListGoodsDao;
+import cn.erp.domain.CustomerReturnListGoods;
 import cn.erp.domain.SaleList;
 import cn.erp.domain.SaleListGoods;
 import cn.erp.utils.C3P0Util;
@@ -37,6 +38,13 @@ public class SaleListGoodsDaoImpl implements SaleListGoodsDao{
 		int i = qr.update(sql,saleListGoods.getCode(),saleListGoods.getModel(),saleListGoods.getName(),saleListGoods.getNum(),saleListGoods.getPrice(),
 				saleListGoods.getTotal(),saleListGoods.getUnit(),saleListGoods.getSale_list_id(),saleListGoods.getType_id(),saleListGoods.getGoods_id());
 		return i;
+	}
+
+	@Override
+	public List<SaleListGoods> findBySaleListId(Integer saleListId) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select * from t_sale_list_goods where sale_list_id=?";
+		return qr.query(sql, new BeanListHandler<SaleListGoods>(SaleListGoods.class),saleListId);
 	}
 	
 }

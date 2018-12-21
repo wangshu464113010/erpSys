@@ -1,8 +1,10 @@
 cn\erp\dao\impl\GoodsunitDaoImpl.class
 cn\erp\service\impl\SaleListServiceImpl.class
+cn\erp\domain\SaleListCount.class
 cn\erp\web\servlet\OverServlet.class
 cn\erp\service\UserService.class
 cn\erp\dao\SaleListDao.class
+cn\erp\dao\CustomerReturnListGoodsDao.class
 cn\erp\service\SaleListGoodsService.class
 cn\erp\domain\HelloWorld.class
 cn\erp\dao\GoodsDao.class
@@ -13,6 +15,7 @@ cn\erp\web\servlet\CustomerReturnListServlet.class
 cn\erp\dao\impl\RoleDaoImpl.class
 cn\erp\dao\GoodsunitDao.class
 com\erp\filter\LoginFilter.class
+cn\erp\domain\CustomerReturnListCount.class
 cn\erp\service\impl\UserServiceImpl.class
 cn\erp\web\servlet\DamageServlet.class
 cn\erp\web\servlet\RoleServlet.class
@@ -51,6 +54,7 @@ cn\erp\web\servlet\CustomerServlet.class
 cn\erp\domain\Goodsunit.class
 cn\erp\dao\impl\CustomerDaoImpl.class
 cn\erp\service\impl\GoodsunitServiceImpl.class
+cn\erp\dao\impl\CustomerReturnListGoodsDaoImpl.class
 cn\erp\domain\Supplier.class
 cn\erp\service\PurchaseService.class
 cn\erp\dao\impl\GoodsDaoImpl.class
