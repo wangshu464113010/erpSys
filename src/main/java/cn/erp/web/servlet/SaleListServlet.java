@@ -112,7 +112,7 @@ public class SaleListServlet extends HttpServlet{
 			if(i == 1){
 				resultMap.put("success", true);
 			}else{
-				resultMap.put("errorInfo", "淇濆瓨澶辫触锛�");
+				resultMap.put("errorInfo", "删除失败!");
 			}
 			resp.getWriter().write(JSONObject.toJSON(resultMap).toString());
 			
