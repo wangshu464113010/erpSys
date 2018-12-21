@@ -20,14 +20,18 @@ import cn.erp.domain.GoodsType;
 
 import cn.erp.service.GoodsService;
 import cn.erp.service.GoodstypeService;
+import cn.erp.service.ListAlarmService;
 import cn.erp.service.impl.GoodsServiceImpl;
 import cn.erp.service.impl.GoodstypeServiceImpl;
+import cn.erp.service.impl.ListAlarmServiceImpl;
+import cn.erp.utils.StringUtils;
 
 @WebServlet("/admin/goods/*")
 public class GoodsServlet extends HttpServlet{
 	
 	private GoodsService goodsService = new GoodsServiceImpl();
 	private GoodstypeService goodstypeService = new GoodstypeServiceImpl();
+	private ListAlarmService listAlarmService = new ListAlarmServiceImpl();
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,6 +45,33 @@ public class GoodsServlet extends HttpServlet{
 		}
 		if("/list".equals(uri)){
 			findAllGoodsAndGoodsType(req,resp);
+		}
+		if("/listAlarm".equals(uri)){
+			List<Goods> list=null;
+			
+			try {
+				list=listAlarmService.findAll();
+//				String string = JSONObject.toJSON(list).toString();
+//				string = "{\"rows\":"+string+"}";
+//				StringUtils.removeUnderlineAndUpperCase(string);
+//				System.out.println(string);
+//				resp.getWriter().write(string);
+				String string = JSONObject.toJSON(list).toString();
+				string = "{\"rows\":"+string+"}";
+				string = string.replaceAll("purchasing_price", "purchasingPrice");
+				string = string.replaceAll("selling_price", "sellingPrice");
+				//string = string.replaceAll("last_purchasing_price", "lastPurchasingPrice");
+				string = string.replaceAll("last_purchasingPrice", "lastPurchasingPrice");
+				string = string.replaceAll("inventory_quantity", "inventoryQuantity");
+				string = string.replaceAll("type_id", "typeId");
+				string = string.replaceAll("min_num", "minNum");
+				string = string.replaceAll("p_id", "pId");
+//				System.out.println(string);
+				resp.getWriter().write(string);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
