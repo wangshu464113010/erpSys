@@ -16,7 +16,7 @@ public class GoodsGoosTypeVO {
 		private Integer saleTotal;
 		private String producer;
 		private String remarks;
-		private String codeOrName;		
+		private String codeOrName;	//搜索框输入的东西	
 		private Integer typeId;		
 		private GoodsType type;
 		public Integer getTypeId() {
