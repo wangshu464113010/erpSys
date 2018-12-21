@@ -10,9 +10,7 @@ import cn.erp.domain.Purchase_List_Goods;
 
 public interface PurchaseDao {
 	public List<Purchase> findAllByP_id(int p_id) throws SQLException;
-	
 	public int savePurchaseListGoods(Purchase_List_Goods purchaseListGoods) throws SQLException;
-	
 	public int savePurchaseList(Purchase_List purchaseList) throws SQLException;
 	
 	public Purchase_List findId(String purchase_number,Integer supplier_id,Integer user_id)throws SQLException;
@@ -26,4 +24,8 @@ public interface PurchaseDao {
 	public int deletePuchaseListById(Integer id)throws SQLException;
 	
 	public int deletePuchaseListGoodsByPuchaseListId(Integer id)throws SQLException;
+	
+	public int getPurchaseNumber(String date) throws SQLException;
 }
+	
+

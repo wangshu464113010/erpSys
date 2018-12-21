@@ -68,8 +68,9 @@ public class PurchaseSerlet extends HttpServlet{
 		if("/delete".equals(uri)){
 			deletePurchaseList(request,response);
 		}
-			
-		
+		if("/getPurchaseNumber".equals(uri)){
+			getPurchaseNumber(request,response);
+		}	
 		
 	}
 	
@@ -103,6 +104,7 @@ public class PurchaseSerlet extends HttpServlet{
 		float amount_payable = Float.parseFloat(request.getParameter("amountPayable"));
 		float amount_paid = Float.parseFloat(request.getParameter("amountPaid"));
 		String purchaseDate = request.getParameter("purchaseDate");
+		String purchase_Number=request.getParameter("purchaseNumber");
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		Date purchase_date=null;
 		try {
@@ -114,19 +116,11 @@ public class PurchaseSerlet extends HttpServlet{
 		int state = Integer.parseInt(request.getParameter("state"));
 		String json = request.getParameter("goodsJson");
 		ArrayList<GoodsJson> list = JSON.parseObject(json, new TypeReference<ArrayList<GoodsJson>>() {});
-		GoodsJson goodsJson = list.get(0);
-		String[] split = purchaseDate.split("-");
-		String pd="";
-		for (String string : split) {
-			pd+=string;
-		}
-		String purchase_Number="JH"+pd+goodsJson.getCode();
-		
 		try {
-			int i = this.purchaseService.saveJh(user_id, supplier_id, amount_payable, amount_paid, purchase_date, remarks, state, goodsJson, purchase_Number);
+			int i = this.purchaseService.saveJh(user_id, supplier_id, amount_payable, amount_paid, purchase_date, remarks, state, list, purchase_Number);
 			Map<String,Object> map=new HashMap<>();
 			Object json1=null;
-			if(i==2){
+			if(i==list.size()+1){
 				map.put("success", true);
 				json1 = JSONObject.toJSON(map);
 			}else{
@@ -209,4 +203,18 @@ public class PurchaseSerlet extends HttpServlet{
 		}
 		
 	}
+	
+	private void getPurchaseNumber(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		PrintWriter pw = response.getWriter();
+		Date date =new Date();
+		String date1 = new SimpleDateFormat("yyyy-MM-dd").format(date);
+		try {
+			String purchaseNumber = this.purchaseService.getPurchaseNumber(date1);
+			pw.write(purchaseNumber);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

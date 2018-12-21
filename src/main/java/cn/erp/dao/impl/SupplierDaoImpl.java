@@ -53,7 +53,7 @@ public class SupplierDaoImpl implements SupplierDao {
 	@Override
 	public Supplier finddOne(Integer id)  throws SQLException{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		String sql = "select * fronm t_supplier where id = ?";
+		String sql = "select * from t_supplier where id = ?";
 		Supplier supplier = qr.query(sql, new BeanHandler<Supplier>(Supplier.class),id);
 		return supplier;
 	}
@@ -89,7 +89,7 @@ public class SupplierDaoImpl implements SupplierDao {
 			s = s+i+",";
 		}
 		String sql = "delete from t_supplier where id in ( "+s.substring(0, s.length()-1)+" )";
-		//System.out.println(sql);	//------待优化---------------
+		//System.out.println(sql);	//------寰呬紭鍖�---------------
 		return qr.update(sql);
 		//return qr.update(sql,ids[0]);
 	}

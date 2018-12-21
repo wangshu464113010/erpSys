@@ -84,7 +84,7 @@ public class PurchaseServiceImpl implements PurchaseService{
 
 	@Override
 	public int saveJh(int user_id, String supplier_id, float amount_payable, float amount_paid, Date purchase_date,
-			String remarks, int state, GoodsJson goodsJson, String purchase_number) throws SQLException {
+			String remarks, int state, ArrayList<GoodsJson> goodsJson1, String purchase_number) throws SQLException {
 		int i=0;
 		Purchase_List pl=new Purchase_List();
 		pl.setAmount_paid(amount_paid);
@@ -96,19 +96,21 @@ public class PurchaseServiceImpl implements PurchaseService{
 		pl.setSupplier_id(Integer.parseInt(supplier_id));
 		pl.setUser_id(user_id);
 		i += purchaseDao.savePurchaseList(pl);
-		Purchase_List_Goods plg=new Purchase_List_Goods();
-		plg.setCode(goodsJson.getCode());
-		plg.setGoods_id(goodsJson.getGoodsId());
-		plg.setModel(goodsJson.getModel());
-		plg.setName(goodsJson.getName());
-		plg.setNum(Integer.parseInt(goodsJson.getNum()));
-		plg.setPrice(Float.parseFloat(goodsJson.getPrice()));
-		plg.setTotal(goodsJson.getTotal());
-		plg.setType_id(goodsJson.getTypeId());
-		plg.setUtil(goodsJson.getUnit());
-		Purchase_List purchase_List = purchaseDao.findId(purchase_number,Integer.parseInt(supplier_id),user_id);
-		plg.setPurchase_list_id(purchase_List.getId());
-		i += purchaseDao.savePurchaseListGoods(plg);
+		for (GoodsJson goodsJson : goodsJson1) {
+			Purchase_List_Goods plg=new Purchase_List_Goods();
+			plg.setCode(goodsJson.getCode());
+			plg.setGoods_id(goodsJson.getGoodsId());
+			plg.setModel(goodsJson.getModel());
+			plg.setName(goodsJson.getName());
+			plg.setNum(Integer.parseInt(goodsJson.getNum()));
+			plg.setPrice(Float.parseFloat(goodsJson.getPrice()));
+			plg.setTotal(goodsJson.getTotal());
+			plg.setType_id(goodsJson.getTypeId());
+			plg.setUtil(goodsJson.getUnit());
+			Purchase_List purchase_List = purchaseDao.findId(purchase_number,Integer.parseInt(supplier_id),user_id);
+			plg.setPurchase_list_id(purchase_List.getId());
+			i += purchaseDao.savePurchaseListGoods(plg);
+		}
 		return i;
 	}
 
@@ -156,5 +158,18 @@ public class PurchaseServiceImpl implements PurchaseService{
 		int  i= this.purchaseDao.deletePuchaseListGoodsByPuchaseListId(id);
 		int index = this.purchaseDao.deletePuchaseListById(id);
 		return index;
+	}
+
+
+	@Override
+	public String getPurchaseNumber(String date) throws SQLException {
+		int i = 10000+this.purchaseDao.getPurchaseNumber(date)+1;
+		String[] split = date.split("-");
+		String s="";
+		for (String string : split) {
+			s+=string;
+		}
+		String j=(i+"").substring(1);
+		return "JH"+s+j;
 	}
 }

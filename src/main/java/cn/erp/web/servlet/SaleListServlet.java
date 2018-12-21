@@ -52,6 +52,12 @@ public class SaleListServlet extends HttpServlet{
 		if("/delete".equals(uri)){
 			delete(req,resp);
 		}
+		if("/countSaleByDay".equals(uri)){///saleList/countSaleByDay
+			//begin	2018-12-15
+			//end	2018-12-2
+			
+			
+		}
 		
 	}
 
@@ -107,7 +113,7 @@ public class SaleListServlet extends HttpServlet{
 			if(i == 1){
 				resultMap.put("success", true);
 			}else{
-				resultMap.put("errorInfo", "保存失败！");
+				resultMap.put("errorInfo", "淇濆瓨澶辫触锛�");
 			}
 			resp.getWriter().write(JSONObject.toJSON(resultMap).toString());
 			
@@ -177,7 +183,7 @@ public class SaleListServlet extends HttpServlet{
 			if(i == 1){
 				map.put("success", true);
 			}else{
-				map.put("errorInfo", "删除失败！");
+				map.put("errorInfo", "鍒犻櫎澶辫触锛�");
 			}
 			resp.getWriter().write(JSONObject.toJSON(map).toString());
 		} catch (NumberFormatException e) {
