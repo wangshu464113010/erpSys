@@ -14,6 +14,10 @@ public class UserServiceImpl implements UserService{
 	private UserDao userDao=new UserDaoImpl();
 	
 	@Override
+	public User findByUser_id(int id) throws SQLException {
+		return userDao.findOne(id);
+	}
+	@Override
 	public User login(String user_name, String password)throws SQLException {
 		
 		return this.userDao.findByNameAndPassword(user_name,password);
@@ -29,5 +33,4 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 }

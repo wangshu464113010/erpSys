@@ -39,4 +39,11 @@ public class SaleListGoodsDaoImpl implements SaleListGoodsDao{
 		return i;
 	}
 	
+	@Override
+	public List<SaleListGoods> selectBySaleListId(Integer saleListId) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select * from t_sale_list_goods where sale_list_id=?";
+		return qr.query(sql, new BeanListHandler<SaleListGoods>(SaleListGoods.class),saleListId);
+	}
+	
 }

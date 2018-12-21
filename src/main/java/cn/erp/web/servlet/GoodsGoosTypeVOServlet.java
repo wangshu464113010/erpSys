@@ -63,11 +63,9 @@ public class GoodsGoosTypeVOServlet extends HttpServlet {
 	private void GoodsGoosTypeVOFindall(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String page = request.getParameter("page");
 		String rows = request.getParameter("rows");
-		Page<GoodsGoosTypeVO> page1 = new Page<GoodsGoosTypeVO>();
-		
+		Page<GoodsGoosTypeVO> page1 = new Page<GoodsGoosTypeVO>();		
 		page1.setSize(Integer.parseInt(rows));			
-		page1.setPageNow(Integer.parseInt(page));
-		
+		page1.setPageNow(Integer.parseInt(page));		
 		try {
 			//data来源于service--->dao----->database
 			List<GoodsGoosTypeVO> list = goodsGoosTypeVOService.findAll(page1);//把请求响应

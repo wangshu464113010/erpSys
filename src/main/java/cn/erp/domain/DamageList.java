@@ -2,18 +2,35 @@ package cn.erp.domain;
 
 import java.util.Date;
 
-public class Damagelist {
-	private Integer id;
+public class DamageList{
+	private int id;
 	private Date damage_date;
 	private String damage_number;
 	private String remarks;
-	private Integer user_id;
-	public Integer getId() {
+	private int user_id;
+	private DamageListGoods damage_list_id;
+	private User user;
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
+
+	public DamageListGoods getDamage_list_id() {
+		return damage_list_id;
+	}
+	public void setDamage_list_id(DamageListGoods damage_list_id) {
+		this.damage_list_id = damage_list_id;
+	}
+	
+	
 	public Date getDamage_date() {
 		return damage_date;
 	}
@@ -32,10 +49,10 @@ public class Damagelist {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	public Integer getUser_id() {
+	public int getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(Integer user_id) {
+	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
 	

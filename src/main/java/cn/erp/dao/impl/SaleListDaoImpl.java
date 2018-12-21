@@ -79,5 +79,12 @@ public class SaleListDaoImpl implements SaleListDao{
 		List<SaleList> list = qr.query(sql,new BeanListHandler<SaleList>(SaleList.class));
 		return list;
 	}
-
+	
+	@Override
+	public List<SaleList> findByDate(String begin,String end) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select * from t_sale_list where sale_date>=? and sale_date<=?";
+		return qr.query(sql, new BeanListHandler<SaleList>(SaleList.class),begin,end);
+	}
+	
 }
