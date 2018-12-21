@@ -17,7 +17,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.mysql.fabric.xmlrpc.base.Data;
 
-import cn.erp.domain.Damagelist;
 import cn.erp.domain.Overgoods;
 import cn.erp.domain.Overlist;
 import cn.erp.service.OverService;

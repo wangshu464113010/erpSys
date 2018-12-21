@@ -43,6 +43,11 @@ public class UserDaoImpl implements UserDao{
 		return qr.query(sql,new BeanListHandler<Role_Menu>(Role_Menu.class),id);
 	}
 	
+	public User findOne(int id) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select * from t_user where id = ?";
+		return qr.query(sql, new BeanHandler<User>(User.class),id);
+	}
 	@Override
 	public int updatePassword(User user, String password) throws SQLException {
 		String sql = "update t_user set password=? where id=?";

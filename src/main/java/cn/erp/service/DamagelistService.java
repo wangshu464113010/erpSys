@@ -2,8 +2,9 @@ package cn.erp.service;
 
 import java.sql.SQLException;
 
-import cn.erp.domain.Damagelist;
+import cn.erp.domain.DamageList;
+
 
 public interface DamagelistService {
-	public void insertDamagelist(Damagelist damagelist)throws SQLException;
+	public void insertDamagelist(DamageList damagelist)throws SQLException;
 }
