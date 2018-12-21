@@ -1,5 +1,7 @@
 package cn.erp.domain;
 
+import java.util.List;
+
 public class CustomerReturnList {
 	//退货商品
 	private Integer id;//关联退货id

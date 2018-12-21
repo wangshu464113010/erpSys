@@ -4,10 +4,13 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.dbutils.QueryRunner;
+
 import cn.erp.domain.GoodsJson;
 import cn.erp.domain.PurchaseList;
 import cn.erp.domain.Purchase_List;
 import cn.erp.domain.Purchase_List_Goods;
+import cn.erp.utils.C3P0Util;
 
 public interface PurchaseService {
 	public List<PurchaseList> purchaseList()throws SQLException;
@@ -19,4 +22,6 @@ public interface PurchaseService {
 	public List<Purchase_List_Goods> findAllListGoodsById(Integer id) throws SQLException;
 	
 	public int deletePurchaseList(Integer id)throws SQLException;
+	
+	public int updataState(int id) throws SQLException;
 }	

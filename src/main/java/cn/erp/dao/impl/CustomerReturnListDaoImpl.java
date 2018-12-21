@@ -9,7 +9,9 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.erp.dao.CustomerReturnListDao;
 import cn.erp.domain.CustomerReturnList;
+import cn.erp.domain.CustomerReturnListCount;
 import cn.erp.domain.CustomerReturnListGoods;
+import cn.erp.domain.Goods;
 import cn.erp.domain.Purchase;
 import cn.erp.domain.Purchase_List;
 import cn.erp.domain.SaleList;
@@ -57,6 +59,28 @@ public class CustomerReturnListDaoImpl implements CustomerReturnListDao {
 		sql = "select * from t_customer_return_list_goods where customer_return_list_id=?";
 		list = qr.query(sql, new BeanListHandler<CustomerReturnListGoods>(CustomerReturnListGoods.class),
 				customer_return_list_id);
+		return list;
+	}
+
+	@Override
+	public List<CustomerReturnListCount> findListCount(String bCustomerReturnDate, String eCustomerReturnDate, Integer type_id,
+			String codeOrName) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "";
+		List<CustomerReturnListCount> list = null;
+		if(type_id==null&&("".equals(codeOrName)||codeOrName==null)){
+			sql = "select * from t_customer_return_list t1,t_customer_return_list_goods t2 where t1.id=t2.customer_return_list_id and customer_return_date >= ? and customer_return_date <=?";
+			list =  qr.query(sql,new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),bCustomerReturnDate,eCustomerReturnDate);
+		}else if(type_id==null&&(!"".equals(codeOrName)||codeOrName!=null)){
+			sql = "select * from t_customer_return_list t1,t_customer_return_list_goods t2 where t1.id=t2.customer_return_list_id and code like ? or name like ? and customer_return_date >= ? and customer_return_date <=?";
+			list =  qr.query(sql,new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),"%"+codeOrName+"%","%"+codeOrName+"%",bCustomerReturnDate,eCustomerReturnDate);
+		}else if(type_id!=null&&("".equals(codeOrName)||codeOrName==null)){
+			sql = "select * from t_customer_return_list t1,t_customer_return_list_goods t2 where t1.id=t2.customer_return_list_id and type_id=? and customer_return_date >= ? and customer_return_date <=?";
+			list =  qr.query(sql,new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),type_id,bCustomerReturnDate,eCustomerReturnDate);
+		}else if(type_id!=null&&(!"".equals(codeOrName)||codeOrName!=null)){
+			sql = "select * from t_customer_return_list t1,t_customer_return_list_goods t2 where t1.id=t2.customer_return_list_id and type_id=? and code like ? or name like ? and customer_return_date >= ? and customer_return_date <=?";
+			list =  qr.query(sql,new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),type_id,"%"+codeOrName+"%","%"+codeOrName+"%",bCustomerReturnDate,eCustomerReturnDate);
+		}
 		return list;
 	}
 }

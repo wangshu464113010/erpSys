@@ -26,4 +26,6 @@ public interface PurchaseDao {
 	public int deletePuchaseListById(Integer id)throws SQLException;
 	
 	public int deletePuchaseListGoodsByPuchaseListId(Integer id)throws SQLException;
+	
+	public int updataState(int id)throws SQLException;
 }

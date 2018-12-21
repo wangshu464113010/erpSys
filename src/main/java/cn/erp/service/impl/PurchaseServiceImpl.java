@@ -157,4 +157,10 @@ public class PurchaseServiceImpl implements PurchaseService{
 		int index = this.purchaseDao.deletePuchaseListById(id);
 		return index;
 	}
+
+
+	@Override
+	public int updataState(int id) throws SQLException {
+		return purchaseDao.updataState(id);
+	}
 }

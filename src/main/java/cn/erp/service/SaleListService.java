@@ -4,7 +4,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import cn.erp.domain.CountSale;
+import cn.erp.domain.CustomerReturnListCount;
 import cn.erp.domain.SaleList;
+import cn.erp.domain.SaleListCount;
 import cn.erp.domain.SaleListGoods;
 
 public interface SaleListService {
@@ -19,4 +21,10 @@ public interface SaleListService {
 	public int findByMaxId() throws SQLException;
 	
 	public List<CountSale> findByMonthTj(String begin, String end) throws SQLException;
+	
+	public int updataState(int id) throws SQLException;
+	
+	public List<SaleListCount> findListCount(String bSaleDate, String eSaleDate,Integer type_id, String codeOrName) throws SQLException;
+	
+	public String findSaleNumber() throws SQLException;
 }
