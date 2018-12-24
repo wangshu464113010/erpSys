@@ -1,7 +1,61 @@
+<<<<<<< HEAD
+=======
+cn\erp\dao\OverflowListGoodsDao.class
+cn\erp\domain\DamageList.class
+cn\erp\domain\Page.class
+cn\erp\web\servlet\LogServlet.class
+cn\erp\web\servlet\OverflowServlet.class
+cn\erp\dao\impl\PurchaseDaoImpl.class
+cn\erp\service\UserService.class
+cn\erp\domain\Menu.class
+cn\erp\service\impl\DamageGoodsServiceImpl.class
+cn\erp\service\impl\LogServiceImpl.class
+cn\erp\dao\GoodsDao.class
+cn\erp\service\GoodsService.class
+cn\erp\service\impl\GoodsServiceImpl.class
+cn\erp\service\LogService.class
+>>>>>>> refs/heads/wy3
 cn\erp\dao\impl\GoodsTypeDaoImpl.class
+<<<<<<< HEAD
 cn\erp\domain\Return_List_Goods.class
+=======
+cn\erp\service\impl\UserServiceImpl.class
+cn\erp\web\servlet\DamageServlet.class
+cn\erp\dao\impl\OverflowListDaoImpl.class
+cn\erp\dao\impl\OverflowListGoodsDaoImpl.class
+cn\erp\dao\impl\LogDaoImpl.class
+cn\erp\service\OverflowListService.class
+cn\erp\service\DamageGoodsService.class
+cn\erp\domain\GoodsData.class
+cn\erp\domain\User.class
+cn\erp\service\OverflowListGoodsService.class
+cn\erp\dao\MenuDao.class
+cn\erp\service\GoodstypeService.class
+cn\erp\dao\impl\ListAlarmDaoImpl.class
+cn\erp\domain\OverflowListGoods.class
+cn\erp\service\impl\OverflowListServiceImpl.class
+cn\erp\dao\UserDao.class
+cn\erp\dao\DamageGoodsDao.class
+cn\erp\dao\ListAlarmDao.class
+cn\erp\domain\Purchase.class
+cn\erp\service\impl\ListAlarmServiceImpl.class
+cn\erp\service\impl\PurchaseServiceImpl.class
+cn\erp\service\ListAlarmService.class
+cn\erp\web\servlet\PurchaseSerlet.class
+cn\erp\service\impl\MenuServiceImpl.class
+cn\erp\dao\DamageDao.class
+cn\erp\service\impl\DamageServiceImpl.class
+cn\erp\domain\OverflowList.class
+cn\erp\domain\DamageListGoods.class
+cn\erp\utils\StringUtils.class
+cn\erp\web\servlet\GoodsServlet.class
+cn\erp\domain\Goods.class
+cn\erp\dao\impl\MenuDaoImpl.class
+cn\erp\domain\Attribute.class
+>>>>>>> refs/heads/wy3
 cn\erp\domain\PurchaseList.class
 cn\erp\web\servlet\UserServlet.class
+<<<<<<< HEAD
 cn\erp\service\impl\GoodsGoosTypeVOServiceImpl.class
 cn\erp\domain\ReturnList.class
 cn\erp\domain\Return.class
@@ -13,6 +67,24 @@ cn\erp\service\impl\GoodsunitServiceImpl.class
 cn\erp\domain\Role_Menu.class
 cn\erp\web\servlet\OverflowServlet.class
 cn\erp\dao\impl\OverDaoImpl.class
+=======
+cn\erp\dao\impl\UserDaoImpl.class
+cn\erp\domain\Log.class
+cn\erp\domain\GoodsType.class
+cn\erp\domain\SaleList.class
+cn\erp\dao\impl\DamageDaoImpl.class
+cn\erp\utils\C3P0Util.class
+cn\erp\dao\LogDao.class
+cn\erp\dao\OverflowListDao.class
+cn\erp\service\impl\OverflowListGoodsServiceImpl.class
+cn\erp\service\impl\GoodstypeServiceImpl.class
+cn\erp\web\servlet\ListAlarmServlet.class
+cn\erp\service\MenuService.class
+cn\erp\dao\GoodsTypeDao.class
+cn\erp\dao\impl\DamageGoodsDaoImpl.class
+cn\erp\service\PurchaseService.class
+cn\erp\dao\impl\GoodsDaoImpl.class
+>>>>>>> refs/heads/wy3
 cn\erp\service\DamageService.class
 cn\erp\dao\ReturnDao.class
 cn\erp\domain\Role.class

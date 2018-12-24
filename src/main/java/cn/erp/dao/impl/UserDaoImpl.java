@@ -9,6 +9,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.erp.dao.UserDao;
 import cn.erp.domain.Role_Menu;
+import cn.erp.domain.DamageList;
 import cn.erp.domain.User;
 import cn.erp.domain.User_Role;
 import cn.erp.utils.C3P0Util;
@@ -53,6 +54,21 @@ public class UserDaoImpl implements UserDao{
 		String sql = "update t_user set password=? where id=?";
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		return qr.update(sql,password,user.getId());
+	}
+
+	@Override
+	public List<User> findAll() throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select * from t_user";
+		List<User> list =  qr.query(sql,new BeanListHandler<User>(User.class));
+		return list;
+	}
+
+	@Override
+	public User findOne(String userTrueName) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select * from t_user where true_name like ?";
+		return qr.query(sql, new BeanHandler<User>(User.class),"%"+userTrueName+"%");
 	}
 
 }
