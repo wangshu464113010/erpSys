@@ -6,5 +6,4 @@ import cn.erp.domain.Log;
 
 public interface LogDao {
     public void insertlog(Log log) throws SQLException;//记录日志
-   // public List<log>(Log log);
 }

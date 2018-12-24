@@ -3,6 +3,8 @@ package cn.erp.web.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,15 +15,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.Menu;
+import cn.erp.domain.Page;
 import cn.erp.domain.User;
 import cn.erp.service.MenuService;
 import cn.erp.service.UserService;
 import cn.erp.service.impl.MenuServiceImpl;
 import cn.erp.service.impl.UserServiceImpl;
 import cn.erp.utils.LogUtils;
+import cn.erp.utils.StringUtils;
 
 @WebServlet("/user/*")
 public class UserServlet extends HttpServlet {
@@ -43,8 +48,9 @@ public class UserServlet extends HttpServlet {
 		}
 		if("/loadUserInfo".equals(uri)){
 			load(request,response);
-		}		
+		}
 	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
