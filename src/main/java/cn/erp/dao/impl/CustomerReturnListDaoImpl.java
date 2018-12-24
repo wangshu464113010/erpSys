@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.erp.dao.CustomerReturnListDao;
 import cn.erp.domain.CustomerReturnList;
@@ -15,6 +16,7 @@ import cn.erp.domain.Goods;
 import cn.erp.domain.Purchase;
 import cn.erp.domain.Purchase_List;
 import cn.erp.domain.SaleList;
+import cn.erp.domain.User;
 import cn.erp.utils.C3P0Util;
 
 public class CustomerReturnListDaoImpl implements CustomerReturnListDao {
@@ -49,7 +51,6 @@ public class CustomerReturnListDaoImpl implements CustomerReturnListDao {
 		}
 		return list;
 	}
-
 	@Override
 	public List<CustomerReturnListGoods> findCustomerReturnListGoodsAll(Integer customer_return_list_id)
 			throws SQLException {
@@ -63,24 +64,46 @@ public class CustomerReturnListDaoImpl implements CustomerReturnListDao {
 	}
 
 	@Override
-	public List<CustomerReturnListCount> findListCount(String bCustomerReturnDate, String eCustomerReturnDate, Integer type_id,
-			String codeOrName) throws SQLException {
-		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+	public int deleteById(int customer_return_list_id) throws SQLException {
 		String sql = "";
-		List<CustomerReturnListCount> list = null;
-		if(type_id==null&&("".equals(codeOrName)||codeOrName==null)){
-			sql = "select * from t_customer_return_list t1,t_customer_return_list_goods t2 where t1.id=t2.customer_return_list_id and customer_return_date >= ? and customer_return_date <=?";
-			list =  qr.query(sql,new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),bCustomerReturnDate,eCustomerReturnDate);
-		}else if(type_id==null&&(!"".equals(codeOrName)||codeOrName!=null)){
-			sql = "select * from t_customer_return_list t1,t_customer_return_list_goods t2 where t1.id=t2.customer_return_list_id and code like ? or name like ? and customer_return_date >= ? and customer_return_date <=?";
-			list =  qr.query(sql,new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),"%"+codeOrName+"%","%"+codeOrName+"%",bCustomerReturnDate,eCustomerReturnDate);
-		}else if(type_id!=null&&("".equals(codeOrName)||codeOrName==null)){
-			sql = "select * from t_customer_return_list t1,t_customer_return_list_goods t2 where t1.id=t2.customer_return_list_id and type_id=? and customer_return_date >= ? and customer_return_date <=?";
-			list =  qr.query(sql,new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),type_id,bCustomerReturnDate,eCustomerReturnDate);
-		}else if(type_id!=null&&(!"".equals(codeOrName)||codeOrName!=null)){
-			sql = "select * from t_customer_return_list t1,t_customer_return_list_goods t2 where t1.id=t2.customer_return_list_id and type_id=? and code like ? or name like ? and customer_return_date >= ? and customer_return_date <=?";
-			list =  qr.query(sql,new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),type_id,"%"+codeOrName+"%","%"+codeOrName+"%",bCustomerReturnDate,eCustomerReturnDate);
+		String sql1 = "";
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		QueryRunner qr1 = new QueryRunner(C3P0Util.getDataSource());
+		//先删除从表才能删除主表
+		sql1 = "delete from t_customer_return_list_goods where customer_return_list_id=?";
+		int i = qr1.update(sql1,customer_return_list_id);
+		if(i==0){
+			sql = "delete  from t_customer_return_list where id=?";
+			qr.update(sql,customer_return_list_id);
+			i = 1;
+		}else{
+			sql = "delete  from t_customer_return_list where id=?";
+			qr.update(sql,customer_return_list_id);
 		}
-		return list;
+		return i;
+	}
+	//增加单号
+	@Override
+	public int insertCustomerRetrunList(Double amount_paid, Double amount_payable, String customer_return_date,
+			String customer_return_number,String remarks, Integer state, Integer customer_id) throws SQLException {
+		String sql = "";
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		sql = "select max(customer_return_number) from t_customer_return_list";
+        String s =  (String) qr.query(sql,new ScalarHandler());
+		if(s.equals(customer_return_number)){
+		}else{
+			String c1 = customer_return_number.substring(0,customer_return_number.length()-5);
+			String c2 = customer_return_number.substring(9,customer_return_number.length());
+			int a = Integer.parseInt(c2)+1;
+			customer_return_number = c1+a;
+		}
+		sql = "insert into t_customer_return_list values(default,?,?,?,?,?,?,?,?)";
+		User user = new User();
+		user.setId(1);
+		Integer user_id = user.getId();
+		
+		int i = qr.update(sql,amount_paid,amount_payable,customer_return_date,customer_return_number,remarks,
+							state,user_id,customer_id );
+		return i;
 	}
 }

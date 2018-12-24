@@ -14,7 +14,12 @@ public class UserServiceImpl implements UserService{
 	private UserDao userDao=new UserDaoImpl();
 	
 	@Override
+	public User findByUser_id(int id) throws SQLException {
+		return userDao.findOne(id);
+	}
+	@Override
 	public User login(String user_name, String password)throws SQLException {
+		
 		return this.userDao.findByNameAndPassword(user_name,password);
 	}
 
@@ -22,10 +27,10 @@ public class UserServiceImpl implements UserService{
 	public List<User_Role> findAllUserRoleByUserId(Integer id) throws SQLException {
 		return this.userDao.findAllUserRoleByUserId(id);
 	}
-	
+
 	@Override
 	public int updatePassword(User user, String password) throws SQLException {
-		return this.userDao.updatePassword(user,password);
+		// TODO Auto-generated method stub
+		return 0;
 	}
-
 }

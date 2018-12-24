@@ -106,30 +106,6 @@ public class SaleListDaoImpl implements SaleListDao {
 		return qr.update(sql, id);
 	}
 
-	@Override
-	public List<SaleListCount> findListCount(String bSaleDate, String eSaleDate, Integer type_id, String codeOrName)
-			throws SQLException {
-		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		String sql = "";
-		List<SaleListCount> list = null;
-		if (type_id == null && ("".equals(codeOrName) || codeOrName == null)) {
-			sql = "select * from t_sale_list t1 left join t_sale_list_goods t2 on t1.id=t2.sale_list_id where  sale_date >= ? and sale_date <=?";
-			list = qr.query(sql, new BeanListHandler<SaleListCount>(SaleListCount.class), bSaleDate, eSaleDate);
-		} else if (type_id == null && (!"".equals(codeOrName) || codeOrName != null)) {
-			sql = "select * from t_sale_list t1 left join t_sale_list_goods t2 on t1.id=t2.sale_list_id  where  code like ? or name like ? and sale_date >= ? and sale_date <=?";
-			list = qr.query(sql, new BeanListHandler<SaleListCount>(SaleListCount.class), "%" + codeOrName + "%",
-					"%" + codeOrName + "%", bSaleDate, eSaleDate);
-		} else if (type_id != null && ("".equals(codeOrName) || codeOrName == null)) {
-			sql = "select * from t_sale_list t1 left join t_sale_list_goods t2 on t1.id=t2.sale_list_id where type_id=? and sale_date >= ? and sale_date <=?";
-			list = qr.query(sql, new BeanListHandler<SaleListCount>(SaleListCount.class), type_id, bSaleDate,
-					eSaleDate);
-		} else if (type_id != null && (!"".equals(codeOrName) || codeOrName != null)) {
-			sql = "select * from t_sale_list t1 left join t_sale_list_goods t2 on t1.id=t2.sale_list_id where type_id=? and code like ? or name like ? and sale_date >= ? and sale_date <=?";
-			list = qr.query(sql, new BeanListHandler<SaleListCount>(SaleListCount.class), type_id,
-					"%" + codeOrName + "%", "%" + codeOrName + "%", bSaleDate, eSaleDate);
-		}
-		return list;
-	}
 
 	@Override
 	public String findSaleNumber() throws SQLException {

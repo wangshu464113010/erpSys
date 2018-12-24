@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.Supplier;
+import cn.erp.domain.User;
 import cn.erp.service.SupplierService;
 import cn.erp.service.impl.SupplierServiceImpl;
+import cn.erp.utils.LogUtils;
 
 /**
  * Servlet implementation class SupplierServlet
@@ -29,13 +31,13 @@ public class SupplierServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
-		if("/list".equals(uri)){//admin/supplier/list
+		if("/list".equals(uri)){
 			listPage(request, response);
 		}
 		if("/comboList".equals(uri)){
 			findAllSupplier(request,response);
 		}
-		if("/delete".equals(uri)){///admin/supplier/delete
+		if("/delete".equals(uri)){
 			String ids = request.getParameter("ids");
 			String[] split = ids.trim().split(",");
 			int[] id = new int[split.length];
@@ -50,7 +52,7 @@ public class SupplierServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		if("/save".equals(uri)){//admin/supplier/save
+		if("/save".equals(uri)){
 			Supplier supplier = new Supplier();
 			String id = request.getParameter("id");
 			supplier = injectionSupplier(request, supplier);
@@ -63,15 +65,14 @@ public class SupplierServlet extends HttpServlet {
 					PrintWriter pw = response.getWriter();
 					supplierService.update(supplier);
 					pw.write("{\"success\":true}");
+					User u = (User) request.getSession().getAttribute("user");
+					LogUtils.insertLog("更新操作", "更新成功",u.getId());
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
-		}
-		
-		
+		}		
 	}
-
 	private void findAllSupplier(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter pw = response.getWriter();
 		try {
@@ -81,8 +82,7 @@ public class SupplierServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
+	}	
 	private Supplier injectionSupplier(HttpServletRequest request, Supplier supplier) {
 		String name = request.getParameter("name");
 		String contact = request.getParameter("contact");
@@ -96,12 +96,13 @@ public class SupplierServlet extends HttpServlet {
 		supplier.setRemarks(remarks);
 		return supplier;
 	}
-
 	private void saveSuplier(HttpServletRequest request, HttpServletResponse response,Supplier supplier) throws IOException {
 		PrintWriter pw = response.getWriter();
 		try {
 			if(supplierService.add(supplier)> 0){
 				pw.write("{\"success\":true}");
+				User u = (User) request.getSession().getAttribute("user");
+				LogUtils.insertLog("添加操作", "添加供应商",u.getId());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

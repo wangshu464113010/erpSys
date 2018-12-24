@@ -12,5 +12,6 @@ public interface UserService {
 	List<User_Role> findAllUserRoleByUserId(Integer id)throws SQLException;
 	
 	int updatePassword(User user,String password)throws SQLException;
+	public User findByUser_id(int id) throws SQLException;
 	
 }

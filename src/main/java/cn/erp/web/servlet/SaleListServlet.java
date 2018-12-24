@@ -25,10 +25,12 @@ import cn.erp.domain.GoodsJson;
 import cn.erp.domain.SaleList;
 import cn.erp.domain.SaleListCount;
 import cn.erp.domain.SaleListGoods;
+import cn.erp.domain.User;
 import cn.erp.service.SaleListGoodsService;
 import cn.erp.service.SaleListService;
 import cn.erp.service.impl.SaleListGoodsServiceImpl;
 import cn.erp.service.impl.SaleListServiceImpl;
+import cn.erp.utils.LogUtils;
 import cn.erp.utils.StringUtils;
 
 @WebServlet("/admin/saleList/*")
@@ -41,18 +43,27 @@ public class SaleListServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
-		if ("/save".equals(uri)) {
-			save(req, resp);
+		if("/save".equals(uri)){
+			//保存客户销售清单
+			save(req,resp);
 		}
-		if ("/list".equals(uri)) {
-			searchSaleList(req, resp);
+		if("/list".equals(uri)){
+			//查询客户
+			searchSaleList(req,resp);
 		}
-		if ("/listGoods".equals(uri)) {
-			showListGoods(req, resp);
+		if("/listGoods".equals(uri)){
+			//查询客户销售清单商品
+			showListGoods(req,resp);
 		}
-		if ("/delete".equals(uri)) {
-			delete(req, resp);
+		if("/delete".equals(uri)){
+			//删除客户销售清单
+			delete(req,resp);
 		}
+		if("/countSaleByDay".equals(uri)){///saleList/countSaleByDay
+			//begin	2018-12-15
+			//end	2018-12-2
+		}
+		//按月报表信息
 		if("/countSaleByMonth".equals(uri)){
 			countSaleByMonth(req,resp);
 		}
@@ -100,8 +111,7 @@ public class SaleListServlet extends HttpServlet {
 			saleList.setUser_id(1);
 			saleList.setCustomer_id(Integer.parseInt(customer_id));
 
-			ArrayList<GoodsJson> list = JSON.parseObject(goodsJson, new TypeReference<ArrayList<GoodsJson>>() {
-			});
+			ArrayList<GoodsJson> list = JSON.parseObject(goodsJson, new TypeReference<ArrayList<GoodsJson>>() {});
 			GoodsJson goodsJson2 = list.get(0);
 			SaleListGoods saleListGoods = new SaleListGoods();
 			saleListGoods.setCode(goodsJson2.getCode());
@@ -123,6 +133,8 @@ public class SaleListServlet extends HttpServlet {
 			Map<String, Object> resultMap = new HashMap<>();
 			if (i == 1) {
 				resultMap.put("success", true);
+				User u = (User) req.getSession().getAttribute("user");
+				LogUtils.insertLog("添加操作", "保存客户销售清单",u.getId());
 			}else{
 				resultMap.put("errorInfo", "保存失败！");
 			}
@@ -160,6 +172,8 @@ public class SaleListServlet extends HttpServlet {
 			jsonData = "{\"rows\":" + jsonData + "}";
 			String data = StringUtils.removeUnderlineAndUpperCase(jsonData);
 			resp.getWriter().write(data);
+			User u = (User) req.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询客户信息",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -179,6 +193,8 @@ public class SaleListServlet extends HttpServlet {
 			String str = json.toString();
 			str = StringUtils.removeUnderlineAndUpperCase(str);
 			pw.write(str);
+			User u = (User) req.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询客户详细信息",u.getId());
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (SQLException e) {
@@ -195,6 +211,8 @@ public class SaleListServlet extends HttpServlet {
 				map.put("success", true);
 			} else {
 				map.put("errorInfo", "删除失败！");
+				User u = (User) req.getSession().getAttribute("user");
+				LogUtils.insertLog("删除操作", "删除客户信息",u.getId());
 			}
 			resp.getWriter().write(JSONObject.toJSON(map).toString());
 		} catch (NumberFormatException e) {
@@ -240,21 +258,7 @@ public class SaleListServlet extends HttpServlet {
 	}
 
 	private void saleListCount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		try {
-			String bSaleDate = req.getParameter("bSaleDate");
-			String eSaleDate = req.getParameter("eSaleDate");
-			Integer type_id = null;
-			if (!"".equals(req.getParameter("type.id")) && req.getParameter("type.id") != null) {
-				type_id = Integer.parseInt(req.getParameter("type.id"));
-			}
-			String codeOrName = req.getParameter("codeOrName");
-			List<SaleListCount> list = saleListService.findListCount(bSaleDate, eSaleDate, type_id, codeOrName);
-			String jsonData = JSONObject.toJSON(list).toString();
-			jsonData = "{\"rows\":" + jsonData + "}";
-			String string = StringUtils.removeUnderlineAndUpperCase(jsonData);
-			resp.getWriter().write(string);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			
+	
 	}
 }

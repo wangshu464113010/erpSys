@@ -20,6 +20,5 @@ public interface SaleListDao {
 	public List<SaleList> findByMaxId() throws SQLException;
 	public List<SaleList> findByDate(String begin,String end) throws SQLException;
 	public int updataState(int id)throws SQLException;
-	public List<SaleListCount> findListCount(String bSaleDate,String eSaleDate,Integer type_id,String codeOrName) throws SQLException;
 	public String findSaleNumber() throws SQLException;;
 }

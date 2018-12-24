@@ -106,5 +106,15 @@ public class PurchaseDaoImpl implements PurchaseDao{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		return qr.update(sql,id);
 	}
+	@Override
+	public int getPurchaseNumber(String date) throws SQLException {
+		String sql = "select * from t_purchase_list where purchase_date=?";
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		List<Purchase_List> list = qr.query(sql,new BeanListHandler<Purchase_List>(Purchase_List.class),date);
+		return list.size();
+	}
+
+	
+	
 
 }
