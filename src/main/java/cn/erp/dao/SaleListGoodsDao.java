@@ -15,6 +15,6 @@ public interface SaleListGoodsDao {
 	
 	public List<SaleListGoods> selectBySaleListId(Integer saleListId) throws SQLException;
 	
-	public List<SaleListGoods> findBySaleListId(Integer saleListId) throws SQLException;
+	public List<SaleListGoods> findBySaleListId(Integer saleListId,Integer type_id, String codeOrName) throws SQLException;
 	
 }

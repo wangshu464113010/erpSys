@@ -243,7 +243,6 @@ public class GoodsServlet extends HttpServlet {
 				list = goodsService.findAll(page, rows, null, codeOrName);
 			}
 			int total = goodsService.count();
-			System.out.println(list.size());
 			String string = JSONObject.toJSON(list).toString();
 			string = "{\"total\":" + total + ",\"rows\":" + string + "}";
 			string = StringUtils.removeUnderlineAndUpperCase(string);

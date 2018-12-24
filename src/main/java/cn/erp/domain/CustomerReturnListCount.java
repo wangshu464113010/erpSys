@@ -7,7 +7,7 @@ public class CustomerReturnListCount {
 	private Integer id;
 	private double amount_paid;
 	private double amount_payable;
-	private Date customer_return_date;
+	private String customer_return_date;
 	private String customer_return_number;
 	private String remarks;
 	private Integer state;
@@ -15,19 +15,10 @@ public class CustomerReturnListCount {
 	private Integer customer_id;
 	private User user = new User();
 	private Customer customer = new Customer();
-	private Integer id1;
-	private String code;
-	private String model;
-	private String name;
-	private Integer num;
-	private double price;
-	private Integer total;
-	private String unit;
 	private Integer customer_return_list_id;
 	private Integer type_id;
 	private Integer goods_id;
 	private List<CustomerReturnListGoods> customer_return_list_goods_list;
-	
 	public Integer getId() {
 		return id;
 	}
@@ -46,10 +37,10 @@ public class CustomerReturnListCount {
 	public void setAmount_payable(double amount_payable) {
 		this.amount_payable = amount_payable;
 	}
-	public Date getCustomer_return_date() {
+	public String getCustomer_return_date() {
 		return customer_return_date;
 	}
-	public void setCustomer_return_date(Date customer_return_date) {
+	public void setCustomer_return_date(String customer_return_date) {
 		this.customer_return_date = customer_return_date;
 	}
 	public String getCustomer_return_number() {
@@ -94,55 +85,6 @@ public class CustomerReturnListCount {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
-	public Integer getId1() {
-		return id1;
-	}
-	public void setId1(Integer id1) {
-		this.id1 = id1;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public String getModel() {
-		return model;
-	}
-	public void setModel(String model) {
-		this.model = model;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Integer getNum() {
-		return num;
-	}
-	public void setNum(Integer num) {
-		this.num = num;
-	}
-	public double getPrice() {
-		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	public Integer getTotal() {
-		return total;
-	}
-	public void setTotal(Integer total) {
-		this.total = total;
-	}
-	public String getUnit() {
-		return unit;
-	}
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
 	public Integer getCustomer_return_list_id() {
 		return customer_return_list_id;
 	}
@@ -167,5 +109,6 @@ public class CustomerReturnListCount {
 	public void setCustomer_return_list_goods_list(List<CustomerReturnListGoods> customer_return_list_goods_list) {
 		this.customer_return_list_goods_list = customer_return_list_goods_list;
 	}
+	
 	
 }

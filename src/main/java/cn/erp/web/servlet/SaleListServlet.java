@@ -70,9 +70,9 @@ public class SaleListServlet extends HttpServlet {
 		if ("/update".equals(uri)) {
 			updateState(req, resp);
 		}
-		 if ("/listCount".equals(uri)) {
-		 saleListCount(req, resp);
-		 }
+	    if ("/listCount".equals(uri)) {
+	    	saleListCount(req, resp);
+	    }
 
 	}
 
@@ -112,23 +112,25 @@ public class SaleListServlet extends HttpServlet {
 			saleList.setCustomer_id(Integer.parseInt(customer_id));
 
 			ArrayList<GoodsJson> list = JSON.parseObject(goodsJson, new TypeReference<ArrayList<GoodsJson>>() {});
-			GoodsJson goodsJson2 = list.get(0);
-			SaleListGoods saleListGoods = new SaleListGoods();
-			saleListGoods.setCode(goodsJson2.getCode());
-			saleListGoods.setModel(goodsJson2.getModel());
-			saleListGoods.setName(goodsJson2.getName());
-			saleListGoods.setNum(Integer.parseInt(goodsJson2.getNum()));
-			saleListGoods.setPrice(Float.parseFloat(goodsJson2.getPrice()));
-			saleListGoods.setTotal(goodsJson2.getTotal());
-			saleListGoods.setUnit(goodsJson2.getUnit());
-			saleListGoods.setType_id(goodsJson2.getTypeId());
-			saleListGoods.setGoods_id(goodsJson2.getGoodsId());
-
+			//插入数据
 			int i = saleListService.addSaleList(saleList);
-			if (i == 1) {
-				int id = saleListService.findByMaxId();
-				saleListGoods.setSale_list_id(id);
-				saleListGoodsService.insertSaleListGoods(saleListGoods);
+			for (int getindex = 0; getindex < list.size(); getindex++) {
+				GoodsJson goodsJson2 = list.get(getindex);
+				SaleListGoods saleListGoods = new SaleListGoods();
+				saleListGoods.setCode(goodsJson2.getCode());
+				saleListGoods.setModel(goodsJson2.getModel());
+				saleListGoods.setName(goodsJson2.getName());
+				saleListGoods.setNum(Integer.parseInt(goodsJson2.getNum()));
+				saleListGoods.setPrice(Float.parseFloat(goodsJson2.getPrice()));
+				saleListGoods.setTotal(goodsJson2.getTotal());
+				saleListGoods.setUnit(goodsJson2.getUnit());
+				saleListGoods.setType_id(goodsJson2.getTypeId());
+				saleListGoods.setGoods_id(goodsJson2.getGoodsId());
+				if (i == 1) {
+					int id = saleListService.findByMaxId();
+					saleListGoods.setSale_list_id(id);
+					saleListGoodsService.insertSaleListGoods(saleListGoods);
+				}
 			}
 			Map<String, Object> resultMap = new HashMap<>();
 			if (i == 1) {
@@ -139,6 +141,7 @@ public class SaleListServlet extends HttpServlet {
 				resultMap.put("errorInfo", "保存失败！");
 			}
 			resp.getWriter().write(JSONObject.toJSON(resultMap).toString());
+
 
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -185,7 +188,6 @@ public class SaleListServlet extends HttpServlet {
 		try {
 			PrintWriter pw = resp.getWriter();
 			Integer id = Integer.parseInt(req.getParameter("saleListId"));
-			System.out.println(id);
 			List<SaleListGoods> list = saleListService.findAllListGoodsById(id);
 			Map<String, Object> map = new HashMap<>();
 			map.put("rows", list);
@@ -258,7 +260,21 @@ public class SaleListServlet extends HttpServlet {
 	}
 
 	private void saleListCount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-			
-	
+		try {
+			String bSaleDate = req.getParameter("bSaleDate");
+			String eSaleDate = req.getParameter("eSaleDate");
+			Integer type_id = null;
+			if (!"".equals(req.getParameter("type.id")) && req.getParameter("type.id") != null) {
+				type_id = Integer.parseInt(req.getParameter("type.id"));
+			}
+			String codeOrName = req.getParameter("codeOrName");
+			List<SaleListCount> list = saleListService.findListCount(bSaleDate, eSaleDate, type_id, codeOrName);
+			String jsonData = JSONObject.toJSON(list).toString();
+			jsonData = "{\"rows\":" + jsonData + "}";
+			String string = StringUtils.removeUnderlineAndUpperCase(jsonData);
+			resp.getWriter().write(string);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

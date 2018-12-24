@@ -25,4 +25,6 @@ public interface SaleListService {
 	public int updataState(int id) throws SQLException;
 	
 	public String findSaleNumber() throws SQLException;
+	
+	public List<SaleListCount> findListCount(String bSaleDate, String eSaleDate, Integer type_id, String codeOrName) throws SQLException;
 }

@@ -52,7 +52,6 @@ public class GoodsUnitServlet extends HttpServlet {
 		if("/save".equals(uri)){
 			try {
 				String name = request.getParameter("name");
-				System.out.println(name);
 				Goodsunit goodsunit = new Goodsunit();
 				goodsunit.setName(name);
 				int i  = goodsunitService.add(goodsunit);
@@ -67,7 +66,6 @@ public class GoodsUnitServlet extends HttpServlet {
 		if("/delete".equals(uri)){
 			try {
 				String id = request.getParameter("id");
-				//System.out.println(id);
 				Goodsunit goodsunit = new Goodsunit();
 				goodsunit.setId(Integer.parseInt(id));
 				int i  = goodsunitService.delete(goodsunit);

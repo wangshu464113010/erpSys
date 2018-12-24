@@ -15,9 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.User;
-import cn.erp.service.MenuService;
 import cn.erp.service.UserService;
-import cn.erp.service.impl.MenuServiceImpl;
 import cn.erp.service.impl.UserServiceImpl;
 import cn.erp.utils.LogUtils;
 
@@ -71,7 +69,7 @@ private static final long serialVersionUID = 1L;
 			LogUtils.insertLog("更新操作", "密码修改成功",u.getId());
 		}else{
 			map.put("success", false);
-			map.put("errorInfo", "修改失敗!");
+			map.put("errorInfo", "修改失败！");
 		}
 		pw.write(JSONObject.toJSON(map).toString());
 	}

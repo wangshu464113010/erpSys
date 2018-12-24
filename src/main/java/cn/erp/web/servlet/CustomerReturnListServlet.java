@@ -63,6 +63,9 @@ public class CustomerReturnListServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		if("/listCount".equals(uri)){
+			deleteCustomerReturnListGoods(req, resp);
+		}
 	}
 }
 

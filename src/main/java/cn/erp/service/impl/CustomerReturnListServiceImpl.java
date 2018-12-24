@@ -1,6 +1,8 @@
 package cn.erp.service.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -63,7 +65,51 @@ public class CustomerReturnListServiceImpl implements CustomerReturnListService{
 	
 		
 	public int deleteById(int customer_return_list_id) throws SQLException {
-		int i = customerReturnListDao.deleteById(customer_return_list_id);
-		return i;
+		return customerReturnListDao.deleteById(customer_return_list_id);
+	}
+		
+	@Override
+	public List<CustomerReturnListCount> findListCount(String bCustomerReturnDate, String eCustomerReturnDate,
+			Integer type_id, String codeOrName) throws SQLException {
+		
+		List<CustomerReturnListCount> list = customerReturnListDao.findListCount(bCustomerReturnDate,eCustomerReturnDate);
+		for (CustomerReturnListCount customerReturnListCount : list) {
+			
+			customerReturnListCount.setCustomer(customerDao.findById(customerReturnListCount.getCustomer_id()));
+			
+			customerReturnListCount.setUser(userDao.findUserById(customerReturnListCount.getUser_id()));
+			
+			List<CustomerReturnListGoods> list2 = customerReturnListGoodsDao.findByCustomerReturnListId(customerReturnListCount.getId(),type_id,codeOrName);
+			
+			for (CustomerReturnListGoods customerReturnListGoods : list2) {
+				customerReturnListGoods.setType(goodsTypeDao.findOne(customerReturnListGoods.getType_id()));
+			}
+			customerReturnListCount.setCustomer_return_list_goods_list(list2);
+		}
+//		List<CustomerReturnListCount> list = new ArrayList<>();
+//		List<CustomerReturnList> list1 = customerReturnListDao.findListCount(bCustomerReturnDate,eCustomerReturnDate);
+//		for (CustomerReturnList customerReturnList : list1) {
+//			List<CustomerReturnListGoods> list2 = customerReturnListGoodsDao.findByCustomerReturnListId(customerReturnList.getId(),type_id,codeOrName);
+//			for (CustomerReturnListGoods customerReturnListGoods : list2) {
+//				CustomerReturnListCount customerReturnListCount = new CustomerReturnListCount();
+//				customerReturnListCount.setId(customerReturnList.getId());
+//				customerReturnListCount.setAmount_payable(customerReturnList.getAmount_payable());
+//				customerReturnListCount.setAmount_paid(customerReturnList.getAmount_paid());
+//				customerReturnListCount.setCustomer_return_date(customerReturnList.getCustomer_return_date());
+//				customerReturnListCount.setCustomer_return_number(customerReturnList.getCustomer_return_number());
+//				customerReturnListCount.setRemarks(customerReturnList.getRemarks());
+//				customerReturnListCount.setState(customerReturnList.getState());
+//				customerReturnListCount.setUser_id(customerReturnList.getUser_id());
+//				customerReturnListCount.setCustomer_id(customerReturnList.getCustomer_id());
+//				customerReturnListCount.setCustomer(customerDao.findById(customerReturnList.getCustomer_id()));
+//				customerReturnListCount.setUser(userDao.findUserById(customerReturnList.getUser_id()));
+////				List<CustomerReturnListGoods> list3 = new ArrayList<>();
+////				list3.add(customerReturnListGoods);
+//				customerReturnListCount.setCustomer_return_list_goods_list(list2);
+//				customerReturnListGoods.setType(goodsTypeDao.findOne(customerReturnListGoods.getType_id()));
+//				list.add(customerReturnListCount);
+//			}
+//		}
+		return list;
 	}
 }

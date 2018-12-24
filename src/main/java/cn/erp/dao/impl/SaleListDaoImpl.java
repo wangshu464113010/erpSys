@@ -106,6 +106,13 @@ public class SaleListDaoImpl implements SaleListDao {
 		return qr.update(sql, id);
 	}
 
+	@Override
+	public List<SaleListCount> findListCount(String bSaleDate, String eSaleDate) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select * from t_sale_list where sale_date >= ? and sale_date <=?";
+		List<SaleListCount> list = qr.query(sql, new BeanListHandler<SaleListCount>(SaleListCount.class),bSaleDate,eSaleDate);
+		return list;
+	}
 
 	@Override
 	public String findSaleNumber() throws SQLException {

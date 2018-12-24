@@ -19,4 +19,7 @@ public interface CustomerReturnListService {
 	public List<CustomerReturnListGoods> findCustomerReturnListGoodsAll(Integer customer_return_list_id) throws SQLException;
 	
 	public int deleteById(int customer_return_list_id) throws SQLException;
+	
+	public List<CustomerReturnListCount> findListCount(String bCustomerReturnDate, String eCustomerReturnDate,
+			Integer type_id, String codeOrName) throws SQLException;
 }
