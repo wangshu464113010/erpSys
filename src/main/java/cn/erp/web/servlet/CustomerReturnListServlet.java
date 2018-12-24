@@ -64,7 +64,7 @@ public class CustomerReturnListServlet extends HttpServlet {
 			}
 		}
 		if("/listCount".equals(uri)){
-			deleteCustomerReturnListGoods(req, resp);
+			customerReturnListCount(req, resp);
 		}
 	}
 }
@@ -177,7 +177,22 @@ public class CustomerReturnListServlet extends HttpServlet {
 
 
 	private void customerReturnListCount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
+		try {
+			String bCustomerReturnDate = req.getParameter("bCustomerReturnDate");
+			String eCustomerReturnDate = req.getParameter("eCustomerReturnDate");
+			Integer type_id = null;
+			if (!"".equals(req.getParameter("type.id")) && req.getParameter("type.id") != null) {
+				type_id = Integer.parseInt(req.getParameter("type.id"));
+			}
+			String codeOrName = req.getParameter("codeOrName");
+			List<CustomerReturnListCount> list = customerReturnListService.findListCount(bCustomerReturnDate, eCustomerReturnDate, type_id, codeOrName);
+			String jsonData = JSONObject.toJSON(list).toString();
+			jsonData = "{\"rows\":" + jsonData + "}";
+			String string = StringUtils.removeUnderlineAndUpperCase(jsonData);
+			resp.getWriter().write(string);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	//删除
 	private void deleteCustomerReturnListGoods(HttpServletRequest req, HttpServletResponse resp) throws IOException {

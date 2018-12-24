@@ -1,21 +1,12 @@
 package cn.erp.dao.impl;
 
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.erp.dao.CustomerRetrunListGoodsDao;
-import cn.erp.domain.CustomerReturnList;
 import cn.erp.domain.CustomerReturnListGoods;
-import cn.erp.domain.SaleListGoods;
-import cn.erp.domain.User;
 import cn.erp.utils.C3P0Util;
-import cn.erp.utils.StringUtils;
 
 public class CustomerRetrunListGoodsDaoImpl implements CustomerRetrunListGoodsDao{
 	@Override
