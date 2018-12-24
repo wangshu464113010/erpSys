@@ -1,4 +1,5 @@
 E:\Git\erpSys\src\main\java\cn\erp\domain\Page.java
+E:\Git\erpSys\src\main\java\cn\erp\web\servlet\LogServlet.java
 E:\Git\erpSys\src\main\java\cn\erp\utils\StringUtils.java
 E:\Git\erpSys\src\main\java\cn\erp\web\servlet\DamageServlet.java
 E:\Git\erpSys\src\main\java\cn\erp\dao\impl\GoodsDaoImpl.java
@@ -25,6 +26,7 @@ E:\Git\erpSys\src\main\java\cn\erp\service\impl\DamageGoodsServiceImpl.java
 E:\Git\erpSys\src\main\java\cn\erp\web\servlet\GoodsServlet.java
 E:\Git\erpSys\src\main\java\cn\erp\domain\SaleList.java
 E:\Git\erpSys\src\main\java\cn\erp\service\impl\DamageServiceImpl.java
+E:\Git\erpSys\src\main\java\cn\erp\service\impl\LogServiceImpl.java
 E:\Git\erpSys\src\main\java\cn\erp\service\impl\PurchaseServiceImpl.java
 E:\Git\erpSys\src\main\java\cn\erp\utils\C3P0Util.java
 E:\Git\erpSys\src\main\java\cn\erp\dao\DamageGoodsDao.java
@@ -45,10 +47,14 @@ E:\Git\erpSys\src\main\java\cn\erp\dao\ListAlarmDao.java
 E:\Git\erpSys\src\main\java\cn\erp\service\impl\ListAlarmServiceImpl.java
 E:\Git\erpSys\src\main\java\cn\erp\service\DamageService.java
 E:\Git\erpSys\src\main\java\com\erp\filter\EncodingFilter.java
+E:\Git\erpSys\src\main\java\cn\erp\dao\LogDao.java
 E:\Git\erpSys\src\main\java\cn\erp\dao\impl\MenuDaoImpl.java
 E:\Git\erpSys\src\main\java\cn\erp\dao\MenuDao.java
+E:\Git\erpSys\src\main\java\cn\erp\service\LogService.java
 E:\Git\erpSys\src\main\java\cn\erp\domain\Menu.java
+E:\Git\erpSys\src\main\java\cn\erp\dao\impl\LogDaoImpl.java
 E:\Git\erpSys\src\main\java\cn\erp\service\OverflowListService.java
+E:\Git\erpSys\src\main\java\cn\erp\domain\Log.java
 E:\Git\erpSys\src\main\java\cn\erp\dao\GoodsTypeDao.java
 E:\Git\erpSys\src\main\java\cn\erp\service\impl\OverflowListServiceImpl.java
 E:\Git\erpSys\src\main\java\cn\erp\domain\GoodsData.java
