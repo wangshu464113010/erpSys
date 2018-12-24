@@ -101,6 +101,8 @@ public class CustomerReturnListDaoImpl implements CustomerReturnListDao {
 							state,user_id,customer_id );
 		return i;
 	}
+	
+	@Override
 	public List<CustomerReturnListCount> findListCount(String bCustomerReturnDate, String eCustomerReturnDate) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		String sql = "select * from t_customer_return_list where customer_return_date >= ? and customer_return_date <=?";

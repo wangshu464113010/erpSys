@@ -18,5 +18,6 @@ public interface CustomerReturnListDao {
 	public int insertCustomerRetrunList(Double amount_paid,Double amount_payable,
 			String customer_return_date,String customer_return_numberString,
 	String remarks,Integer state,Integer customer_id) throws SQLException;
+	
 	public List<CustomerReturnListCount> findListCount(String bCustomerReturnDate,String eCustomerReturnDate) throws SQLException;
 }
