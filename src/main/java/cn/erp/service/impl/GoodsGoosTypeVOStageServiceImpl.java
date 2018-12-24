@@ -35,12 +35,6 @@ public class GoodsGoosTypeVOStageServiceImpl implements GoodsGoosTypeVOStageServ
 		return goodsGoosTypeVOStageDao.count();
 	}
 
-//	@Override
-//	public void insertsaveStore(Goods goods) throws SQLException {
-//		// goodsGoosTypeVOStageDao.insertsaveStore(goods);
-//		
-//	}
-
 	@Override
 	public void updatesaveStoreThree(Integer id, Integer num, Double price) throws SQLException {
 		// TODO Auto-generated method stub

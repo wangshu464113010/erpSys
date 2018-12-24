@@ -15,8 +15,10 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.CustomerReturnList;
 import cn.erp.domain.CustomerReturnListGoods;
+import cn.erp.domain.User;
 import cn.erp.service.CustomerReturnListService;
 import cn.erp.service.impl.CustomerReturnListServiceImpl;
+import cn.erp.utils.LogUtils;
 import cn.erp.utils.StringUtils;
 
 @WebServlet("/admin/customerReturnList/*")
@@ -57,6 +59,8 @@ public class CustomerReturnListServlet extends HttpServlet {
 			jsonData = "{\"rows\":"+jsonData+"}";
 			String string = StringUtils.removeUnderlineAndUpperCase(jsonData);
 			pw.write(string);
+			User u = (User) req.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询客户退货单号信息",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -73,6 +77,8 @@ public class CustomerReturnListServlet extends HttpServlet {
 			jsonData = "{\"rows\":"+jsonData+"}";
 			String string = StringUtils.removeUnderlineAndUpperCase(jsonData);
 			pw.write(string);
+			User u = (User) req.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询客户具体信息单号信息",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
