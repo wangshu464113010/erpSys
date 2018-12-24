@@ -16,5 +16,9 @@ public class OverlistServiceImpl implements OverlistService{
 		// TODO Auto-generated method stub
 		overlistdao.insertoverlist(overlist);
 	}
+	@Override
+	public Integer getMaxId(Overlist overlist) throws SQLException {
+		return overlistdao.getMaxId(overlist);
+	}
 
 }

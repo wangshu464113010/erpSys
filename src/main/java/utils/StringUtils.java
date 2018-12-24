@@ -10,8 +10,8 @@ public class StringUtils {
 
 	/**
 	  *   	删除下划线，并把下划线后面的字母变为大写
-	  * @param s 传入�?要修改的字符�?
-	  * @return 返回修改后的字符�?
+	  * @param s 传入�?要修改的字符�?
+	  * @return 返回修改后的字符�?
 	  */
 	public static String removeUnderlineAndUpperCase(String s) {
 		String[] split = s.split("_");

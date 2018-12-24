@@ -5,6 +5,7 @@ import java.util.List;
 
 import cn.erp.domain.Customer;
 import cn.erp.domain.CustomerReturnList;
+import cn.erp.domain.CustomerReturnListCount;
 import cn.erp.domain.CustomerReturnListGoods;
 
 public interface CustomerReturnListDao {
@@ -17,4 +18,6 @@ public interface CustomerReturnListDao {
 	public int insertCustomerRetrunList(Double amount_paid,Double amount_payable,
 			String customer_return_date,String customer_return_numberString,
 	String remarks,Integer state,Integer customer_id) throws SQLException;
+	
+	public List<CustomerReturnListCount> findListCount(String bCustomerReturnDate,String eCustomerReturnDate) throws SQLException;
 }

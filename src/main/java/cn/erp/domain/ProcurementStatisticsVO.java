@@ -21,9 +21,9 @@ public class ProcurementStatisticsVO {
 	private Integer userId;
 	private Integer supplierID;
 	
-	private Supplier supplier;//¹©Ó¦ÉÌ
-	private User user;//ÓÃ»§
-	private List<PurchaseListGoodsVO> purchaseListGoodsList;//¹©»õ±í
+	private Supplier supplier;//ï¿½ï¿½Ó¦ï¿½ï¿½
+	private User user;//ï¿½Ã»ï¿½
+	private List<PurchaseListGoodsVO> purchaseListGoodsList;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public Integer getUserId() {
 		return userId;

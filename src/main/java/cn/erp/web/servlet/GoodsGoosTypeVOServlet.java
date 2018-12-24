@@ -16,8 +16,10 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.GoodsGoosTypeVO;
 import cn.erp.domain.Page;
+import cn.erp.domain.User;
 import cn.erp.service.GoodsGoosTypeVOService;
 import cn.erp.service.impl.GoodsGoosTypeVOServiceImpl;
+import cn.erp.utils.LogUtils;
 import cn.erp.utils.StringUtils;
 
 /**
@@ -39,6 +41,7 @@ public class GoodsGoosTypeVOServlet extends HttpServlet {
 				GoodsGoosTypeVOFindlike(request, response);
 			}
 		}
+	//模糊查找期初库存
 	private void GoodsGoosTypeVOFindlike(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		String page = request.getParameter("page");//--->http打包的数据 ---->html页面
@@ -54,12 +57,15 @@ public class GoodsGoosTypeVOServlet extends HttpServlet {
 			String string = JSONObject.toJSON(list).toString();
 			int total = goodsGoosTypeVOService.countLike(codeOrName);
 			string = "{\"total\":"+total+",\"rows\":"+string+"}";			
-			response.getWriter().write(string);			
+			response.getWriter().write(string);	
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "模糊查找所有期初库存",u.getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	//查找期初库存
 	private void GoodsGoosTypeVOFindall(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String page = request.getParameter("page");
 		String rows = request.getParameter("rows");
@@ -73,6 +79,8 @@ public class GoodsGoosTypeVOServlet extends HttpServlet {
 			int total = goodsGoosTypeVOService.count();
 			string = "{\"total\":"+total+",\"rows\":"+string+"}";
 			response.getWriter().write(string);
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询所有期初库存信息",u.getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

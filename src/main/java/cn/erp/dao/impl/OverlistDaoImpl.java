@@ -3,6 +3,7 @@ package cn.erp.dao.impl;
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import cn.erp.dao.OverlistDao;
 import cn.erp.domain.Overlist;
@@ -18,6 +19,14 @@ public class OverlistDaoImpl implements OverlistDao {
 		 
 		 int i=qr.update(sql,overlist.getOverflow_date(),overlist.getOverflow_number(),overlist.getRemarks(),overlist.getUser_id());
 		
+	}
+	
+	@Override
+	public Integer getMaxId(Overlist overlist) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select max(id) as id from t_overflow_list";
+		Overlist query=qr.query(sql, new BeanHandler<Overlist>(Overlist.class));
+		return query.getId();
 	}
 
 }

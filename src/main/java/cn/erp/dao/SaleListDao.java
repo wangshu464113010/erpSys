@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import cn.erp.domain.SaleList;
+import cn.erp.domain.SaleListCount;
 import cn.erp.domain.SaleListGoods;
 
 public interface SaleListDao {
@@ -15,4 +16,7 @@ public interface SaleListDao {
 	public int deleteById(int id) throws SQLException;
 	public List<SaleList> findByMaxId() throws SQLException;
 	public List<SaleList> findByDate(String begin,String end) throws SQLException;
+	public int updataState(int id)throws SQLException;
+	public List<SaleListCount> findListCount(String bSaleDate,String eSaleDate) throws SQLException;
+	public String findSaleNumber() throws SQLException;;
 }

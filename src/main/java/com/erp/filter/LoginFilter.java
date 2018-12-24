@@ -29,7 +29,7 @@ public class LoginFilter implements Filter{
 		if(!"/user/login".equals(request.getRequestURI())
 				&& !"/login.html".equals(request.getRequestURI())
 				&& request.getSession().getAttribute("user")==null 
-				&& !request.getRequestURI().contains("static")){//·ÅÐÐ¾²Ì¬×ÊÔ´
+				&& !request.getRequestURI().contains("static")){//ï¿½ï¿½ï¿½Ð¾ï¿½Ì¬ï¿½ï¿½Ô´
 			response.sendRedirect("/login.html");
 			return ;
 		}else{

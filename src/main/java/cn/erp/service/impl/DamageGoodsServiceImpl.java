@@ -58,8 +58,4 @@ public class DamageGoodsServiceImpl implements DamageGoodsService{
 		return list;
 	}
 
-
-
-	
-
 }

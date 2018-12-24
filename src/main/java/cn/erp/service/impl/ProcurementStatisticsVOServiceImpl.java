@@ -19,8 +19,11 @@ import cn.erp.domain.ProcurementStatisticsVO;
 import cn.erp.domain.PurchaseListGoodsVO;
 import cn.erp.service.ProcurementStatisticsVOService;
 /**
+<<<<<<< HEAD
  * 采购单统计----
  * 进货----供货商
+=======
+>>>>>>> branch 'master' of https://git@github.com/wangshu464113010/erpSys.git
  * @author wangshu
  *
  */

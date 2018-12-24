@@ -162,6 +162,9 @@ public class PurchaseServiceImpl implements PurchaseService{
 
 
 	@Override
+	public int updataState(int id) throws SQLException {
+		return purchaseDao.updataState(id);
+	}
 	public String getPurchaseNumber(String date) throws SQLException {
 		int i = 10000+this.purchaseDao.getPurchaseNumber(date)+1;
 		String[] split = date.split("-");

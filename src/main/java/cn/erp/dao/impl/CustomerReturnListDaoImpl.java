@@ -1,7 +1,6 @@
 package cn.erp.dao.impl;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -10,10 +9,8 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.erp.dao.CustomerReturnListDao;
 import cn.erp.domain.CustomerReturnList;
+import cn.erp.domain.CustomerReturnListCount;
 import cn.erp.domain.CustomerReturnListGoods;
-import cn.erp.domain.Purchase;
-import cn.erp.domain.Purchase_List;
-import cn.erp.domain.SaleList;
 import cn.erp.domain.User;
 import cn.erp.utils.C3P0Util;
 
@@ -103,5 +100,13 @@ public class CustomerReturnListDaoImpl implements CustomerReturnListDao {
 		int i = qr.update(sql,amount_paid,amount_payable,customer_return_date,customer_return_number,remarks,
 							state,user_id,customer_id );
 		return i;
+	}
+	
+	@Override
+	public List<CustomerReturnListCount> findListCount(String bCustomerReturnDate, String eCustomerReturnDate) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select * from t_customer_return_list where customer_return_date >= ? and customer_return_date <=?";
+		List<CustomerReturnListCount> list = qr.query(sql, new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),bCustomerReturnDate,eCustomerReturnDate);
+		return list;
 	}
 }

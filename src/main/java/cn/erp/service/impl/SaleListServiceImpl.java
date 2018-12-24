@@ -22,8 +22,11 @@ import cn.erp.dao.impl.UserDaoImpl;
 import cn.erp.domain.CountSale;
 import cn.erp.domain.Customer;
 import cn.erp.domain.Goods;
+import cn.erp.domain.CustomerReturnListCount;
+import cn.erp.domain.CustomerReturnListGoods;
 import cn.erp.domain.GoodsType;
 import cn.erp.domain.SaleList;
+import cn.erp.domain.SaleListCount;
 import cn.erp.domain.SaleListGoods;
 import cn.erp.domain.User;
 import cn.erp.service.SaleListService;
@@ -145,6 +148,31 @@ public class SaleListServiceImpl implements SaleListService{
 			list2.add(countSale);
 		}
 		return list2;
+	}
+	
+	public int updataState(int id) throws SQLException {
+		return saleListDao.updataState(id);
+	}
+	
+	@Override
+	public List<SaleListCount> findListCount(String bSaleDate, String eSaleDate, Integer type_id, String codeOrName)
+			throws SQLException {
+		List<SaleListCount> list = saleListDao.findListCount(bSaleDate, eSaleDate);
+		for (SaleListCount saleListCount : list) {
+			saleListCount.setCustomer(customerDao.findById(saleListCount.getCustomer_id()));
+			saleListCount.setUser(userDao.findUserById(saleListCount.getUser_id()));
+			List<SaleListGoods> list2 = saleListGoodsDao.findBySaleListId(saleListCount.getId(),type_id,codeOrName);
+			for (SaleListGoods saleListGoods : list2) {
+				saleListGoods.setType(goodsTypeDao.findOne(saleListGoods.getType_id()));
+			}
+			saleListCount.setSale_list_goods_list(list2);
+		}
+		return list;
+	}
+
+	@Override
+	public String findSaleNumber() throws SQLException {
+		return saleListDao.findSaleNumber();
 	}
 	
 

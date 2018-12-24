@@ -6,4 +6,6 @@ import cn.erp.domain.Overlist;
 
 public interface OverlistService {
 	public void insertOverlist(Overlist overlist)throws SQLException;
+	
+	public Integer getMaxId(Overlist overlist) throws SQLException;
 }

@@ -8,6 +8,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import cn.erp.dao.SaleListGoodsDao;
+import cn.erp.domain.CustomerReturnListGoods;
 import cn.erp.domain.SaleList;
 import cn.erp.domain.SaleListGoods;
 import cn.erp.utils.C3P0Util;
@@ -38,6 +39,27 @@ public class SaleListGoodsDaoImpl implements SaleListGoodsDao{
 				saleListGoods.getTotal(),saleListGoods.getUnit(),saleListGoods.getSale_list_id(),saleListGoods.getType_id(),saleListGoods.getGoods_id());
 		return i;
 	}
+
+	@Override
+	public List<SaleListGoods> findBySaleListId(Integer saleListId,Integer type_id,String codeOrName) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql =  "";
+		List<SaleListGoods> list = null;
+		if (type_id == null && ("".equals(codeOrName) || codeOrName == null)) {
+			sql = "select * from t_sale_list_goods where sale_list_id=?";
+			list = qr.query(sql, new BeanListHandler<SaleListGoods>(SaleListGoods.class),saleListId);
+		} else if (type_id == null && (!"".equals(codeOrName) || codeOrName != null)) {
+			sql = "select * from t_sale_list_goods where sale_list_id=? and code like ? or name like ?";
+			list = qr.query(sql, new BeanListHandler<SaleListGoods>(SaleListGoods.class),saleListId,"%"+codeOrName+"%","%"+codeOrName+"%");
+		} else if (type_id != null && ("".equals(codeOrName) || codeOrName == null)) {
+			sql = "select * from t_sale_list_goods where sale_list_id=? and type_id=?";
+			list = qr.query(sql, new BeanListHandler<SaleListGoods>(SaleListGoods.class),saleListId,type_id);
+		} else if (type_id != null && (!"".equals(codeOrName) || codeOrName != null)) {
+			sql = "select * from t_sale_list_goods where sale_list_id=? and type_id=? and code like ? or name like ?";
+			list = qr.query(sql, new BeanListHandler<SaleListGoods>(SaleListGoods.class),saleListId,type_id,"%"+codeOrName+"%","%"+codeOrName+"%");
+		}
+		return list;
+	}
 	
 	@Override
 	public List<SaleListGoods> selectBySaleListId(Integer saleListId) throws SQLException {
@@ -45,5 +67,6 @@ public class SaleListGoodsDaoImpl implements SaleListGoodsDao{
 		String sql = "select * from t_sale_list_goods where sale_list_id=?";
 		return qr.query(sql, new BeanListHandler<SaleListGoods>(SaleListGoods.class),saleListId);
 	}
+
 	
 }

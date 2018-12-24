@@ -14,8 +14,10 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.Customer;
 import cn.erp.domain.Page;
+import cn.erp.domain.User;
 import cn.erp.service.CustomerService;
 import cn.erp.service.impl.CustomerServiceImpl;
+import cn.erp.utils.LogUtils;
 
 @WebServlet("/admin/customer/*")
 public class CustomerServlet extends HttpServlet{
@@ -26,12 +28,14 @@ public class CustomerServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
-		if("/comboList".equals(uri)){
+		if("/comboList".equals(uri)){		
 			showCustomer(req,resp);
 		}
 		if("/list".equals(uri)){
+			
 			listPageOrLike(req, resp);
 		}
+		
 		if("/delete".equals(uri)){
 			try {
 				String str = req.getParameter("ids").trim();
@@ -42,12 +46,15 @@ public class CustomerServlet extends HttpServlet{
 				}
 				if(customerService.delete(ids) > 0){
 					resp.getWriter().write("{\"success\":true}");
+					User u = (User) req.getSession().getAttribute("user");
+					LogUtils.insertLog("删除操作", "删除顾客信息",u.getId());
 				}
 			} catch (NumberFormatException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
 		if("/save".equals(uri)){
 			String name = req.getParameter("name");
 			String contact = req.getParameter("contact");
@@ -55,8 +62,7 @@ public class CustomerServlet extends HttpServlet{
 			String address = req.getParameter("address");
 			String remarks = req.getParameter("remarks");
 			String id = req.getParameter("id");
-			Customer c = new Customer();
-			
+			Customer c = new Customer();			
 			c.setContact(contact);
 			c.setAddress(address);
 			c.setName(name);
@@ -66,18 +72,20 @@ public class CustomerServlet extends HttpServlet{
 				if(id == null || id.equals("")){
 					customerService.insert(c);
 					resp.getWriter().write("{\"success\":true}");
+					User u = (User) req.getSession().getAttribute("user");
+					LogUtils.insertLog("添加操作", "添加一条顾客信息",u.getId());
 				}else{
 					c.setId(Integer.parseInt(id));
 					customerService.update(c);
 					resp.getWriter().write("{\"success\":true}");
+					User u = (User) req.getSession().getAttribute("user");
+					LogUtils.insertLog("更新操作", "更新顾客信息",u.getId());
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
-
 
 	private void listPageOrLike(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String page = req.getParameter("page");
@@ -92,6 +100,8 @@ public class CustomerServlet extends HttpServlet{
 				Object json = JSONObject.toJSON(list);
 				String str = "{\"total\":"+customerService.findAll().size()+",\"rows\":"+json.toString()+"}";
 				resp.getWriter().write(str);
+				User u = (User) req.getSession().getAttribute("user");
+				LogUtils.insertLog("查询操作", "模糊查询所有顾客信息",u.getId());
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -108,8 +118,6 @@ public class CustomerServlet extends HttpServlet{
 		}
 	}
 
-	
-	
 	public void showCustomer(HttpServletRequest req, HttpServletResponse resp){
 		try {
 			List<Customer> list = customerService.findAll();
@@ -118,8 +126,6 @@ public class CustomerServlet extends HttpServlet{
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
-	}
-	
+		}		
+	}	
 }

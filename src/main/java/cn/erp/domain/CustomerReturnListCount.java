@@ -1,37 +1,40 @@
 package cn.erp.domain;
 
+import java.util.Date;
 import java.util.List;
 
-public class CustomerReturnList {
-	//退货商品
-	private Integer id;//关联退货id
-	private Double amount_paid;//已付
-	private Double amount_payable;//应付
-	private String customer_return_date;//退货日期
-	private String customer_return_number;//单号
-	private String remarks;//备注
-	private Integer state;//付款状态
-	private Integer user_id;//用户
-	private Integer customer_id;//关联客户id
+public class CustomerReturnListCount {
+	private Integer id;
+	private double amount_paid;
+	private double amount_payable;
+	private String customer_return_date;
+	private String customer_return_number;
+	private String remarks;
+	private Integer state;
+	private Integer user_id;
+	private Integer customer_id;
 	private User user = new User();
 	private Customer customer = new Customer();
-	
+	private Integer customer_return_list_id;
+	private Integer type_id;
+	private Integer goods_id;
+	private List<CustomerReturnListGoods> customer_return_list_goods_list;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Double getAmount_paid() {
+	public double getAmount_paid() {
 		return amount_paid;
 	}
-	public void setAmount_paid(Double amount_paid) {
+	public void setAmount_paid(double amount_paid) {
 		this.amount_paid = amount_paid;
 	}
-	public Double getAmount_payable() {
+	public double getAmount_payable() {
 		return amount_payable;
 	}
-	public void setAmount_payable(Double amount_payable) {
+	public void setAmount_payable(double amount_payable) {
 		this.amount_payable = amount_payable;
 	}
 	public String getCustomer_return_date() {
@@ -82,12 +85,30 @@ public class CustomerReturnList {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	@Override
-	public String toString() {
-		return "CustomerReturnList [id=" + id + ", amount_paid=" + amount_paid + ", amount_payable=" + amount_payable
-				+ ", customer_return_date=" + customer_return_date + ", customer_return_number="
-				+ customer_return_number + ", remarks=" + remarks + ", state=" + state + ", user_id=" + user_id
-				+ ", customer_id=" + customer_id + ", user=" + user + ", customer=" + customer + "]";
+	public Integer getCustomer_return_list_id() {
+		return customer_return_list_id;
 	}
+	public void setCustomer_return_list_id(Integer customer_return_list_id) {
+		this.customer_return_list_id = customer_return_list_id;
+	}
+	public Integer getType_id() {
+		return type_id;
+	}
+	public void setType_id(Integer type_id) {
+		this.type_id = type_id;
+	}
+	public Integer getGoods_id() {
+		return goods_id;
+	}
+	public void setGoods_id(Integer goods_id) {
+		this.goods_id = goods_id;
+	}
+	public List<CustomerReturnListGoods> getCustomer_return_list_goods_list() {
+		return customer_return_list_goods_list;
+	}
+	public void setCustomer_return_list_goods_list(List<CustomerReturnListGoods> customer_return_list_goods_list) {
+		this.customer_return_list_goods_list = customer_return_list_goods_list;
+	}
+	
 	
 }

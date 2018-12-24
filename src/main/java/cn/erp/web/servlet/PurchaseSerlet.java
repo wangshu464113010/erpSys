@@ -27,18 +27,21 @@ import cn.erp.domain.PurchaseList;
 import cn.erp.domain.Purchase_List;
 import cn.erp.domain.Purchase_List_Goods;
 import cn.erp.service.ProcurementStatisticsVOService;
+import cn.erp.domain.User;
+import cn.erp.service.GoodstypeService;
 import cn.erp.service.PurchaseService;
 import cn.erp.service.impl.ProcurementStatisticsVOServiceImpl;
 import cn.erp.service.impl.PurchaseServiceImpl;
+import cn.erp.service.impl.SupplierServiceImpl;
+import cn.erp.utils.LogUtils;
 import utils.StringUtils;
 
 
 /**
- * 此servlet就是GoodsTypeServlet
+ * 
  * @author wangshu
  *
  */
-//@WebServlet("/admin/goodsType/*")
 @WebServlet("/admin/purchaseList/*")
 public class PurchaseSerlet extends HttpServlet{
 	
@@ -74,8 +77,7 @@ public class PurchaseSerlet extends HttpServlet{
 			
 		}
 		
-		
-		
+		//uri = uri.substring(uri.lastIndexOf("/"));	
 		if("/save".equals(uri)){
 			saveSupplier(request,response);
 		}
@@ -88,6 +90,10 @@ public class PurchaseSerlet extends HttpServlet{
 		if("/delete".equals(uri)){
 			deletePurchaseList(request,response);
 		}
+		if("/update".equals(uri)){
+			updateState(request,response);
+		}
+		
 		if("/getPurchaseNumber".equals(uri)){
 			getPurchaseNumber(request,response);
 		}	
@@ -96,28 +102,21 @@ public class PurchaseSerlet extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-	}
-	
-	
-	
-	private void findAllByType(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
-		
+	}	
+	private void findAllByType(HttpServletRequest request, HttpServletResponse response) throws IOException {		
 		PrintWriter pw = response.getWriter();
 		try {
 			List<PurchaseList> list = purchaseService.purchaseList();
 			Object json = JSONObject.toJSON(list);
 			pw.write(json.toString().replaceAll("name", "text"));
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("鏌ヨ鎿嶄綔", "鏌ヨ鎵�鏈夊晢鍝佺绫�",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	
-	
 	private void saveSupplier(HttpServletRequest request, HttpServletResponse response) throws IOException{
-//		User user = request.getSession().getAttribute("user");
-//		user.getId();
 		PrintWriter pw = response.getWriter();
 		Integer user_id=1;
 		String supplier_id = request.getParameter("supplier.id");
@@ -143,9 +142,11 @@ public class PurchaseSerlet extends HttpServlet{
 			if(i==list.size()+1){
 				map.put("success", true);
 				json1 = JSONObject.toJSON(map);
+				User u = (User) request.getSession().getAttribute("user");
+				LogUtils.insertLog("娣诲姞鎿嶄綔", "娣诲姞渚涘簲鍟嗕俊鎭�",u.getId());
 			}else{
 				map.put("success", false);
-				map.put("errorInfo", "系统繁忙，请稍后尝试");
+				map.put("errorInfo", "绯荤粺绻佸繖锛岃绋嶅悗灏濊瘯");
 				json1 = JSONObject.toJSON(map);
 			}
 			pw.write(json1.toString());
@@ -180,6 +181,8 @@ public class PurchaseSerlet extends HttpServlet{
 			String str = json.toString();
 			str = StringUtils.removeUnderlineAndUpperCase(str);
 			pw.write(str);
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("鏌ヨ鎿嶄綔", "鏌ヨ鎵�鏈夎繘璐т俊鎭�",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -196,6 +199,8 @@ public class PurchaseSerlet extends HttpServlet{
 			String str = json.toString();
 			str = StringUtils.removeUnderlineAndUpperCase(str);
 			pw.write(str);
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("鏌ヨ鎿嶄綔", "鏌ヨ鎵�鏈夊晢鍝佷俊鎭�",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -211,10 +216,12 @@ public class PurchaseSerlet extends HttpServlet{
 			Object json1=null;
 			if(index>0){
 				map.put("success", true);
+				User u = (User) request.getSession().getAttribute("user");
+				LogUtils.insertLog("鍒犻櫎鎿嶄綔", "鍒犻櫎瀹㈡埛鍗曚俊鎭�",u.getId());
 				json1 = JSONObject.toJSON(map);
 			}else{
 				map.put("success", false);
-				map.put("errorInfo", "系统繁忙，请稍后尝试");
+				map.put("errorInfo", "绯荤粺绻佸繖锛岃绋嶅悗灏濊瘯");
 				json1 = JSONObject.toJSON(map);
 			}
 			pw.write(json1.toString());
@@ -224,6 +231,24 @@ public class PurchaseSerlet extends HttpServlet{
 		
 	}
 	
+	
+	private void updateState(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		try {
+			String id = req.getParameter("id");
+			int i = purchaseService.updataState(Integer.parseInt(id));
+			Map<String, Object> map = new HashMap<>();
+			if(i == 0){
+				map.put("errorInfo", "鎿嶄綔瓒呮椂锛�");
+			}else{
+				map.put("success", true);
+			}
+			resp.getWriter().write(JSONObject.toJSON(map).toString());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	private void getPurchaseNumber(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter pw = response.getWriter();
 		Date date =new Date();

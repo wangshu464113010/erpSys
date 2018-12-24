@@ -101,6 +101,12 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	}
 
 	@Override
+	public int updataState(int id) throws SQLException {
+		String sql = "update t_purchase_list set state=1 where id=?";
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.update(sql,id);
+	}
+	@Override
 	public int getPurchaseNumber(String date) throws SQLException {
 		String sql = "select * from t_purchase_list where purchase_date=?";
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
