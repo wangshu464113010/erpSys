@@ -102,13 +102,14 @@ public class SaleListServiceImpl implements SaleListService{
 	@Override
 	public List<SaleListCount> findListCount(String bSaleDate, String eSaleDate, Integer type_id, String codeOrName)
 			throws SQLException {
-		List<SaleListCount> list = saleListDao.findListCount(bSaleDate, eSaleDate,type_id,codeOrName);
+		List<SaleListCount> list = saleListDao.findListCount(bSaleDate, eSaleDate);
 		for (SaleListCount saleListCount : list) {
 			saleListCount.setCustomer(customerDao.findById(saleListCount.getCustomer_id()));
 			saleListCount.setUser(userDao.findUserById(saleListCount.getUser_id()));
-			List<SaleListGoods> list2 = saleListGoodsDao.findBySaleListId(saleListCount.getSale_list_id());
+			List<SaleListGoods> list2 = saleListGoodsDao.findBySaleListId(saleListCount.getId(),type_id,codeOrName);
 			for (SaleListGoods saleListGoods : list2) {
 				saleListGoods.setType(goodsTypeDao.findOne(saleListGoods.getType_id()));
+				
 			}
 			saleListCount.setSale_list_goods_list(list2);
 		}

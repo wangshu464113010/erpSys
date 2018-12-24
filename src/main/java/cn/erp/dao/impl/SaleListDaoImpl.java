@@ -99,27 +99,10 @@ public class SaleListDaoImpl implements SaleListDao {
 	}
 
 	@Override
-	public List<SaleListCount> findListCount(String bSaleDate, String eSaleDate, Integer type_id, String codeOrName)
-			throws SQLException {
+	public List<SaleListCount> findListCount(String bSaleDate, String eSaleDate) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		String sql = "";
-		List<SaleListCount> list = null;
-		if (type_id == null && ("".equals(codeOrName) || codeOrName == null)) {
-			sql = "select * from t_sale_list t1,t_sale_list_goods t2 where t1.id=t2.sale_list_id and sale_date >= ? and sale_date <=?";
-			list = qr.query(sql, new BeanListHandler<SaleListCount>(SaleListCount.class), bSaleDate, eSaleDate);
-		} else if (type_id == null && (!"".equals(codeOrName) || codeOrName != null)) {
-			sql = "select * from t_sale_list t1,t_sale_list_goods t2 where t1.id=t2.sale_list_id and code like ? or name like ? and sale_date >= ? and sale_date <=?";
-			list = qr.query(sql, new BeanListHandler<SaleListCount>(SaleListCount.class), "%" + codeOrName + "%",
-					"%" + codeOrName + "%", bSaleDate, eSaleDate);
-		} else if (type_id != null && ("".equals(codeOrName) || codeOrName == null)) {
-			sql = "select * from t_sale_list t1,t_sale_list_goods t2 where t1.id=t2.sale_list_id and type_id=? and sale_date >= ? and sale_date <=?";
-			list = qr.query(sql, new BeanListHandler<SaleListCount>(SaleListCount.class), type_id, bSaleDate,
-					eSaleDate);
-		} else if (type_id != null && (!"".equals(codeOrName) || codeOrName != null)) {
-			sql = "select * from t_sale_list t1,t_sale_list_goods t2 where t1.id=t2.sale_list_id and type_id=? and code like ? or name like ? and sale_date >= ? and sale_date <=?";
-			list = qr.query(sql, new BeanListHandler<SaleListCount>(SaleListCount.class), type_id,
-					"%" + codeOrName + "%", "%" + codeOrName + "%", bSaleDate, eSaleDate);
-		}
+		String sql = "select * from t_sale_list where sale_date >= ? and sale_date <=?";
+		List<SaleListCount> list = qr.query(sql, new BeanListHandler<SaleListCount>(SaleListCount.class),bSaleDate,eSaleDate);
 		return list;
 	}
 

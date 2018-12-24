@@ -47,7 +47,6 @@ public class DamageServlet extends HttpServlet {
 		String damageDate = request.getParameter("damageDate");// damageDate
 		String remarks = request.getParameter("remarks");
 		String jsonStr = request.getParameter("goodsJson");
-		// System.out.println(jsonStr);
 		JSONObject json = JSON.parseObject(jsonStr.substring(1, jsonStr.length() - 1));
 		String num = json.getString("num");
 		String user_id = "1";
@@ -71,14 +70,12 @@ public class DamageServlet extends HttpServlet {
 	}
 	private void insertDamage_goods(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String jsonStr = request.getParameter("goodsJson");
-		// System.out.println(jsonStr);
 		JSONObject json = JSON.parseObject(jsonStr.substring(1, jsonStr.length() - 1));
 		String code = json.getString("code");
 		String model = json.getString("model");
 		String name = json.getString("name");
 		String num = json.getString("num");
 		String price = json.getString("price");
-		// System.out.println(price);
 		String total = json.getString("total");
 		String unit = json.getString("unit");
 //	String  damage_list_id= json.getString("damageListId");

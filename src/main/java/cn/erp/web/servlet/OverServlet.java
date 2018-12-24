@@ -52,7 +52,6 @@ public class OverServlet extends HttpServlet {
 		String overflowDate = request.getParameter("overflowDate");// overflowDate		
 		String remarks = request.getParameter("remarks");
 		String jsonStr = request.getParameter("goodsJson");
-		//System.out.println(jsonStr);
 		JSONObject json = JSON.parseObject(jsonStr.substring(1, jsonStr.length() - 1));		
 		String num = json.getString("num");		
 		String overflowNumber = "BY" +overflowDate.replaceAll("-", "")+""+num;
@@ -77,14 +76,12 @@ public class OverServlet extends HttpServlet {
 
 	private void insertOver_goods(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String jsonStr = request.getParameter("goodsJson");
-		//System.out.println(jsonStr);
 		JSONObject json = JSON.parseObject(jsonStr.substring(1, jsonStr.length() - 1));
 		String code = json.getString("code");
 		String model = json.getString("model");
 		String name = json.getString("name");
 		String num = json.getString("num");
 		String price = json.getString("price");
-		//System.out.println(price);
 		String total = json.getString("total");
 		String unit = json.getString("unit");
 		String type_id = json.getString("typeId");

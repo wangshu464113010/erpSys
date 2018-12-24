@@ -58,7 +58,7 @@ private static final long serialVersionUID = 1L;
 			request.getSession().removeAttribute("user");
 		}else{
 			map.put("success", false);
-			map.put("errorInfo", "œµÕ≥∑±√¶£¨«Î…‘∫Û‘Ÿ ‘!");
+			map.put("errorInfo", "‰øÆÊîπÂ§±Ë¥•ÔºÅ");
 		}
 		pw.write(JSONObject.toJSON(map).toString());
 	}

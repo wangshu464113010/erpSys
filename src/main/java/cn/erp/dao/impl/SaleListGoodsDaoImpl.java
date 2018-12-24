@@ -41,10 +41,23 @@ public class SaleListGoodsDaoImpl implements SaleListGoodsDao{
 	}
 
 	@Override
-	public List<SaleListGoods> findBySaleListId(Integer saleListId) throws SQLException {
+	public List<SaleListGoods> findBySaleListId(Integer saleListId,Integer type_id,String codeOrName) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		String sql = "select * from t_sale_list_goods where sale_list_id=?";
-		return qr.query(sql, new BeanListHandler<SaleListGoods>(SaleListGoods.class),saleListId);
+		String sql =  "";
+		List<SaleListGoods> list = null;
+		if (type_id == null && ("".equals(codeOrName) || codeOrName == null)) {
+			sql = "select * from t_sale_list_goods where sale_list_id=?";
+			list = qr.query(sql, new BeanListHandler<SaleListGoods>(SaleListGoods.class),saleListId);
+		} else if (type_id == null && (!"".equals(codeOrName) || codeOrName != null)) {
+			sql = "select * from t_sale_list_goods where sale_list_id=? and code like ? or name like ?";
+			list = qr.query(sql, new BeanListHandler<SaleListGoods>(SaleListGoods.class),saleListId,"%"+codeOrName+"%","%"+codeOrName+"%");
+		} else if (type_id != null && ("".equals(codeOrName) || codeOrName == null)) {
+			sql = "select * from t_sale_list_goods where sale_list_id=? and type_id=?";
+			list = qr.query(sql, new BeanListHandler<SaleListGoods>(SaleListGoods.class),saleListId,type_id);
+		} else if (type_id != null && (!"".equals(codeOrName) || codeOrName != null)) {
+			sql = "select * from t_sale_list_goods where sale_list_id=? and type_id=? and code like ? or name like ?";
+			list = qr.query(sql, new BeanListHandler<SaleListGoods>(SaleListGoods.class),saleListId,type_id,"%"+codeOrName+"%","%"+codeOrName+"%");
+		}
+		return list;
 	}
-	
 }

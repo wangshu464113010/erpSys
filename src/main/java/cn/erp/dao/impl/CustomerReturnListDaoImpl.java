@@ -63,24 +63,10 @@ public class CustomerReturnListDaoImpl implements CustomerReturnListDao {
 	}
 
 	@Override
-	public List<CustomerReturnListCount> findListCount(String bCustomerReturnDate, String eCustomerReturnDate, Integer type_id,
-			String codeOrName) throws SQLException {
+	public List<CustomerReturnListCount> findListCount(String bCustomerReturnDate, String eCustomerReturnDate) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		String sql = "";
-		List<CustomerReturnListCount> list = null;
-		if(type_id==null&&("".equals(codeOrName)||codeOrName==null)){
-			sql = "select * from t_customer_return_list t1,t_customer_return_list_goods t2 where t1.id=t2.customer_return_list_id and customer_return_date >= ? and customer_return_date <=?";
-			list =  qr.query(sql,new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),bCustomerReturnDate,eCustomerReturnDate);
-		}else if(type_id==null&&(!"".equals(codeOrName)||codeOrName!=null)){
-			sql = "select * from t_customer_return_list t1,t_customer_return_list_goods t2 where t1.id=t2.customer_return_list_id and code like ? or name like ? and customer_return_date >= ? and customer_return_date <=?";
-			list =  qr.query(sql,new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),"%"+codeOrName+"%","%"+codeOrName+"%",bCustomerReturnDate,eCustomerReturnDate);
-		}else if(type_id!=null&&("".equals(codeOrName)||codeOrName==null)){
-			sql = "select * from t_customer_return_list t1,t_customer_return_list_goods t2 where t1.id=t2.customer_return_list_id and type_id=? and customer_return_date >= ? and customer_return_date <=?";
-			list =  qr.query(sql,new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),type_id,bCustomerReturnDate,eCustomerReturnDate);
-		}else if(type_id!=null&&(!"".equals(codeOrName)||codeOrName!=null)){
-			sql = "select * from t_customer_return_list t1,t_customer_return_list_goods t2 where t1.id=t2.customer_return_list_id and type_id=? and code like ? or name like ? and customer_return_date >= ? and customer_return_date <=?";
-			list =  qr.query(sql,new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),type_id,"%"+codeOrName+"%","%"+codeOrName+"%",bCustomerReturnDate,eCustomerReturnDate);
-		}
+		String sql = "select * from t_customer_return_list where customer_return_date >= ? and customer_return_date <=?";
+		List<CustomerReturnListCount> list = qr.query(sql, new BeanListHandler<CustomerReturnListCount>(CustomerReturnListCount.class),bCustomerReturnDate,eCustomerReturnDate);
 		return list;
 	}
 }

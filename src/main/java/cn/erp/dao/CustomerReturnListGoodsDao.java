@@ -6,5 +6,6 @@ import java.util.List;
 import cn.erp.domain.CustomerReturnListGoods;
 
 public interface CustomerReturnListGoodsDao {
-	public List<CustomerReturnListGoods> findByCustomerReturnListId(Integer customerReturnListId) throws SQLException;
+	List<CustomerReturnListGoods> findByCustomerReturnListId(Integer customerReturnListId,Integer type_id,String codeOrName) throws SQLException;
+
 }

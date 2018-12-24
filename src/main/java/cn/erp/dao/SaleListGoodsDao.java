@@ -14,6 +14,6 @@ public interface SaleListGoodsDao {
 	
 	public int insertSaleListGoods(SaleListGoods saleListGoods) throws SQLException;
 	
-	public List<SaleListGoods> findBySaleListId(Integer saleListId) throws SQLException;
+	public List<SaleListGoods> findBySaleListId(Integer saleListId,Integer type_id, String codeOrName) throws SQLException;
 	
 }

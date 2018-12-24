@@ -15,14 +15,6 @@ public class SaleListCount {
 	private Integer customer_id;
 	private User user = new User();
 	private Customer customer = new Customer();
-	private Integer id1;
-	private String code;
-	private String model;
-	private String name;
-	private Integer num;
-	private double price;
-	private Integer total;
-	private String unit;
 	private Integer sale_list_id;
 	private Integer type_id;
 	private Integer goods_id;
@@ -93,54 +85,6 @@ public class SaleListCount {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public Integer getId1() {
-		return id1;
-	}
-	public void setId1(Integer id1) {
-		this.id1 = id1;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public String getModel() {
-		return model;
-	}
-	public void setModel(String model) {
-		this.model = model;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Integer getNum() {
-		return num;
-	}
-	public void setNum(Integer num) {
-		this.num = num;
-	}
-	public double getPrice() {
-		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	public Integer getTotal() {
-		return total;
-	}
-	public void setTotal(Integer total) {
-		this.total = total;
-	}
-	public String getUnit() {
-		return unit;
-	}
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
 	public Integer getSale_list_id() {
 		return sale_list_id;
 	}
@@ -165,6 +109,7 @@ public class SaleListCount {
 	public void setSale_list_goods_list(List<SaleListGoods> sale_list_goods_list) {
 		this.sale_list_goods_list = sale_list_goods_list;
 	}
+	
 	
 	
 }
