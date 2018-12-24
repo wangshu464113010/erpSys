@@ -53,20 +53,13 @@ public class SaleListServlet extends HttpServlet{
 		if("/delete".equals(uri)){
 			delete(req,resp);
 		}
-<<<<<<< HEAD
 		if("/countSaleByDay".equals(uri)){///saleList/countSaleByDay
 			//begin	2018-12-15
 			//end	2018-12-2
-			
-			
 		}
-=======
 		if("/countSaleByMonth".equals(uri)){
 			countSaleByMonth(req,resp);
 		}
-		
->>>>>>> branch 'master' of https://git@github.com/wangshu464113010/erpSys.git
-		
 	}
 
 	public void save(HttpServletRequest req, HttpServletResponse resp) {
@@ -121,11 +114,7 @@ public class SaleListServlet extends HttpServlet{
 			if(i == 1){
 				resultMap.put("success", true);
 			}else{
-<<<<<<< HEAD
-				resultMap.put("errorInfo", "淇濆瓨澶辫触锛�");
-=======
 				resultMap.put("errorInfo", "删除失败!");
->>>>>>> branch 'master' of https://git@github.com/wangshu464113010/erpSys.git
 			}
 			resp.getWriter().write(JSONObject.toJSON(resultMap).toString());
 			
@@ -195,11 +184,7 @@ public class SaleListServlet extends HttpServlet{
 			if(i == 1){
 				map.put("success", true);
 			}else{
-<<<<<<< HEAD
-				map.put("errorInfo", "鍒犻櫎澶辫触锛�");
-=======
 				map.put("errorInfo", "删除失败!");
->>>>>>> branch 'master' of https://git@github.com/wangshu464113010/erpSys.git
 			}
 			resp.getWriter().write(JSONObject.toJSON(map).toString());
 		} catch (NumberFormatException e) {
