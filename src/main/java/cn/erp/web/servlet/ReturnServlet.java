@@ -21,22 +21,45 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 
-import cn.erp.domain.Return_List_Goods;
-import cn.erp.domain.Return_List;
 import cn.erp.domain.GoodsJson;
+import cn.erp.domain.ProcurementReturnStatisticsVO;
 import cn.erp.domain.ReturnList;
+import cn.erp.domain.Return_List;
+import cn.erp.domain.Return_List_Goods;
+import cn.erp.service.ProcurementReturnStatisticsVOService;
 import cn.erp.service.ReturnService;
+import cn.erp.service.impl.ProcurementReturnStatisticsVOServiceImpl;
 import cn.erp.service.impl.ReturnServiceImpl;
 import utils.StringUtils;
 @WebServlet(value="/admin/returnList/*")
 public class ReturnServlet  extends HttpServlet {
 
 	private ReturnService returnservice = new ReturnServiceImpl();
-	
+	private ProcurementReturnStatisticsVOService procurementReturnStatisticsVOService
+	= new ProcurementReturnStatisticsVOServiceImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
+		
+		if("/listCount".equals(uri)){
+			String bReturnDate = req.getParameter("bReturnDate");
+			String eReturnDate = req.getParameter("eReturnDate");
+			String type = req.getParameter("type.id");
+			String codeOrName = req.getParameter("codeOrName");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				List<ProcurementReturnStatisticsVO> list =null;
+				list = procurementReturnStatisticsVOService.findAll(
+						sdf.parse(bReturnDate), 
+						sdf.parse(eReturnDate), type, codeOrName);
+				String string = JSONObject.toJSON(list).toString();
+				resp.getWriter().write("{\"rows\":"+string+"}");
+			} catch (SQLException | ParseException e) {
+				e.printStackTrace();
+			}
+			
+		}
 		
 		if("/save".equals(uri)){
 			saveSupplier(req,resp);

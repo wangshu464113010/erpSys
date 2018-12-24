@@ -22,15 +22,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 
 import cn.erp.domain.GoodsJson;
+import cn.erp.domain.ProcurementStatisticsVO;
 import cn.erp.domain.PurchaseList;
 import cn.erp.domain.Purchase_List;
 import cn.erp.domain.Purchase_List_Goods;
-import cn.erp.service.GoodstypeService;
+import cn.erp.service.ProcurementStatisticsVOService;
 import cn.erp.service.PurchaseService;
-import cn.erp.service.SupplierService;
-import cn.erp.service.impl.GoodstypeServiceImpl;
+import cn.erp.service.impl.ProcurementStatisticsVOServiceImpl;
 import cn.erp.service.impl.PurchaseServiceImpl;
-import cn.erp.service.impl.SupplierServiceImpl;
 import utils.StringUtils;
 
 
@@ -44,6 +43,7 @@ import utils.StringUtils;
 public class PurchaseSerlet extends HttpServlet{
 	
 	private PurchaseService purchaseService = new PurchaseServiceImpl();
+	private ProcurementStatisticsVOService procurementStatisticsVOService = new ProcurementStatisticsVOServiceImpl();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
@@ -55,6 +55,26 @@ public class PurchaseSerlet extends HttpServlet{
 //		if("/goodsType/list".equals(uri)){
 //			findAllByType(request,response);//
 //		}
+		if("/listCount".equals(uri)){
+			String bPurchaseDate = request.getParameter("bPurchaseDate");
+			String ePurchaseDate = request.getParameter("ePurchaseDate");
+			String type = request.getParameter("type.id");
+			String codeOrName = request.getParameter("codeOrName");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				List<ProcurementStatisticsVO> list = procurementStatisticsVOService.findAll(
+						sdf.parse(bPurchaseDate), 
+						sdf.parse(ePurchaseDate), type, codeOrName);
+				String string = JSONObject.toJSON(list).toString();
+				response.getWriter().write("{\"rows\":"+string+"}");
+			} catch (SQLException | ParseException e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
+		
+		
 		
 		if("/save".equals(uri)){
 			saveSupplier(request,response);

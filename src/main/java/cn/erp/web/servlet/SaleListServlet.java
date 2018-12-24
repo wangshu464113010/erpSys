@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,10 +25,13 @@ import cn.erp.domain.CountSale;
 import cn.erp.domain.GoodsJson;
 import cn.erp.domain.SaleList;
 import cn.erp.domain.SaleListGoods;
+import cn.erp.domain.StatisticsByDayVO;
 import cn.erp.service.SaleListGoodsService;
 import cn.erp.service.SaleListService;
+import cn.erp.service.StatisticsByDayVOService;
 import cn.erp.service.impl.SaleListGoodsServiceImpl;
 import cn.erp.service.impl.SaleListServiceImpl;
+import cn.erp.service.impl.StatisticsByDayVOServiceImpl;
 import cn.erp.utils.StringUtils;
 
 
@@ -36,7 +40,7 @@ public class SaleListServlet extends HttpServlet{
 	
 	private SaleListService saleListService = new SaleListServiceImpl();
 	private SaleListGoodsService saleListGoodsService = new SaleListGoodsServiceImpl();
-	
+	private StatisticsByDayVOService statisticsByDayVOService = new StatisticsByDayVOServiceImpl();
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
@@ -53,19 +57,32 @@ public class SaleListServlet extends HttpServlet{
 		if("/delete".equals(uri)){
 			delete(req,resp);
 		}
-<<<<<<< HEAD
 		if("/countSaleByDay".equals(uri)){///saleList/countSaleByDay
-			//begin	2018-12-15
-			//end	2018-12-2
+			String s1 = req.getParameter("begin");
+			String s2 = req.getParameter("end");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
+			Date startDate = null;
+			Date endDate = null;
+			try {
+				startDate = sdf.parse(s1);
+				endDate = sdf.parse(s2);
+				List<StatisticsByDayVO> list = statisticsByDayVOService.findAll(startDate, endDate);
+				Object json = JSONObject.toJSON(list);
+				resp.getWriter().write("{\"success\":true,\"rows\":"+json.toString()+"}");
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			
 		}
-=======
 		if("/countSaleByMonth".equals(uri)){
 			countSaleByMonth(req,resp);
 		}
 		
->>>>>>> branch 'master' of https://git@github.com/wangshu464113010/erpSys.git
 		
 	}
 
@@ -121,11 +138,8 @@ public class SaleListServlet extends HttpServlet{
 			if(i == 1){
 				resultMap.put("success", true);
 			}else{
-<<<<<<< HEAD
 				resultMap.put("errorInfo", "淇濆瓨澶辫触锛�");
-=======
 				resultMap.put("errorInfo", "删除失败!");
->>>>>>> branch 'master' of https://git@github.com/wangshu464113010/erpSys.git
 			}
 			resp.getWriter().write(JSONObject.toJSON(resultMap).toString());
 			
@@ -195,11 +209,7 @@ public class SaleListServlet extends HttpServlet{
 			if(i == 1){
 				map.put("success", true);
 			}else{
-<<<<<<< HEAD
-				map.put("errorInfo", "鍒犻櫎澶辫触锛�");
-=======
 				map.put("errorInfo", "删除失败!");
->>>>>>> branch 'master' of https://git@github.com/wangshu464113010/erpSys.git
 			}
 			resp.getWriter().write(JSONObject.toJSON(map).toString());
 		} catch (NumberFormatException e) {

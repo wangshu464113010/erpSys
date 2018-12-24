@@ -16,7 +16,23 @@ public class StatisticsByDayVODaoImpl implements StatisticsByDayVODao {
 	@Override
 	public List<StatisticsByDayVO> findAll(Date beginDate, Date endDate) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		String sql = "select purchasing.suma amountCost,"
+		String sql ="select                                                          "
++"sum(purchasing_price*s.num) amountCost,sum(s.total) amountSale                       "
++",s.sale_date date,(sum(s.total)-sum(purchasing_price*s.num)) amountProfit       "
++"from t_goods g,                                                                      "
++"(                                                                                    "
++"select goods_id,slg.num num,sl.sale_date sale_date,slg.total total                   "
++"from t_sale_list sl,t_sale_list_goods slg                                            "
++"where                                                                                "
++" sl.id= slg.sale_list_id and                                                         "
++" sl.sale_date>=? and sl.sale_date<=?                           "
++" ) s                                                                                 "
++" where g.id=s.goods_id                                                               "
++" group by s.sale_date";
+				
+			return	qr.query(sql, new BeanListHandler<StatisticsByDayVO>(StatisticsByDayVO.class),
+						beginDate,endDate);
+				/*"select purchasing.suma amountCost,"
 				+ "s.t amountSale,(s.t-purchasing.suma) amountProfit,d.sale_date date"
 +"from "
 +"(                                                                              "
@@ -65,9 +81,7 @@ public class StatisticsByDayVODaoImpl implements StatisticsByDayVODao {
 +"	select sale_date"
 +"	from t_sale_list"
 +"	where sale_date = ?"
-+") d";
-		
-		return null;
++") d";*/	
 	}
 
 }

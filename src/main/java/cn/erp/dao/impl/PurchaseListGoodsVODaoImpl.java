@@ -24,5 +24,18 @@ public class PurchaseListGoodsVODaoImpl implements PurchaseListGoodsVODao {
 				new BeanListHandler<PurchaseListGoodsVO>(PurchaseListGoodsVO.class),
 				purchaseListId);
 	}
+	@Override
+	public List<PurchaseListGoodsVO> findByPurchaseListIdAndCodeOrName(int purchaseListId,String codeOrName) throws SQLException {
+		String sql = "select "
+				+ " id,code,model,name,num,total,unit,price,"
+				+ " purchase_list_id  purchaseListId,"
+				+" type_id typeId, goods_id goodsId "
+				+ " from t_purchase_list_goods where purchase_list_id = ? "
+				+ " and ( code like ? or name like ?)";
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query(sql,
+				new BeanListHandler<PurchaseListGoodsVO>(PurchaseListGoodsVO.class),
+				purchaseListId,"%"+codeOrName+"%","%"+codeOrName+"%");
+	}
 
 }

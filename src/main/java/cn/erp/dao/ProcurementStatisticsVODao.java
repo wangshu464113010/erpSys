@@ -13,5 +13,7 @@ import cn.erp.domain.ProcurementStatisticsVO;
 public interface ProcurementStatisticsVODao {
 	public List<ProcurementStatisticsVO> findAll(Date bPurchaseDate,Date ePurchaseDate) throws SQLException;
 
+	public List<ProcurementStatisticsVO> findAllByTypeId(Date bPurchaseDate, Date ePurchaseDate, String type_id) throws SQLException;
+
 	
 }

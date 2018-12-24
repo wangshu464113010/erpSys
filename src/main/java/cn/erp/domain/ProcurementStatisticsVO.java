@@ -3,7 +3,7 @@ package cn.erp.domain;
 import java.util.Date;
 import java.util.List;
 /**
- * 采购统计表
+ * 采购统计中的进货单查询VO对象
  * @author wangshu
  *
  */

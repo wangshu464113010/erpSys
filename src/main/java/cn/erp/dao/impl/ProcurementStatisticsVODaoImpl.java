@@ -27,4 +27,18 @@ public class ProcurementStatisticsVODaoImpl implements ProcurementStatisticsVODa
 				,bPurchaseDate,ePurchaseDate);
 	}
 
+	@Override
+	public List<ProcurementStatisticsVO> findAllByTypeId(Date bPurchaseDate, Date ePurchaseDate, String type_id) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql = "select tpl.id id,tpl.purchase_Number purchaseNumber,"+
+		" tpl.purchase_Date purchaseDate,tpl.amount_Payable amountPayable,"+
+		" tpl.amount_Paid amountPaid,tpl.state state,tpl.remarks remarks,"+
+		" tpl.supplier_id supplierId,tpl.user_id userId "+
+		" from "+
+		" t_purchase_list tpl where  and tpl.purchase_Date >=? and tpl.purchase_Date <=?";
+		return qr.query(sql, 
+				new BeanListHandler<ProcurementStatisticsVO>(ProcurementStatisticsVO.class)
+				,bPurchaseDate,ePurchaseDate);
+	}
+
 }
