@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSONObject;
 import cn.erp.domain.Goods;
 import cn.erp.domain.GoodsGoosTypeVO;
 import cn.erp.domain.Page;
+import cn.erp.domain.User;
 import cn.erp.service.GoodsGoosTypeVOService;
 import cn.erp.service.GoodsGoosTypeVOStageService;
 import cn.erp.service.GoodsService;
@@ -27,6 +28,7 @@ import cn.erp.service.impl.GoodsServiceImpl;
 import cn.erp.service.impl.GoodstypeServiceImpl;
 import cn.erp.service.impl.SaleListGoodsServiceImpl;
 import cn.erp.service.impl.ListAlarmServiceImpl;
+import cn.erp.utils.LogUtils;
 import cn.erp.utils.StringUtils;
 
 @WebServlet("/admin/goods/*")
@@ -55,7 +57,12 @@ public class GoodsServlet extends HttpServlet {
 			}
 		}
 		if("/deleteStock".equals(uri)) {
-			deletesaveStore(req,resp);
+			try {
+				deletesaveStore(req,resp);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		if ("/listInventory".equals(uri)) {
@@ -76,8 +83,6 @@ public class GoodsServlet extends HttpServlet {
 					List<Goods> list = goodsService.findLikeGoods(name, pageNow, pageSize);
 					Object json = JSONObject.toJSON(list);
 					String string = StringUtils.removeUnderlineAndUpperCase(json.toString());
-					// System.out.println(string);
-					// {"total":0,"rows":[]}
 					string = "{\"total\":" + goodsService.countLikeGoods(name) + ",\"rows\":" + string + "}";
 					pw.write(string);
 
@@ -86,7 +91,8 @@ public class GoodsServlet extends HttpServlet {
 				}
 			}
 		}
-		if ("/genGoodsCode".equals(uri)) {
+		
+		if ("/genGoodsCode".equals(uri)) {//获取商品的code最大值，无需进行日志记录
 			try {
 				String maxGoodsCode = goodsService.getMaxGoodsCode();
 				PrintWriter pw = resp.getWriter();
@@ -95,6 +101,7 @@ public class GoodsServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		//删除商品
 		if ("/delete".equals(uri)) {
 			String id = req.getParameter("id");
 			try {
@@ -105,17 +112,20 @@ public class GoodsServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
 		if ("/save".equals(uri)) {
 			Goods goods = injectionSaveAndUpdateGoods(req);
 			String id = req.getParameter("id");
 			try {
 				if (id == null || id == "") {
-					if (goodsService.insert(goods) > 0) {
+					if (goodsService.insert(goods) > 0) {//保存商品
 						resp.getWriter().write("{\"success\":true}");
+						User u = (User) req.getSession().getAttribute("user");
+						LogUtils.insertLog("添加操作", "添加一条商品信息",u.getId());
 					}
 				} else {
 					goods.setId(Integer.parseInt(id));
-					if (goodsService.update(goods) > 0) {
+					if (goodsService.update(goods) > 0) {//更新商品信息
 						resp.getWriter().write("{\"success\":true}");
 					}
 				}
@@ -152,7 +162,7 @@ public class GoodsServlet extends HttpServlet {
 		}
 	}
 
-	private void deletesaveStore(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	private void deletesaveStore(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
 		// TODO Auto-generated method stub
 		String id = req.getParameter("id");
 		GoodsGoosTypeVO goodsGoosTypeVO = new GoodsGoosTypeVO();
@@ -163,6 +173,8 @@ public class GoodsServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		resp.getWriter().write("{\"success\":true}");
+		User u = (User) req.getSession().getAttribute("user");
+		LogUtils.insertLog("删除操作", "删除商品种类信息",u.getId());
 	}
 
 	private void insertsaveStore(HttpServletRequest req, HttpServletResponse resp) throws NumberFormatException, SQLException, IOException {
@@ -175,8 +187,9 @@ public class GoodsServlet extends HttpServlet {
 		goodsGoosTypeVO.setSellingPrice(Double.parseDouble(price));
 		goodsGoosTypeVOStageService.updatesaveStoreThree(Integer.parseInt(id), Integer.parseInt(num), Double.parseDouble(price));
 		resp.getWriter().write("{\"success\":true}");
+		User u = (User) req.getSession().getAttribute("user");
+		LogUtils.insertLog("添加操作", "添加一条商品信息",u.getId());
 	}
-
 	private Goods injectionSaveAndUpdateGoods(HttpServletRequest req) {
 		String typeid = req.getParameter("type.id");
 		String code = req.getParameter("code");
@@ -217,7 +230,6 @@ public class GoodsServlet extends HttpServlet {
 	}
 
 	private void findAllGoodsAndGoodsType(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
 		PrintWriter pw = resp.getWriter();
 		Integer page = Integer.parseInt(req.getParameter("page"));
 		Integer rows = Integer.parseInt(req.getParameter("rows"));
@@ -235,14 +247,6 @@ public class GoodsServlet extends HttpServlet {
 			String string = JSONObject.toJSON(list).toString();
 			string = "{\"total\":" + total + ",\"rows\":" + string + "}";
 			string = StringUtils.removeUnderlineAndUpperCase(string);
-//			string = string.replaceAll("purchasing_price", "purchasingPrice");
-//			string = string.replaceAll("selling_price", "sellingPrice");
-//			//string = string.replaceAll("last_purchasing_price", "lastPurchasingPrice");
-//			string = string.replaceAll("last_purchasingPrice", "lastPurchasingPrice");
-//			string = string.replaceAll("inventory_quantity", "inventoryQuantity");
-//			string = string.replaceAll("type_id", "typeId");
-//			string = string.replaceAll("min_num", "minNum");
-//			string = string.replaceAll("p_id", "pId");
 			pw.write(string);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -250,7 +254,6 @@ public class GoodsServlet extends HttpServlet {
 	}
 
 	private void saveStore(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
 		String id = request.getParameter("id");
 		String num = request.getParameter("num");
 		String price = request.getParameter("price");
@@ -273,6 +276,8 @@ public class GoodsServlet extends HttpServlet {
 			int total = goodsGoosTypeVOStageService.count();
 			string = "{\"total\":" + total + ",\"rows\":" + string + "}";
 			response.getWriter().write(string);
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询所有期初库存",u.getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

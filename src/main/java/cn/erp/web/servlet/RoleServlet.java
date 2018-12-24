@@ -19,8 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.Role;
+import cn.erp.domain.User;
 import cn.erp.service.RoleService;
 import cn.erp.service.impl.RoleServiceImpl;
+import cn.erp.utils.LogUtils;
 
 
 @WebServlet("/admin/role/*")
@@ -33,21 +35,18 @@ public class RoleServlet extends HttpServlet {
 		String uri = request.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
 		if("/list".equals(uri)){
-			findAllRole(request,response);//
+			findAllRole(request,response);
 		}
 		if("/save".equals(uri)){
-			saleRole(request,response);//
+			saleRole(request,response);
 		}
 		if("/delete".equals(uri)){
 			deleteRole(request,response);
-		}
-		
-		
+		}		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-	}
-	
+	}	
 	private void findAllRole(HttpServletRequest request, HttpServletResponse response){
 		
 		Integer page = Integer.parseInt(request.getParameter("page"));
@@ -61,14 +60,13 @@ public class RoleServlet extends HttpServlet {
 			map.put("total", total);
 			map.put("rows", list);
 			pw.write(JSONObject.toJSON(map).toString());
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询所有角色信息",u.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-	}
-	
-	private void saleRole(HttpServletRequest request, HttpServletResponse response){
-		
+		}		
+	}	
+	private void saleRole(HttpServletRequest request, HttpServletResponse response){		
 		String name = request.getParameter("name");
 		String remarks = request.getParameter("remarks");
 		String id = request.getParameter("id");
@@ -83,17 +81,17 @@ public class RoleServlet extends HttpServlet {
 				Map<String,Object> map=new HashMap<>();
 				if(i>0){
 					map.put("success", true);
+					User u = (User) request.getSession().getAttribute("user");
+					LogUtils.insertLog("查询操作", "查询销售角色",u.getId());
 				}else{
 					map.put("success", false);
-					map.put("errorInfo", "ϵͳ��æ�����Ժ�����!");
+					map.put("errorInfo", "ϵͳ��æ�����Ժ�����!");
 				}
 				pw.write(JSONObject.toJSON(map).toString());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}		
 	}
-
 	private void deleteRole(HttpServletRequest request, HttpServletResponse response){
 		String id = request.getParameter("id");
 		try {
@@ -103,9 +101,11 @@ public class RoleServlet extends HttpServlet {
 				Map<String,Object> map=new HashMap<>();
 				if(i>0){
 					map.put("success", true);
+					User u = (User) request.getSession().getAttribute("user");
+					LogUtils.insertLog("删除操作", "删除角色信息",u.getId());
 				}else{
 					map.put("success", false);
-					map.put("errorInfo", "ϵͳ��æ�����Ժ�����!");
+					map.put("errorInfo", "ϵͳ��æ�����Ժ�����!");
 				}
 				pw.write(JSONObject.toJSON(map).toString());
 			}

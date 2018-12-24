@@ -15,10 +15,12 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.GoodsType;
 import cn.erp.domain.PurchaseList;
+import cn.erp.domain.User;
 import cn.erp.service.GoodstypeService;
 import cn.erp.service.PurchaseService;
 import cn.erp.service.impl.GoodstypeServiceImpl;
 import cn.erp.service.impl.PurchaseServiceImpl;
+import cn.erp.utils.LogUtils;
 
 /**
  * Servlet implementation class Goodes
@@ -66,6 +68,8 @@ public class GoodsTypeServlet extends HttpServlet {
 			goodstypeService.addGoodsType(goodstype);
 			PrintWriter pw = response.getWriter();
 			pw.write("{\"success\":true}");
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("添加操作", "添加一个商品种类",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -78,29 +82,25 @@ public class GoodsTypeServlet extends HttpServlet {
 			List<PurchaseList> list = purchaseService.purchaseList();
 			Object json = JSONObject.toJSON(list);
 			pw.write(json.toString().replaceAll("name", "text"));
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询所有商品种类",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
-	
-	
+	}	
 	private void findAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter pw = response.getWriter();
 		try {
 			List<PurchaseList> list = purchaseService.purchaseList();
 			Object json = JSONObject.toJSON(list);
 			pw.write(json.toString().replaceAll("name", "text"));
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询所有",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
-	
+	}	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

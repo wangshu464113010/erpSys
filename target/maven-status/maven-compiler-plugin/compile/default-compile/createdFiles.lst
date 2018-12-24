@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> refs/heads/zq4
 cn\erp\dao\impl\GoodsTypeDaoImpl.class
 cn\erp\service\GoodsService.class
 cn\erp\web\servlet\PurchaseSerlet$1.class
@@ -13,6 +16,10 @@ cn\erp\service\impl\SaleListServiceImpl.class
 cn\erp\domain\CustomerReturnListGoods.class
 cn\erp\domain\HelloWorld.class
 cn\erp\service\impl\UserServiceImpl.class
+<<<<<<< HEAD
+=======
+cn\erp\domain\Log.class
+>>>>>>> refs/heads/zq4
 cn\erp\domain\User.class
 cn\erp\dao\impl\UserDaoImpl.class
 cn\erp\dao\CustomerReturnListDao.class
@@ -20,6 +27,7 @@ cn\erp\service\impl\GoodsunitServiceImpl.class
 cn\erp\domain\Role_Menu.class
 cn\erp\dao\impl\OverDaoImpl.class
 cn\erp\service\DamageService.class
+cn\erp\dao\impl\LogDaoImpl.class
 cn\erp\domain\Role.class
 cn\erp\web\servlet\SaleListServlet.class
 cn\erp\dao\impl\SupplierDaoImpl.class
@@ -29,7 +37,13 @@ cn\erp\service\SaleListGoodsService.class
 cn\erp\service\SaleListService.class
 cn\erp\service\GoodsunitService.class
 cn\erp\dao\impl\MenuDaoImpl.class
+<<<<<<< HEAD
 cn\erp\dao\DamagelistDao.class
+=======
+cn\erp\dao\impl\GoodsGoosTypeVOStageDaoImpl.class
+cn\erp\dao\DamagelistDao.class
+cn\erp\service\impl\GoodsGoosTypeVOStageServiceImpl.class
+>>>>>>> refs/heads/zq4
 cn\erp\web\servlet\PurchaseSerlet.class
 cn\erp\dao\impl\PurchaseListGoodsVODaoImpl.class
 cn\erp\service\CustomerService.class
@@ -37,39 +51,64 @@ cn\erp\dao\PurchaseListGoodsVODao.class
 cn\erp\service\OverlistService.class
 cn\erp\domain\GoodsType.class
 cn\erp\dao\SaleListDao.class
+<<<<<<< HEAD
 cn\erp\dao\impl\StatisticsByDayVODaoImpl.class
+=======
+>>>>>>> refs/heads/zq4
 cn\erp\service\impl\SupplierServiceImpl.class
 cn\erp\domain\Menu.class
 cn\erp\dao\GoodsDao.class
 cn\erp\service\impl\SaleListGoodsServiceImpl.class
 cn\erp\domain\SaleListCondition.class
 cn\erp\dao\GoodsTypeDao.class
+<<<<<<< HEAD
 cn\erp\domain\ProcurementStatisticsVO.class
+=======
+>>>>>>> refs/heads/zq4
 cn\erp\dao\MenuDao.class
 cn\erp\service\RoleService.class
 com\erp\filter\LoginFilter.class
+<<<<<<< HEAD
+=======
+cn\erp\web\servlet\LogServlet.class
+>>>>>>> refs/heads/zq4
 cn\erp\service\PurchaseService.class
 cn\erp\domain\Overgoods.class
 cn\erp\dao\impl\GoodsGoosTypeVODaoImpl.class
 cn\erp\web\servlet\SupplierServlet.class
+<<<<<<< HEAD
 cn\erp\service\ProcurementStatisticsVOService.class
+=======
+>>>>>>> refs/heads/zq4
 cn\erp\service\impl\CustomerServiceImpl.class
 cn\erp\dao\impl\DamageDaoImpl.class
 cn\erp\service\impl\MenuServiceImpl.class
 cn\erp\web\servlet\GoodsTypeServlet.class
 cn\erp\utils\StringUtils.class
 cn\erp\service\impl\CustomerReturnListServiceImpl.class
+<<<<<<< HEAD
+=======
+cn\erp\dao\GoodsGoosTypeVOStageDao.class
+cn\erp\utils\LogUtils.class
+>>>>>>> refs/heads/zq4
 cn\erp\dao\OverlistDao.class
+<<<<<<< HEAD
 cn\erp\dao\ProcurementStatisticsVODao.class
+=======
+>>>>>>> refs/heads/zq4
 cn\erp\dao\SaleListGoodsDao.class
 com\erp\filter\ReleaseStaticResourcesFilter.class
 cn\erp\dao\OverDao.class
 cn\erp\domain\SaleList.class
+<<<<<<< HEAD
 cn\erp\domain\PurchaseListGoodsVO.class
 cn\erp\service\impl\ProcurementStatisticsVOServiceImpl.class
+=======
+>>>>>>> refs/heads/zq4
 utils\StringUtils.class
 cn\erp\domain\User_Role.class
 cn\erp\service\impl\OverServiceImpl.class
+cn\erp\service\impl\LogServiceImpl.class
 cn\erp\service\DamagelistService.class
 cn\erp\service\MenuService.class
 cn\erp\domain\Supplier.class
@@ -77,6 +116,10 @@ cn\erp\service\impl\RoleServiceImpl.class
 cn\erp\dao\SupplierDao.class
 cn\erp\domain\Purchase_List.class
 cn\erp\dao\impl\SaleListDaoImpl.class
+<<<<<<< HEAD
+=======
+cn\erp\service\LogService.class
+>>>>>>> refs/heads/zq4
 cn\erp\dao\impl\SaleListGoodsDaoImpl.class
 cn\erp\dao\UserDao.class
 cn\erp\web\servlet\GoodsUnitServlet.class
@@ -107,6 +150,7 @@ cn\erp\dao\impl\PurchaseDaoImpl.class
 cn\erp\domain\Purchase_List_Goods.class
 cn\erp\service\UserService.class
 cn\erp\service\impl\GoodsServiceImpl.class
+<<<<<<< HEAD
 cn\erp\dao\GoodsGoosTypeVODao.class
 cn\erp\dao\DamageDao.class
 cn\erp\web\servlet\CustomerServlet.class
@@ -232,7 +276,10 @@ cn\erp\domain\Return_List_Goods.class
 cn\erp\domain\Damaggoods.class
 cn\erp\domain\IntegerDO.class
 cn\erp\service\SaleListService.class
+=======
+>>>>>>> refs/heads/zq4
 cn\erp\dao\GoodsGoosTypeVODao.class
+<<<<<<< HEAD
 cn\erp\domain\User.class
 cn\erp\dao\impl\CustomerReturnListDaoImpl.class
 cn\erp\dao\OverlistDao.class
@@ -241,7 +288,23 @@ cn\erp\service\OverflowListGoodsService.class
 cn\erp\service\CustomerReturnListGoodsService.class
 cn\erp\service\GoodstypeService.class
 cn\erp\domain\OverflowListGoods.class
+=======
+cn\erp\dao\DamageDao.class
+cn\erp\web\servlet\CustomerServlet.class
+cn\erp\dao\RoleDao.class
+cn\erp\dao\impl\CustomerDaoImpl.class
+cn\erp\web\servlet\OverServlet.class
+cn\erp\domain\IntegerDO.class
+cn\erp\domain\Purchase.class
+cn\erp\service\OverService.class
+cn\erp\domain\Customer.class
+cn\erp\dao\LogDao.class
+cn\erp\domain\CountSale.class
+cn\erp\web\servlet\CustomerReturnListServlet.class
+cn\erp\domain\GoodsJson.class
+>>>>>>> refs/heads/zq4
 cn\erp\dao\CustomerDao.class
+<<<<<<< HEAD
 cn\erp\service\impl\SaleListGoodsServiceImpl.class
 cn\erp\dao\impl\SaleListGoodsDaoImpl.class
 cn\erp\domain\SaleListCondition.class
@@ -285,7 +348,11 @@ cn\erp\dao\OverflowListDao.class
 cn\erp\service\impl\SupplierServiceImpl.class
 cn\erp\domain\CountSale.class
 cn\erp\service\impl\OverflowListGoodsServiceImpl.class
+=======
+cn\erp\service\impl\OverlistServiceImpl.class
+>>>>>>> refs/heads/zq4
 cn\erp\service\impl\GoodstypeServiceImpl.class
+<<<<<<< HEAD
 cn\erp\web\servlet\GoodsUnitServlet.class
 com\erp\filter\ReleaseStaticResourcesFilter.class
 cn\erp\service\MenuService.class
@@ -293,3 +360,11 @@ cn\erp\web\servlet\PurchaseSerlet$1.class
 cn\erp\dao\GoodsTypeDao.class
 cn\erp\service\DamageService.class
 >>>>>>> branch 'master' of https://git@github.com/wangshu464113010/erpSys.git
+=======
+cn\erp\dao\impl\GoodsunitDaoImpl.class
+cn\erp\dao\PurchaseDao.class
+cn\erp\web\servlet\GoodsServlet.class
+cn\erp\domain\GoodsGoosTypeVO.class
+cn\erp\domain\Damagelist.class
+cn\erp\dao\impl\DamagelistDaoImpl.class
+>>>>>>> refs/heads/zq4

@@ -22,12 +22,14 @@ import cn.erp.domain.DamageList;
 import cn.erp.domain.DamageListGoods;
 import cn.erp.domain.Damaggoods;
 import cn.erp.service.DamageGoodsService;
+import cn.erp.domain.User;
 import cn.erp.service.DamageService;
 import cn.erp.service.DamagelistService;
 import cn.erp.service.impl.DamageGoodsServiceImpl;
 import cn.erp.service.impl.DamageServiceImpl;
 import cn.erp.service.impl.DamagelistServiceImpl;
 import cn.erp.utils.StringUtils;
+import cn.erp.utils.LogUtils;
 
 /**
  * Servlet implementation class DamagesServlet
@@ -71,7 +73,7 @@ public class DamageServlet extends HttpServlet {
 			insertDamage_list(request, response);
 		}
 	}
-
+	//向报损关联表添加信息
 	private void insertDamage_list(HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException {
 		String damageDate = request.getParameter("damageDate");// damageDate
@@ -94,6 +96,8 @@ public class DamageServlet extends HttpServlet {
 		damagelist.setUser_id(1);// 还没有登录功能，默认为一
 		try {
 			damagelistService.insertDamagelist(damagelist);
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("添加操作", "添加一条商品损坏关联信息",u.getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -124,6 +128,7 @@ public class DamageServlet extends HttpServlet {
 	    java.util.Date result = sdf.parse(str);
 	    return   result;
 	}
+	//向报损表里面添加信息
 	private void insertDamage_goods(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String jsonStr = request.getParameter("goodsJson");
 		// System.out.println(jsonStr);
@@ -154,6 +159,8 @@ public class DamageServlet extends HttpServlet {
 			damageService.insertdamage(damaggoods);
 			PrintWriter pw = response.getWriter();
 			pw.write("{\"success\":true}");
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("添加操作", "添加一条商品损坏信息",u.getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -21,6 +21,7 @@ import cn.erp.service.MenuService;
 import cn.erp.service.UserService;
 import cn.erp.service.impl.MenuServiceImpl;
 import cn.erp.service.impl.UserServiceImpl;
+import cn.erp.utils.LogUtils;
 
 @WebServlet("/user/*")
 public class UserServlet extends HttpServlet {
@@ -28,22 +29,21 @@ public class UserServlet extends HttpServlet {
 	
     private MenuService menuService = new MenuServiceImpl();
     private UserService userService = new UserServiceImpl();
-    
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
 		if("/loadMenuInfo".equals(uri)){
 			findAll(request,response);//
+			
 		}
 		if("/login".equals(uri)){
 			login(request,response);
+			
 		}
 		if("/loadUserInfo".equals(uri)){
 			load(request,response);
-		}
-		
-		
+		}		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
@@ -80,14 +80,14 @@ public class UserServlet extends HttpServlet {
 				}else{
 					request.getSession().setAttribute("user", user);
 					map.put("success", true);
-				}
+					User u = (User) request.getSession().getAttribute("user");
+					LogUtils.insertLog("登录操作", "用户登录",u.getId());
+				}	
 			}
 			pw.write(JSONObject.toJSON(map).toString());
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
-		
+		}		
 	}
 	
 	private void load(HttpServletRequest request, HttpServletResponse response) throws IOException {

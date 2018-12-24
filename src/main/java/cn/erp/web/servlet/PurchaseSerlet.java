@@ -25,21 +25,22 @@ import cn.erp.domain.GoodsJson;
 import cn.erp.domain.PurchaseList;
 import cn.erp.domain.Purchase_List;
 import cn.erp.domain.Purchase_List_Goods;
+import cn.erp.domain.User;
 import cn.erp.service.GoodstypeService;
 import cn.erp.service.PurchaseService;
 import cn.erp.service.SupplierService;
 import cn.erp.service.impl.GoodstypeServiceImpl;
 import cn.erp.service.impl.PurchaseServiceImpl;
 import cn.erp.service.impl.SupplierServiceImpl;
+import cn.erp.utils.LogUtils;
 import utils.StringUtils;
 
 
 /**
- * 此servlet就是GoodsTypeServlet
+ * 
  * @author wangshu
  *
  */
-//@WebServlet("/admin/goodsType/*")
 @WebServlet("/admin/purchaseList/*")
 public class PurchaseSerlet extends HttpServlet{
 	
@@ -47,15 +48,7 @@ public class PurchaseSerlet extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
-		uri = uri.substring(uri.lastIndexOf("/"));
-		//uri = uri.substring(6);
-//		if("/goodsType/loadTreeInfo".equals(uri)){
-//			findAll(request,response);//
-//		}
-//		if("/goodsType/list".equals(uri)){
-//			findAllByType(request,response);//
-//		}
-		
+		uri = uri.substring(uri.lastIndexOf("/"));	
 		if("/save".equals(uri)){
 			saveSupplier(request,response);
 		}
@@ -76,28 +69,21 @@ public class PurchaseSerlet extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-	}
-	
-	
-	
-	private void findAllByType(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
-		
+	}	
+	private void findAllByType(HttpServletRequest request, HttpServletResponse response) throws IOException {		
 		PrintWriter pw = response.getWriter();
 		try {
 			List<PurchaseList> list = purchaseService.purchaseList();
 			Object json = JSONObject.toJSON(list);
 			pw.write(json.toString().replaceAll("name", "text"));
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询所有商品种类",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	
-	
 	private void saveSupplier(HttpServletRequest request, HttpServletResponse response) throws IOException{
-//		User user = request.getSession().getAttribute("user");
-//		user.getId();
 		PrintWriter pw = response.getWriter();
 		Integer user_id=1;
 		String supplier_id = request.getParameter("supplier.id");
@@ -123,6 +109,8 @@ public class PurchaseSerlet extends HttpServlet{
 			if(i==list.size()+1){
 				map.put("success", true);
 				json1 = JSONObject.toJSON(map);
+				User u = (User) request.getSession().getAttribute("user");
+				LogUtils.insertLog("添加操作", "添加供应商信息",u.getId());
 			}else{
 				map.put("success", false);
 				map.put("errorInfo", "系统繁忙，请稍后尝试");
@@ -160,6 +148,8 @@ public class PurchaseSerlet extends HttpServlet{
 			String str = json.toString();
 			str = StringUtils.removeUnderlineAndUpperCase(str);
 			pw.write(str);
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询所有进货信息",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -176,6 +166,8 @@ public class PurchaseSerlet extends HttpServlet{
 			String str = json.toString();
 			str = StringUtils.removeUnderlineAndUpperCase(str);
 			pw.write(str);
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询所有商品信息",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -191,6 +183,8 @@ public class PurchaseSerlet extends HttpServlet{
 			Object json1=null;
 			if(index>0){
 				map.put("success", true);
+				User u = (User) request.getSession().getAttribute("user");
+				LogUtils.insertLog("删除操作", "删除客户单信息",u.getId());
 				json1 = JSONObject.toJSON(map);
 			}else{
 				map.put("success", false);

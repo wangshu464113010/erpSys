@@ -24,10 +24,12 @@ import cn.erp.domain.CountSale;
 import cn.erp.domain.GoodsJson;
 import cn.erp.domain.SaleList;
 import cn.erp.domain.SaleListGoods;
+import cn.erp.domain.User;
 import cn.erp.service.SaleListGoodsService;
 import cn.erp.service.SaleListService;
 import cn.erp.service.impl.SaleListGoodsServiceImpl;
 import cn.erp.service.impl.SaleListServiceImpl;
+import cn.erp.utils.LogUtils;
 import cn.erp.utils.StringUtils;
 
 
@@ -42,21 +44,27 @@ public class SaleListServlet extends HttpServlet{
 		String uri = req.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
 		if("/save".equals(uri)){
+			//保存客户销售清单
 			save(req,resp);
 		}
 		if("/list".equals(uri)){
+			//查询客户
 			searchSaleList(req,resp);
 		}
 		if("/listGoods".equals(uri)){
+			//查询客户销售清单商品
 			showListGoods(req,resp);
 		}
 		if("/delete".equals(uri)){
+			//删除客户销售清单
 			delete(req,resp);
 		}
 		if("/countSaleByDay".equals(uri)){///saleList/countSaleByDay
 			//begin	2018-12-15
 			//end	2018-12-2
 		}
+		
+		//按月报表信息
 		if("/countSaleByMonth".equals(uri)){
 			countSaleByMonth(req,resp);
 		}
@@ -89,8 +97,6 @@ public class SaleListServlet extends HttpServlet{
 			saleList.setState(Integer.parseInt(state));
 			saleList.setUser_id(1);
 			saleList.setCustomer_id(Integer.parseInt(customer_id));
-			
-			
 			ArrayList<GoodsJson> list = JSON.parseObject(goodsJson, new TypeReference<ArrayList<GoodsJson>>() {});
 			GoodsJson goodsJson2 = list.get(0);
 			SaleListGoods saleListGoods = new SaleListGoods();
@@ -113,6 +119,8 @@ public class SaleListServlet extends HttpServlet{
 			Map<String, Object> resultMap = new HashMap<>();
 			if(i == 1){
 				resultMap.put("success", true);
+				User u = (User) req.getSession().getAttribute("user");
+				LogUtils.insertLog("添加操作", "保存客户销售清单",u.getId());
 			}else{
 				resultMap.put("errorInfo", "删除失败!");
 			}
@@ -150,6 +158,8 @@ public class SaleListServlet extends HttpServlet{
 			jsonData = "{\"rows\":"+jsonData+"}";
 			String data = StringUtils.removeUnderlineAndUpperCase(jsonData);
 			resp.getWriter().write(data);
+			User u = (User) req.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询客户信息",u.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -169,6 +179,8 @@ public class SaleListServlet extends HttpServlet{
 			String str = json.toString();
 			str = StringUtils.removeUnderlineAndUpperCase(str);
 			pw.write(str);
+			User u = (User) req.getSession().getAttribute("user");
+			LogUtils.insertLog("查询操作", "查询客户详细信息",u.getId());
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (SQLException e) {
@@ -183,6 +195,8 @@ public class SaleListServlet extends HttpServlet{
 			Map<String, Object> map = new HashMap<>();
 			if(i == 1){
 				map.put("success", true);
+				User u = (User) req.getSession().getAttribute("user");
+				LogUtils.insertLog("删除操作", "删除客户信息",u.getId());
 			}else{
 				map.put("errorInfo", "删除失败!");
 			}
