@@ -3,10 +3,7 @@ package cn.erp.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-<<<<<<< HEAD
 import cn.erp.domain.Role_Menu;
-=======
->>>>>>> refs/heads/wy3
 import cn.erp.domain.User;
 import cn.erp.domain.User_Role;
 
