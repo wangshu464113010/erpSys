@@ -178,6 +178,7 @@ public class CustomerReturnListServlet extends HttpServlet {
 
 	private void customerReturnListCount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		try {
+			resp.setContentType("application/json");
 			String bCustomerReturnDate = req.getParameter("bCustomerReturnDate");
 			String eCustomerReturnDate = req.getParameter("eCustomerReturnDate");
 			Integer type_id = null;
@@ -188,7 +189,9 @@ public class CustomerReturnListServlet extends HttpServlet {
 			List<CustomerReturnListCount> list = customerReturnListService.findListCount(bCustomerReturnDate, eCustomerReturnDate, type_id, codeOrName);
 			String jsonData = JSONObject.toJSON(list).toString();
 			jsonData = "{\"rows\":" + jsonData + "}";
-			String string = StringUtils.removeUnderlineAndUpperCase(jsonData);
+			//String name="sunCK";
+			String newName=new String(jsonData.getBytes(),"UTF-8").intern();
+			String string = StringUtils.removeUnderlineAndUpperCase(newName);
 			resp.getWriter().write(string);
 		} catch (SQLException e) {
 			e.printStackTrace();

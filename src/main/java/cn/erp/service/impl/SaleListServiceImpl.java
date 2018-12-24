@@ -164,7 +164,6 @@ public class SaleListServiceImpl implements SaleListService{
 			List<SaleListGoods> list2 = saleListGoodsDao.findBySaleListId(saleListCount.getId(),type_id,codeOrName);
 			for (SaleListGoods saleListGoods : list2) {
 				saleListGoods.setType(goodsTypeDao.findOne(saleListGoods.getType_id()));
-				
 			}
 			saleListCount.setSale_list_goods_list(list2);
 		}
