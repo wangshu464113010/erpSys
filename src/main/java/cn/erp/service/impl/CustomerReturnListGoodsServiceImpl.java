@@ -15,7 +15,6 @@ public class CustomerReturnListGoodsServiceImpl implements CustomerReturnListGoo
 	private CustomerRetrunListGoodsDao customerRetrunListGoodsDao = new CustomerRetrunListGoodsDaoImpl();
 	@Override
 	public int insertCustomerRetrunListGoods(CustomerReturnListGoods customerReturnListGoods) throws SQLException {
-		// TODO Auto-generated method stub
 		return customerRetrunListGoodsDao.insertCustomerRetrunListGoods(customerReturnListGoods);
 	}
 }
