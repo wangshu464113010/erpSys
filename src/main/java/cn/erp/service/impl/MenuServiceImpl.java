@@ -14,7 +14,7 @@ import cn.erp.domain.User_Role;
 import cn.erp.service.MenuService;
 
 public class MenuServiceImpl implements MenuService {
-	
+
 	private MenuDao menuDao = new MenuDaoImpl();
 	private UserDao userDao = new UserDaoImpl();
 	

@@ -9,7 +9,6 @@ import cn.erp.domain.Log;
 import java.text.ParseException;
 import java.util.List;
 
-import cn.erp.domain.Log;
 
 public interface LogDao {
 	

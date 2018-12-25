@@ -38,17 +38,6 @@ public class GoodsGoosTypeVOStageDaoImpl implements GoodsGoosTypeVOStageDao{
 		return query.getCount();
 	}
 
-//	@Override
-//	public void insertsaveStore(Goods goods) throws SQLException {
-//		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-//		String sql="insert into t_goods (id,code,inventory_quantity,min_num,model,name,producer,purchasing_price,"
-//				+ "remarks,selling_price,unit,type_id,state,last_purchasing_price) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-//		int i=  qr.update(sql,goods.getId(),goods.getCode(),goods.getInventory_quantity(),goods.getMin_num(),goods.getModel(),
-//				goods.getName(),goods.getProducer(),goods.getLast_purchasing_price(),goods.getRemarks(),
-//				goods.getSelling_price(),goods.getUnit(),goods.getType_id(),goods.getState(),goods.getLast_purchasing_price());
-//				
-//	}
-
 	@Override
 	public void updatesaveStoreThree(Integer id, Integer num, Double price) throws SQLException {
 		// TODO Auto-generated method stub

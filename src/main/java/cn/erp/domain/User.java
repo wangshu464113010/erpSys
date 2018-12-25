@@ -6,7 +6,7 @@ public class User {
 	private String password;
 	private String true_name;
 	private String user_name;
-	private String remarks;
+	private String remarks;//备注
 	public Integer getId() {
 		return id;
 	}

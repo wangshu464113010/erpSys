@@ -1,6 +1,10 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
+<<<<<<< HEAD
 >>>>>>>=branch 'master' of https\://git@github.com/wangshu464113010/erpSys.git
+=======
+>>>>>>>=refs/heads/zq4
+>>>>>>> refs/heads/zq5
 eclipse.preferences.version=1
 encoding//src/main/java/cn/erp/dao/DamageDao.java=UTF-8
 encoding//src/main/java/cn/erp/dao/GoodsDao.java=UTF-8
@@ -10,5 +14,8 @@ encoding//src/main/java/cn/erp/dao/impl/SupplierDaoImpl.java=UTF-8
 encoding//src/main/java/cn/erp/service/GoodsService.java=UTF-8
 encoding//src/main/java/cn/erp/service/GoodstypeService.java=UTF-8
 encoding//src/main/java/cn/erp/service/impl/GoodstypeServiceImpl.java=UTF-8
+<<<<<<< HEAD
 encoding//src/main/java/cn/erp/web/servlet/PurchaseSerlet.java=UTF-8
+=======
+>>>>>>> refs/heads/zq5
 encoding//src/main/java/cn/erp/web/servlet/SaleListServlet.java=UTF-8
