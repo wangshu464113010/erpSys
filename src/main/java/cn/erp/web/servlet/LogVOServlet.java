@@ -43,8 +43,7 @@ public class LogVOServlet extends HttpServlet {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}//把请求响应
-		
+			}//把请求响应		
     }
 	}
 

@@ -2,10 +2,7 @@ package cn.erp.web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,13 +13,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import cn.erp.domain.MenuVO;
+import cn.erp.domain.Page;
 import cn.erp.domain.Role;
 import cn.erp.domain.User;
+import cn.erp.domain.User_Role;
+import cn.erp.service.MenuVOService;
 import cn.erp.service.RoleService;
+import cn.erp.service.impl.MenuVOServiceImpl;
 import cn.erp.service.impl.RoleServiceImpl;
 import cn.erp.utils.LogUtils;
+import cn.erp.utils.StringUtils;
 
 
 @WebServlet("/admin/role/*")
@@ -30,12 +34,19 @@ public class RoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
     private RoleService roleService=new RoleServiceImpl();
-	
+	private MenuVOService menuVOService= new MenuVOServiceImpl();
+    
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
 		if("/list".equals(uri)){
-			findAllRole(request,response);
+			  String name= request.getParameter("name");
+			   if(name==null||name.equals("")) {
+				   findAllRole(request,response);
+			   }else {
+				   findlikerole(request,response);
+			   }
 		}
 		if("/save".equals(uri)){
 			saleRole(request,response);
@@ -43,6 +54,61 @@ public class RoleServlet extends HttpServlet {
 		if("/delete".equals(uri)){
 			deleteRole(request,response);
 		}		
+		if("/loadCheckMenuInfo".equals(uri)){
+			int parentId= Integer.parseInt(request.getParameter("parentId"));
+			int roleId= Integer.parseInt(request.getParameter("roleId"));
+			try {
+				List<MenuVO> list = menuVOService.findAll(parentId, roleId);
+				Object json = JSONObject.toJSON(list);
+				response.getWriter().write(json.toString().replaceAll("icon", "iconCls"));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}if("/listAll".equals(uri)) {
+			findrolefit(request,response);
+		}
+	}
+	
+	private void findrolefit(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			List<Role> list = roleService.findrolefit();
+			User u = (User) request.getSession().getAttribute("user");
+			LogUtils.insertLog("修改操作", "修改角色权限信息",u.getId());
+			String s = "{\"rows\":"+JSONObject.toJSON(list).toString()+"}";
+			try {
+				response.getWriter().write(s);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	private void findlikerole(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		String page = request.getParameter("page");
+		String rows = request.getParameter("rows");
+		String name = request.getParameter("name");
+		Page<Role>page1=new Page<Role>();
+		page1.setSize(Integer.parseInt(rows));			
+	    page1.setPageNow(Integer.parseInt(page));
+		try {
+			List<Role>list = roleService.findlikerole(page1, name);
+			String string = JSONObject.toJSON(list).toString();
+			int total = roleService.count();
+			string = "{\"total\":"+total+",\"rows\":"+string+"}";				
+			response.getWriter().write(StringUtils.removeUnderlineAndUpperCase(string));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

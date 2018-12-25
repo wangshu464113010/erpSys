@@ -22,7 +22,6 @@ import cn.erp.utils.LogUtils;
 @WebServlet("/admin/goodsUnit/*")
 public class GoodsUnitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//admin/goodsUnit/comboList
 
 	private GoodsunitService goodsunitService = new GoodsunitServiceImpl();
 	

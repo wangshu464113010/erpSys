@@ -17,7 +17,9 @@ import com.alibaba.fastjson.JSONObject;
 
 import cn.erp.domain.Page;
 import cn.erp.domain.User;
+import cn.erp.service.RoleService;
 import cn.erp.service.UserService;
+import cn.erp.service.impl.RoleServiceImpl;
 import cn.erp.service.impl.UserServiceImpl;
 import cn.erp.utils.LogUtils;
 import cn.erp.utils.StringUtils;
@@ -27,7 +29,7 @@ public class UpdatePassword extends HttpServlet{
 private static final long serialVersionUID = 1L;
 	
     private UserService userService = new UserServiceImpl();
-    
+    private RoleService roleService=new RoleServiceImpl();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
@@ -59,8 +61,35 @@ private static final long serialVersionUID = 1L;
 			   insertUser(request,response);				
 			}if("/delete".equals(uri)) {
 				deleteUser(request,response);
+			}if("/saveRoleSet".equals(uri)) {
+				insertRoleSet(request,response);
 			}
 		
+	}
+    private void insertRoleSet(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		String roleIds = request.getParameter("roleIds");
+		String[] split = roleIds.split(",");
+		Integer[] ids=new Integer [split.length];
+		for(int i =0;i<split.length;++i) {
+			ids[i] = Integer.parseInt(split[i]);
+		}
+		String userId = request.getParameter("userId");
+		try {
+			roleService.insertRoleSet(ids, Integer.parseInt(userId));
+			try {
+				response.getWriter().write("{\"success\":true}");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
     private void findlikeUser(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
@@ -79,7 +108,7 @@ private static final long serialVersionUID = 1L;
 		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}//把请求响应
+		}
 	}
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub

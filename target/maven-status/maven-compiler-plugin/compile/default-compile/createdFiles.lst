@@ -1,166 +1,56 @@
 cn\erp\dao\impl\GoodsTypeDaoImpl.class
-<<<<<<< HEAD
 cn\erp\domain\Return_List_Goods.class
-=======
-cn\erp\service\GoodsService.class
-cn\erp\domain\Return_List_Goods.class
-cn\erp\web\servlet\PurchaseSerlet$1.class
-cn\erp\service\GoodstypeService.class
->>>>>>> refs/heads/zq5
 cn\erp\domain\PurchaseList.class
 cn\erp\web\servlet\UserServlet.class
-cn\erp\domain\LogVO.class
 cn\erp\service\impl\GoodsGoosTypeVOServiceImpl.class
-<<<<<<< HEAD
 cn\erp\domain\ReturnList.class
-=======
-cn\erp\service\impl\SaleListServiceImpl.class
-cn\erp\domain\ReturnList.class
-cn\erp\domain\CustomerReturnListGoods.class
-cn\erp\domain\OverflowListGoods.class
-cn\erp\domain\HelloWorld.class
 cn\erp\web\servlet\LogVOServlet.class
->>>>>>> refs/heads/zq5
 cn\erp\domain\Return.class
 cn\erp\service\impl\UserServiceImpl.class
 cn\erp\domain\Log.class
 cn\erp\service\impl\OverflowListServiceImpl.class
-<<<<<<< HEAD
-=======
-cn\erp\domain\User.class
-cn\erp\dao\impl\UserDaoImpl.class
->>>>>>> refs/heads/zq5
 cn\erp\dao\CustomerReturnListDao.class
 cn\erp\service\impl\GoodsunitServiceImpl.class
-cn\erp\dao\impl\OverflowListGoodsDaoImpl.class
-cn\erp\web\servlet\OverflowServlet.class
 cn\erp\domain\Role_Menu.class
 cn\erp\web\servlet\OverflowServlet.class
 cn\erp\dao\impl\OverDaoImpl.class
 cn\erp\service\DamageService.class
 cn\erp\dao\ReturnDao.class
 cn\erp\domain\Role.class
-<<<<<<< HEAD
-=======
-cn\erp\dao\ReturnDao.class
-cn\erp\web\servlet\SaleListServlet.class
-cn\erp\web\servlet\ReturnServlet.class
-cn\erp\dao\OverflowListDao.class
->>>>>>> refs/heads/zq5
 cn\erp\dao\impl\SupplierDaoImpl.class
 com\erp\filter\EncodingFilter.class
-<<<<<<< HEAD
 cn\erp\domain\DamageListGoods.class
-=======
-cn\erp\service\GoodsGoosTypeVOStageService.class
-cn\erp\utils\C3P0Util.class
->>>>>>> refs/heads/zq5
 cn\erp\service\SaleListGoodsService.class
-<<<<<<< HEAD
-=======
-cn\erp\domain\DamageListGoods.class
-cn\erp\service\SaleListService.class
-cn\erp\service\GoodsunitService.class
->>>>>>> refs/heads/zq5
 cn\erp\dao\impl\MenuDaoImpl.class
-<<<<<<< HEAD
 cn\erp\service\GoodsunitService.class
-=======
->>>>>>> refs/heads/zq5
 cn\erp\dao\impl\GoodsGoosTypeVOStageDaoImpl.class
-<<<<<<< HEAD
-=======
-cn\erp\dao\DamagelistDao.class
-cn\erp\service\impl\GoodsGoosTypeVOStageServiceImpl.class
->>>>>>> refs/heads/zq5
 cn\erp\web\servlet\PurchaseSerlet.class
-<<<<<<< HEAD
-=======
-cn\erp\dao\impl\PurchaseListGoodsVODaoImpl.class
-cn\erp\service\CustomerService.class
->>>>>>> refs/heads/zq5
+cn\erp\dao\impl\MenuVODaoImpl.class
 cn\erp\dao\CustomerRetrunListGoodsDao.class
 cn\erp\dao\PurchaseListGoodsVODao.class
-<<<<<<< HEAD
-=======
-cn\erp\dao\impl\OverflowListDaoImpl.class
-cn\erp\service\impl\CustomerReturnListGoodsServiceImpl.class
-cn\erp\service\OverlistService.class
-cn\erp\domain\GoodsType.class
->>>>>>> refs/heads/zq5
 cn\erp\dao\SaleListDao.class
-<<<<<<< HEAD
 cn\erp\domain\GoodsType.class
-=======
->>>>>>> refs/heads/zq5
 cn\erp\dao\impl\StatisticsByDayVODaoImpl.class
 cn\erp\service\impl\SupplierServiceImpl.class
 cn\erp\domain\SaleListCondition.class
-<<<<<<< HEAD
 cn\erp\service\impl\SaleListGoodsServiceImpl.class
-=======
-cn\erp\dao\GoodsTypeDao.class
->>>>>>> refs/heads/zq5
 cn\erp\domain\ProcurementStatisticsVO.class
-<<<<<<< HEAD
-=======
-cn\erp\dao\MenuDao.class
->>>>>>> refs/heads/zq5
 cn\erp\service\RoleService.class
 cn\erp\service\DamageGoodsService.class
 com\erp\filter\LoginFilter.class
-<<<<<<< HEAD
-cn\erp\web\servlet\LogServlet.class
-=======
-cn\erp\service\PurchaseService.class
->>>>>>> refs/heads/zq5
 cn\erp\domain\Overgoods.class
-<<<<<<< HEAD
 cn\erp\service\PurchaseService.class
-=======
 cn\erp\dao\LogVODao.class
->>>>>>> refs/heads/zq5
 cn\erp\dao\impl\GoodsGoosTypeVODaoImpl.class
 cn\erp\web\servlet\SupplierServlet.class
-<<<<<<< HEAD
 cn\erp\service\impl\DamageGoodsServiceImpl.class
 cn\erp\domain\DamageList.class
-=======
-cn\erp\service\ProcurementStatisticsVOService.class
-cn\erp\service\impl\CustomerServiceImpl.class
-cn\erp\service\impl\DamageGoodsServiceImpl.class
-cn\erp\dao\impl\DamageDaoImpl.class
-cn\erp\service\impl\MenuServiceImpl.class
->>>>>>> refs/heads/zq5
 cn\erp\web\servlet\GoodsTypeServlet.class
-<<<<<<< HEAD
-=======
-cn\erp\domain\DamageList.class
-cn\erp\web\servlet\ListAlarmServlet.class
-cn\erp\utils\StringUtils.class
-cn\erp\service\impl\CustomerReturnListServiceImpl.class
->>>>>>> refs/heads/zq5
 cn\erp\dao\GoodsGoosTypeVOStageDao.class
 cn\erp\utils\LogUtils.class
-<<<<<<< HEAD
-=======
-cn\erp\service\LogVOService.class
-cn\erp\dao\OverlistDao.class
->>>>>>> refs/heads/zq5
 cn\erp\dao\ProcurementStatisticsVODao.class
-<<<<<<< HEAD
 cn\erp\dao\ProcurementReturnStatisticsVODao.class
-=======
-cn\erp\dao\SaleListGoodsDao.class
-com\erp\filter\ReleaseStaticResourcesFilter.class
-cn\erp\service\impl\LogVOServiceImpl.class
-cn\erp\dao\OverDao.class
->>>>>>> refs/heads/zq5
 cn\erp\domain\SaleList.class
-<<<<<<< HEAD
-=======
-cn\erp\domain\PurchaseListGoodsVO.class
->>>>>>> refs/heads/zq5
 cn\erp\service\impl\ProcurementStatisticsVOServiceImpl.class
 cn\erp\dao\ListAlarmDao.class
 utils\StringUtils.class
@@ -168,60 +58,25 @@ cn\erp\service\impl\LogServiceImpl.class
 cn\erp\service\impl\OverServiceImpl.class
 cn\erp\service\MenuService.class
 cn\erp\dao\SupplierDao.class
-<<<<<<< HEAD
-=======
-cn\erp\domain\Purchase_List.class
-cn\erp\dao\impl\SaleListDaoImpl.class
-cn\erp\dao\DamageGoodsDao.class
-cn\erp\service\LogService.class
->>>>>>> refs/heads/zq5
 cn\erp\dao\impl\SaleListGoodsDaoImpl.class
 cn\erp\dao\OverflowListGoodsDao.class
 cn\erp\service\ListAlarmService.class
 cn\erp\dao\UserDao.class
 cn\erp\domain\Page.class
-<<<<<<< HEAD
 cn\erp\service\SupplierService.class
 cn\erp\web\servlet\GoodsUnitServlet.class
-=======
-cn\erp\service\OverflowListService.class
->>>>>>> refs/heads/zq5
 cn\erp\web\servlet\UpdatePassword.class
 cn\erp\dao\impl\RoleDaoImpl.class
-<<<<<<< HEAD
-=======
-cn\erp\dao\impl\GoodsDaoImpl.class
-cn\erp\dao\impl\CustomerRetrunListGoodsDaoImpl.class
-cn\erp\domain\OverflowList.class
->>>>>>> refs/heads/zq5
 cn\erp\domain\Goods.class
-<<<<<<< HEAD
-=======
-cn\erp\service\OverflowListGoodsService.class
-cn\erp\domain\CustomerReturnList.class
->>>>>>> refs/heads/zq5
 cn\erp\domain\StatisticsByDayVO.class
-cn\erp\web\servlet\ReturnServlet$1.class
 cn\erp\service\CustomerReturnListService.class
-<<<<<<< HEAD
-=======
-cn\erp\dao\impl\ListAlarmDaoImpl.class
-cn\erp\service\impl\OverflowListGoodsServiceImpl.class
-cn\erp\dao\impl\OverlistDaoImpl.class
->>>>>>> refs/heads/zq5
 cn\erp\domain\Damaggoods.class
+cn\erp\dao\MenuVODao.class
 cn\erp\domain\Goodsunit.class
 cn\erp\domain\GoodsData.class
 cn\erp\web\servlet\SaleListServlet$1.class
-<<<<<<< HEAD
-cn\erp\service\CustomerReturnListGoodsService.class
-cn\erp\service\ReturnService.class
-=======
-cn\erp\service\impl\PurchaseServiceImpl.class
-cn\erp\service\CustomerReturnListGoodsService.class
 cn\erp\dao\impl\LogVODaoImpl.class
-cn\erp\dao\GoodsunitDao.class
->>>>>>> refs/heads/zq5
+cn\erp\service\CustomerReturnListGoodsService.class
 cn\erp\web\servlet\RoleServlet.class
 cn\erp\service\ReturnService.class
 cn\erp\domain\SaleListGoods.class
@@ -230,7 +85,6 @@ cn\erp\dao\ReturnListGoodsVODao.class
 cn\erp\domain\Attribute.class
 cn\erp\dao\impl\PurchaseDaoImpl.class
 cn\erp\service\impl\ListAlarmServiceImpl.class
-<<<<<<< HEAD
 cn\erp\service\UserService.class
 cn\erp\dao\GoodsGoosTypeVODao.class
 cn\erp\service\impl\GoodsServiceImpl.class
@@ -258,20 +112,23 @@ cn\erp\service\GoodstypeService.class
 cn\erp\dao\impl\CustomerReturnListDaoImpl.class
 cn\erp\service\impl\DamagelistServiceImpl.class
 cn\erp\service\impl\DamageServiceImpl.class
+cn\erp\domain\LogVO.class
 cn\erp\domain\ReturnListGoodsVO.class
 cn\erp\domain\CustomerReturnListGoods.class
 cn\erp\service\impl\SaleListServiceImpl.class
 cn\erp\domain\OverflowListGoods.class
 cn\erp\domain\HelloWorld.class
+cn\erp\service\MenuVOService.class
 cn\erp\dao\impl\UserDaoImpl.class
 cn\erp\domain\User.class
 cn\erp\dao\impl\OverflowListGoodsDaoImpl.class
 cn\erp\dao\impl\LogDaoImpl.class
 cn\erp\web\servlet\SaleListServlet.class
-cn\erp\dao\OverflowListDao.class
 cn\erp\web\servlet\ReturnServlet.class
+cn\erp\dao\OverflowListDao.class
 cn\erp\service\GoodsGoosTypeVOStageService.class
 cn\erp\utils\C3P0Util.class
+cn\erp\service\impl\MenuVOServiceImpl.class
 cn\erp\service\SaleListService.class
 cn\erp\dao\DamagelistDao.class
 cn\erp\service\impl\GoodsGoosTypeVOStageServiceImpl.class
@@ -293,9 +150,11 @@ cn\erp\service\impl\MenuServiceImpl.class
 cn\erp\web\servlet\ListAlarmServlet.class
 cn\erp\service\impl\CustomerReturnListServiceImpl.class
 cn\erp\utils\StringUtils.class
+cn\erp\service\LogVOService.class
 cn\erp\dao\OverlistDao.class
 cn\erp\dao\SaleListGoodsDao.class
 com\erp\filter\ReleaseStaticResourcesFilter.class
+cn\erp\service\impl\LogVOServiceImpl.class
 cn\erp\dao\OverDao.class
 cn\erp\dao\impl\ProcurementReturnStatisticsVODaoImpl.class
 cn\erp\domain\PurchaseListGoodsVO.class
@@ -318,6 +177,7 @@ cn\erp\web\servlet\DamageServlet.class
 cn\erp\dao\impl\CustomerRetrunListGoodsDaoImpl.class
 cn\erp\dao\impl\GoodsDaoImpl.class
 cn\erp\domain\OverflowList.class
+cn\erp\domain\MenuVO.class
 cn\erp\domain\CustomerReturnList.class
 cn\erp\service\OverflowListGoodsService.class
 cn\erp\web\servlet\ReturnServlet$1.class
@@ -341,37 +201,3 @@ cn\erp\domain\GoodsJson.class
 cn\erp\service\impl\OverlistServiceImpl.class
 cn\erp\dao\PurchaseDao.class
 cn\erp\web\servlet\GoodsServlet.class
-=======
-cn\erp\domain\Purchase_List_Goods.class
-cn\erp\service\UserService.class
-cn\erp\service\impl\GoodsServiceImpl.class
-cn\erp\dao\GoodsGoosTypeVODao.class
-cn\erp\dao\impl\ReturnDaoImpl.class
-cn\erp\dao\DamageDao.class
-cn\erp\web\servlet\CustomerServlet.class
-cn\erp\dao\RoleDao.class
-cn\erp\dao\impl\CustomerDaoImpl.class
-cn\erp\web\servlet\OverServlet.class
-cn\erp\domain\IntegerDO.class
-cn\erp\web\servlet\CustomerReturnListServlet$1.class
-cn\erp\domain\Purchase.class
-cn\erp\service\OverService.class
-cn\erp\domain\Customer.class
-cn\erp\dao\LogDao.class
-cn\erp\domain\Return_List.class
-cn\erp\domain\CountSale.class
-cn\erp\web\servlet\CustomerReturnListServlet.class
-cn\erp\domain\GoodsJson.class
-cn\erp\dao\impl\DamageGoodsDaoImpl.class
-cn\erp\dao\CustomerDao.class
-cn\erp\service\impl\OverlistServiceImpl.class
-cn\erp\service\impl\ReturnServiceImpl.class
-cn\erp\service\impl\GoodstypeServiceImpl.class
-cn\erp\dao\impl\GoodsunitDaoImpl.class
-cn\erp\dao\impl\ProcurementStatisticsVODaoImpl.class
-cn\erp\dao\StatisticsByDayVODao.class
-cn\erp\dao\PurchaseDao.class
-cn\erp\web\servlet\GoodsServlet.class
-cn\erp\domain\GoodsGoosTypeVO.class
-cn\erp\dao\impl\DamagelistDaoImpl.class
->>>>>>> refs/heads/zq5

@@ -30,4 +30,5 @@ public interface UserDao {
 	public int count() throws SQLException;//查询数量
 	
 	public void deleteUser(Integer id)throws SQLException;//删除用户
+	
 }
