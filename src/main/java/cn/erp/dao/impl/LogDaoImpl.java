@@ -22,115 +22,55 @@ public class LogDaoImpl implements LogDao{
 		String sql="insert into t_log (id,content,time,type,user_id) values (?,?,?,?,?)";
 		int i  =  qr.update(sql,log.getId(),log.getContent(),log.getTime(),log.getType(),log.getUserid());
 	}
-	public List<Log> findAll(String type, String btime, String etime, int page, int rows,int user_id) throws SQLException, ParseException {
-//		Date Btime = new java.sql.Date(format(btime).getTime());
-//		Date Etime = new java.sql.Date(format(etime).getTime());
-		
-		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		String sql ="";
-		List<Log> list=new ArrayList<>();
-		if(type==null||type.equals("")) {
-			if(btime==null||btime.equals("")) {
-				if(etime==null||etime.equals("")) {
-					sql="select * from t_log where  user_id=? limit ?,?";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,(page-1)*rows,rows);
-				}else {
-					Date Etime = new java.sql.Date(format(etime).getTime());
-					sql="select * from t_log  where user_id=? and date_format(time,'%Y-%m-%d')= ? limit ?,?";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,Etime,(page-1)*rows,rows);
-				}
-			}else {
-				if(etime==null||etime.equals("")) {
-					Date Btime = new java.sql.Date(format(btime).getTime());
-					sql="select * from t_log where user_id=? and date_format(time,'%Y-%m-%d')= ? limit ?,?";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,Btime,(page-1)*rows,rows);
-				}else {
-					Date Btime = new java.sql.Date(format(btime).getTime());
-					Date Etime = new java.sql.Date(format(etime).getTime());
-					sql="select * from t_log where user_id=? and time between ? and ? limit ?,?";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,Btime,Etime,(page-1)*rows,rows);
-				}
-			}
-		}else {
-			if(btime==null||btime.equals("")) {
-				if(etime==null||etime.equals("")) {
-					sql="select * from t_log where user_id=? and type=? limit ?,?";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,type,(page-1)*rows,rows);
-				}else {
-					Date Etime = new java.sql.Date(format(etime).getTime());
-					sql="select * from t_log where user_id=? and type=? and date_format(time,'%Y-%m-%d')= ? limit ?,?";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,type,Etime,(page-1)*rows,rows);
-				}
-			}else {
-				if(etime==null||etime.equals("")) {
-					Date Btime = new java.sql.Date(format(btime).getTime());
-					sql="select * from t_log where user_id=? and type=? and date_format(time,'%Y-%m-%d')= ? limit ?,?";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,type,Btime,(page-1)*rows,rows);
-				}else {
-					Date Btime = new java.sql.Date(format(btime).getTime());
-					Date Etime = new java.sql.Date(format(etime).getTime());
-					sql="select * from t_log where user_id=? and type=? and time between ? and ? limit ?,?";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,type,Btime,Etime,(page-1)*rows,rows);
-				}
-			}
-		}
-		
-		
-		return list;
-	}
-
 	
 	
-	
-
-
 	@Override
-	public List<Log> findAll(String type, String btime, String etime,int user_id) throws SQLException, ParseException {
+	public List<Log> findAll(String type, String btime, String etime) throws SQLException, ParseException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		String sql ="";
 		List<Log> list=new ArrayList<>();
 		if(type==null||type.equals("")) {
 			if(btime==null||btime.equals("")) {
 				if(etime==null||etime.equals("")) {
-					sql="select * from t_log where user_id=? ";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id);
+					sql="select * from t_log  ";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class));
 				}else {
 					Date Etime = new java.sql.Date(format(etime).getTime());
-					sql="select * from t_log  where user_id=? and date_format(time,'%Y-%m-%d')= ? ";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,Etime);
+					sql="select * from t_log  where  date_format(time,'%Y-%m-%d')= ? ";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),Etime);
 				}
 			}else {
 				if(etime==null||etime.equals("")) {
 					Date Btime = new java.sql.Date(format(btime).getTime());
-					sql="select * from t_log where user_id=? and date_format(time,'%Y-%m-%d')= ? ";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,Btime);
+					sql="select * from t_log where date_format(time,'%Y-%m-%d')= ? ";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),Btime);
 				}else {
 					Date Btime = new java.sql.Date(format(btime).getTime());
 					Date Etime = new java.sql.Date(format(etime).getTime());
-					sql="select * from t_log where user_id=? and time between ? and ? ";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,Btime,Etime);
+					sql="select * from t_log where  time between ? and ? ";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),Btime,Etime);
 				}
 			}
 		}else {
 			if(btime==null||btime.equals("")) {
 				if(etime==null||etime.equals("")) {
-					sql="select * from t_log where user_id=? and type=? ";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,type);
+					sql="select * from t_log where  type=? ";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),type);
 				}else {
 					Date Etime = new java.sql.Date(format(etime).getTime());
-					sql="select * from t_log where user_id=? and type=? and date_format(time,'%Y-%m-%d')= ? ";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,type,Etime);
+					sql="select * from t_log where  type=? and date_format(time,'%Y-%m-%d')= ? ";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),type,Etime);
 				}
 			}else {
 				if(etime==null||etime.equals("")) {
 					Date Btime = new java.sql.Date(format(btime).getTime());
-					sql="select * from t_log where user_id=? and type=? and date_format(time,'%Y-%m-%d')= ? ";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,type,Btime);
+					sql="select * from t_log where   type=? and date_format(time,'%Y-%m-%d')= ? ";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),type,Btime);
 				}else {
 					Date Btime = new java.sql.Date(format(btime).getTime());
 					Date Etime = new java.sql.Date(format(etime).getTime());
-					sql="select * from t_log where user_id=?  and type=? and time between ? and ? ";
-					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),user_id,type,Btime,Etime);
+					sql="select * from t_log where type=? and time between ? and ? ";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),type,Btime,Etime);
 				}
 			}
 		}
@@ -142,6 +82,60 @@ public class LogDaoImpl implements LogDao{
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	    java.util.Date result = sdf.parse(str);
 	    return   result;
+	}
+	@Override
+	public List<Log> findAll(String type, String btime, String etime, int page, int rows) throws SQLException, ParseException{
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String sql ="";
+		List<Log> list=new ArrayList<>();
+		if(type==null||type.equals("")) {
+			if(btime==null||btime.equals("")) {
+				if(etime==null||etime.equals("")) {
+					sql="select * from t_log  limit ?,?";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),(page-1)*rows,rows);
+				}else {
+					Date Etime = new java.sql.Date(format(etime).getTime());
+					sql="select * from t_log  where date_format(time,'%Y-%m-%d')= ? limit ?,?";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),Etime,(page-1)*rows,rows);
+				}
+			}else {
+				if(etime==null||etime.equals("")) {
+					Date Btime = new java.sql.Date(format(btime).getTime());
+					sql="select * from t_log where date_format(time,'%Y-%m-%d')= ? limit ?,?";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),Btime,(page-1)*rows,rows);
+				}else {
+					Date Btime = new java.sql.Date(format(btime).getTime());
+					Date Etime = new java.sql.Date(format(etime).getTime());
+					sql="select * from t_log where  time between ? and ? limit ?,?";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),Btime,Etime,(page-1)*rows,rows);
+				}
+			}
+		}else {
+			if(btime==null||btime.equals("")) {
+				if(etime==null||etime.equals("")) {
+					sql="select * from t_log where  type=? limit ?,?";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),type,(page-1)*rows,rows);
+				}else {
+					Date Etime = new java.sql.Date(format(etime).getTime());
+					sql="select * from t_log where type=? and date_format(time,'%Y-%m-%d')= ? limit ?,?";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),type,Etime,(page-1)*rows,rows);
+				}
+			}else {
+				if(etime==null||etime.equals("")) {
+					Date Btime = new java.sql.Date(format(btime).getTime());
+					sql="select * from t_log where  type=? and date_format(time,'%Y-%m-%d')= ? limit ?,?";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),type,Btime,(page-1)*rows,rows);
+				}else {
+					Date Btime = new java.sql.Date(format(btime).getTime());
+					Date Etime = new java.sql.Date(format(etime).getTime());
+					sql="select * from t_log where  type=? and time between ? and ? limit ?,?";
+					list =  qr.query(sql,new BeanListHandler<Log>(Log.class),type,Btime,Etime,(page-1)*rows,rows);
+				}
+			}
+		}
+		
+		
+		return list;
 	}
 
 

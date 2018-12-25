@@ -47,7 +47,7 @@ public class LogServlet extends HttpServlet{
 			try {
 				
 				list = logService.findByAll(type, btime, etime, page, rows, userTrueName);
-				int total =	list.size();
+				int total =	logService.findAll(type, btime, etime).size();
 				String string = JSONObject.toJSON(list).toString();
 				string = "{\"total\":"+total+",\"rows\":"+string+"}";
 				string = StringUtils.removeUnderlineAndUpperCase(string);

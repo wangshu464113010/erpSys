@@ -16,32 +16,35 @@ import cn.erp.service.LogService;
 public class LogServiceImpl implements LogService{
 	private UserDao userDao = new UserDaoImpl();
 	private LogDao logDao = new LogDaoImpl();
-	private LogDao logdao=new LogDaoImpl();
 	@Override
 	public void insertlog(Log log) throws SQLException {
 		// TODO Auto-generated method stub
-		logdao.insertlog(log);
+		logDao.insertlog(log);
 	}
 	@Override
 	public List<Log> findByAll(String type, String btime, String etime, int page, int rows, String userTrueName)
 			throws SQLException, ParseException {
 		List<Log> list = new ArrayList<>();
 		if(userTrueName==null || userTrueName.equals("")) {
-			List<User> userList = userDao.findAll();
-			for (User user : userList) {
-				Integer user_id = user.getId();
-				List<Log> loglist = logDao.findAll(type, btime, etime, page, rows, user_id);
+//			List<User> userList = userDao.findAll();
+//			for (User user : userList) {
+//				Integer user_id = user.getId();
+				List<Log> loglist = logDao.findAll(type, btime, etime, page, rows);
 				list.addAll(loglist);
-			}
+//			}
 		}else {
-			Integer user_id=userDao.findOne(userTrueName).getId();
-			list=logDao.findAll(type, btime, etime, page, rows, user_id);
+			list=logDao.findAll(type, btime, etime, page, rows);
 		}
 		for (Log log : list) {
 			int user_id = log.getUser_id();
 			User user = userDao.findOne(user_id);
 			log.setUser(user);
 		}
+		return list;
+	}
+	@Override
+	public List<Log> findAll(String type, String btime, String etime) throws SQLException, ParseException {
+		List<Log> list = logDao.findAll(type, btime, etime);
 		return list;
 	}
 
