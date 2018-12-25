@@ -6,6 +6,7 @@ import java.util.List;
 
 import cn.erp.dao.RoleDao;
 import cn.erp.dao.impl.RoleDaoImpl;
+import cn.erp.domain.Page;
 import cn.erp.domain.Role;
 import cn.erp.service.RoleService;
 
@@ -36,6 +37,30 @@ public class RoleServiceImpl implements RoleService{
 	@Override
 	public int deleteRole(Integer id) throws SQLException {
 		return this.roleDao.deleteRole(id);
+	}
+
+	@Override
+	public List<Role> findlikerole(Page page, String name) throws SQLException {
+		// TODO Auto-generated method stub
+		return roleDao.findlikerole(page, name);
+	}
+
+	@Override
+	public int count() throws SQLException {
+		// TODO Auto-generated method stub
+		return roleDao.count();
+	}
+
+	@Override
+	public List<Role> findrolefit() throws SQLException {
+		// TODO Auto-generated method stub
+		return roleDao.findrolefit();
+	}
+
+	@Override
+	public int insertRoleSet(Integer[] role_id, Integer user_id) throws SQLException {
+		// TODO Auto-generated method stub
+		return roleDao.insertRoleSet(role_id, user_id);
 	}
 
 }

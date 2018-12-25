@@ -39,8 +39,7 @@ public class UserServlet extends HttpServlet {
 		String uri = request.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
 		if("/loadMenuInfo".equals(uri)){
-			findAll(request,response);//
-			
+			findAll(request,response);//		
 		}
 		if("/login".equals(uri)){
 			login(request,response);

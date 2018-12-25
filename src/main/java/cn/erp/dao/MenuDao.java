@@ -7,5 +7,5 @@ import cn.erp.domain.Menu;
 
 public interface MenuDao {
 	public List<Menu> findAll()throws SQLException;
-	public List<Menu> findAllByP_id(int p_id) throws SQLException;
+	public List<Menu> findAllByP_id(int p_id) throws SQLException;	
 }

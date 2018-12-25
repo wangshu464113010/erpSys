@@ -58,7 +58,6 @@ public class DamageServlet extends HttpServlet {
 			try {
 				list=damageGoodsService.findBydamage_list_id(damageListid);
 				String string = JSONObject.toJSON(list).toString();
-//			System.out.println(string);
 				string = "{\"rows\":"+string+"}";
 				string = StringUtils.removeUnderlineAndUpperCase(string);
 				response.getWriter().write(string);
