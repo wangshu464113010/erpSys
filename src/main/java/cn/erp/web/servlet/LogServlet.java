@@ -15,11 +15,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -35,30 +30,36 @@ public class LogServlet extends HttpServlet{
 		String uri = req.getRequestURI();
 		uri = uri.substring(uri.lastIndexOf("/"));
 		if ("/list".equals(uri)) {
-			String type = req.getParameter("type");
-			String userTrueName = req.getParameter("user.trueName");
-			String btime = req.getParameter("btime");
-			String etime = req.getParameter("etime");
-			String pages = req.getParameter("page");
-			String row = req.getParameter("rows");
-			int page = Integer.parseInt(pages);
-			int rows = Integer.parseInt(row);
-			List<Log> list = null;
-			try {
-				
-				list = logService.findByAll(type, btime, etime, page, rows, userTrueName);
-				int total =	logService.findAll(type, btime, etime).size();
-				String string = JSONObject.toJSON(list).toString();
-				string = "{\"total\":"+total+",\"rows\":"+string+"}";
-				string = StringUtils.removeUnderlineAndUpperCase(string);
-				resp.getWriter().write(string);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			findLog(req, resp);
+		}
+	}
+	
+	
+	
+	private void findLog(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		String type = req.getParameter("type");
+		String userTrueName = req.getParameter("user.trueName");
+		String btime = req.getParameter("btime");
+		String etime = req.getParameter("etime");
+		String pages = req.getParameter("page");
+		String row = req.getParameter("rows");
+		int page = Integer.parseInt(pages);
+		int rows = Integer.parseInt(row);
+		List<Log> list = null;
+		try {
+			
+			list = logService.findByAll(type, btime, etime, page, rows, userTrueName);
+			int total =	logService.findAll(type, btime, etime).size();
+			String string = JSONObject.toJSON(list).toString();
+			string = "{\"total\":"+total+",\"rows\":"+string+"}";
+			string = StringUtils.removeUnderlineAndUpperCase(string);
+			resp.getWriter().write(string);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

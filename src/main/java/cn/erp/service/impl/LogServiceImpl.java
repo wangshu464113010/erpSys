@@ -29,17 +29,23 @@ public class LogServiceImpl implements LogService{
 //			List<User> userList = userDao.findAll();
 //			for (User user : userList) {
 //				Integer user_id = user.getId();
-				List<Log> loglist = logDao.findAll(type, btime, etime, page, rows);
-				list.addAll(loglist);
+				list = logDao.findAll(type, btime, etime, page, rows);
+				
+				for (Log log : list) {
+					int user_id = log.getUser_id();
+					User user = userDao.findOne(user_id);
+					log.setUser(user);
+				}
 //			}
 		}else {
 			list=logDao.findAll(type, btime, etime, page, rows);
+			User user = userDao.findOne(userTrueName);
+			for (Log log : list) {
+				log.setUser(user);
+			}
+			
 		}
-		for (Log log : list) {
-			int user_id = log.getUser_id();
-			User user = userDao.findOne(user_id);
-			log.setUser(user);
-		}
+		
 		return list;
 	}
 	@Override

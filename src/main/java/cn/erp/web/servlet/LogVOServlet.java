@@ -21,7 +21,7 @@ import cn.erp.utils.StringUtils;
 /**
  * Servlet implementation class LogVOServlet
  */
-@WebServlet("/admin/log/list")
+//@WebServlet("/admin/log/list")
 public class LogVOServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private LogVOService logVOService=new LogVOServiceImpl();
