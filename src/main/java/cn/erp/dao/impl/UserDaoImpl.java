@@ -71,6 +71,7 @@ public class UserDaoImpl implements UserDao{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		String sql = "select * from t_user where true_name like ?";
 		return qr.query(sql, new BeanHandler<User>(User.class),"%"+userTrueName+"%");
+	}
 	public void insertUser(User user) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		String sql="insert into t_user (password,true_name,user_name,remarks)values (?,?,?,?)";
